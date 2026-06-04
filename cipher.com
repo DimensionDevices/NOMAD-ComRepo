@@ -1,0 +1,238 @@
+PAGE: NOMAD Cipher
+COLOR: #2c7a32
+AUTHOR: NOMAD
+DATE: 2026-06-03
+DESCRIPTION: Simple XOR encryption for off-grid secure messaging.
+CATEGORY: app
+
+STYLE-START
+*{user-select:none;-webkit-tap-highlight-color:transparent;box-sizing:border-box;}
+body{background:#0f0f0f;margin:0;padding:8px;min-height:100vh;font-family:'Courier New','SF Mono',monospace;}
+.container{max-width:700px;margin:0 auto;}
+.header{background:#1a1a1a;padding:12px 16px;margin-bottom:12px;}
+.header h1{color:#fff;font-size:18px;margin:0;font-weight:600;}
+.header p{color:#888;font-size:10px;margin:4px 0 0;}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;padding:16px;margin-bottom:12px;}
+.card-title{color:#2e7d32;font-size:12px;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;}
+.label{color:#888;font-size:10px;margin-bottom:4px;display:block;}
+input,textarea{width:100%;background:#0f0f0f;border:1px solid #333;color:#fff;padding:10px;font-size:13px;font-family:'Courier New',monospace;margin-bottom:12px;resize:vertical;}
+input:focus,textarea:focus{outline:none;border-color:#2e7d32;}
+.mode-bar{display:flex;gap:0;margin-bottom:16px;}
+.mode-btn{flex:1;background:#111;border:1px solid #222;color:#888;padding:10px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;font-family:monospace;}
+.mode-btn.active{background:#1a1a1a;color:#2e7d32;border-bottom-color:#2e7d32;}
+.mode-btn:first-child{border-right:0;}
+.action-btn{width:100%;background:#2e7d32;border:none;color:#fff;padding:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:monospace;margin-top:8px;}
+.action-btn:active{background:#1b5e20;}
+.clear-btn{background:#333;margin-top:4px;}
+.clear-btn:active{background:#222;}
+.result-area{background:#0a0a0a;padding:12px;margin-top:12px;}
+.result-label{color:#666;font-size:9px;margin-bottom:4px;text-transform:uppercase;}
+.result-text{color:#2e7d32;font-size:12px;word-break:break-all;font-family:'Courier New',monospace;max-height:150px;overflow-y:auto;}
+.status-bar{background:#0a0a0a;padding:6px 12px;margin-top:8px;min-height:28px;}
+.status-msg{color:#888;font-size:10px;font-family:monospace;}
+.status-msg.error{color:#ff5555;}
+.status-msg.success{color:#2e7d32;}
+STYLE-END
+
+CUSTOMHTML-START
+<div class="container">
+  <div class="card">
+    <div class="mode-bar">
+      <div class="mode-btn active" id="encryptModeBtn" onclick="setMode('encrypt')">ENCRYPT</div>
+      <div class="mode-btn" id="decryptModeBtn" onclick="setMode('decrypt')">DECRYPT</div>
+    </div>
+
+    <div class="card-title" id="modeTitle">ENCRYPT MESSAGE</div>
+    
+    <label class="label">PASSPHRASE</label>
+    <input type="password" id="passphrase" placeholder="Enter secret passphrase..." autocomplete="off">
+    
+    <label class="label" id="inputLabel">MESSAGE TO ENCRYPT</label>
+    <textarea id="inputText" rows="4" placeholder="Type your message here..."></textarea>
+    
+    <button class="action-btn" id="actionBtn" onclick="process()">ENCRYPT</button>
+    
+    <div class="result-area" id="resultArea" style="display:none;">
+      <div class="result-label" id="resultLabel">ENCRYPTED OUTPUT</div>
+      <div class="result-text" id="resultText"></div>
+      <button class="action-btn clear-btn" id="copyBtn">COPY TO CLIPBOARD</button>
+    </div>
+    
+    <div class="status-bar">
+      <div class="status-msg" id="statusMsg">Ready</div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentMode = "encrypt";
+
+function setStatus(msg, isError){
+  let el = document.getElementById("statusMsg");
+  if(!el) return;
+  el.innerHTML = msg;
+  if(isError){
+    el.className = "status-msg error";
+  } else {
+    el.className = "status-msg success";
+  }
+  setTimeout(function(){
+    if(document.getElementById("statusMsg")){
+      document.getElementById("statusMsg").innerHTML = "Ready";
+      document.getElementById("statusMsg").className = "status-msg";
+    }
+  }, 2000);
+}
+
+function setMode(mode){
+  currentMode = mode;
+  let encryptBtn = document.getElementById("encryptModeBtn");
+  let decryptBtn = document.getElementById("decryptModeBtn");
+  let modeTitle = document.getElementById("modeTitle");
+  let inputLabel = document.getElementById("inputLabel");
+  let actionBtn = document.getElementById("actionBtn");
+  
+  if(mode === "encrypt"){
+    encryptBtn.classList.add("active");
+    decryptBtn.classList.remove("active");
+    modeTitle.innerHTML = "ENCRYPT MESSAGE";
+    inputLabel.innerHTML = "MESSAGE TO ENCRYPT";
+    actionBtn.innerHTML = "ENCRYPT";
+  } else {
+    decryptBtn.classList.add("active");
+    encryptBtn.classList.remove("active");
+    modeTitle.innerHTML = "DECRYPT MESSAGE";
+    inputLabel.innerHTML = "MESSAGE TO DECRYPT (hex)";
+    actionBtn.innerHTML = "DECRYPT";
+  }
+  document.getElementById("resultArea").style.display = "none";
+  setStatus("Mode changed", false);
+}
+
+function xorEncrypt(text, pass){
+  let result = [];
+  for(let i = 0; i < text.length; i++){
+    let charCode = text.charCodeAt(i);
+    let passCode = pass.charCodeAt(i % pass.length);
+    result.push(charCode ^ passCode);
+  }
+  return result;
+}
+
+function xorDecrypt(bytes, pass){
+  let result = [];
+  for(let i = 0; i < bytes.length; i++){
+    let passCode = pass.charCodeAt(i % pass.length);
+    result.push(bytes[i] ^ passCode);
+  }
+  return result;
+}
+
+function bytesToHex(bytes){
+  return bytes.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function hexToBytes(hex){
+  let bytes = [];
+  for(let i = 0; i < hex.length; i += 2){
+    bytes.push(parseInt(hex.substr(i, 2), 16));
+  }
+  return bytes;
+}
+
+function bytesToText(bytes){
+  let result = [];
+  for(let i = 0; i < bytes.length; i++){
+    if(bytes[i] >= 32 && bytes[i] <= 126){
+      result.push(String.fromCharCode(bytes[i]));
+    } else if(bytes[i] === 10 || bytes[i] === 13){
+      result.push(String.fromCharCode(bytes[i]));
+    } else {
+      result.push('?');
+    }
+  }
+  return result.join('');
+}
+
+function copyToClipboard(text){
+  let textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.top = '-9999px';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+  textarea.focus();
+  let success = false;
+  try {
+    success = document.execCommand('copy');
+  } catch(e) {
+    success = false;
+  }
+  document.body.removeChild(textarea);
+  return success;
+}
+
+function copyResult(){
+  let resultText = document.getElementById("resultText").innerText;
+  if(!resultText || resultText === ""){
+    setStatus("Nothing to copy", true);
+    return;
+  }
+  let success = copyToClipboard(resultText);
+  if(success){
+    setStatus("Copied to clipboard", false);
+  } else {
+    setStatus("Manual copy required", true);
+  }
+}
+
+function process(){
+  let pass = document.getElementById("passphrase").value;
+  let input = document.getElementById("inputText").value;
+  let resultArea = document.getElementById("resultArea");
+  let resultText = document.getElementById("resultText");
+  let resultLabel = document.getElementById("resultLabel");
+  
+  if(!pass){
+    setStatus("Enter a passphrase first", true);
+    return;
+  }
+  
+  if(!input){
+    setStatus("Enter a message to " + (currentMode === "encrypt" ? "encrypt" : "decrypt"), true);
+    return;
+  }
+  
+  if(currentMode === "encrypt"){
+    let encryptedBytes = xorEncrypt(input, pass);
+    let hexOutput = bytesToHex(encryptedBytes);
+    resultLabel.innerHTML = "ENCRYPTED OUTPUT (hex)";
+    resultText.innerHTML = hexOutput;
+    resultArea.style.display = "block";
+    setStatus("Encryption complete", false);
+  } else {
+    let cleanHex = input.replace(/\s/g, '');
+    if(!/^[0-9a-fA-F]+$/.test(cleanHex) || cleanHex.length % 2 !== 0){
+      setStatus("Invalid hex format", true);
+      return;
+    }
+    let encryptedBytes = hexToBytes(cleanHex);
+    let decryptedBytes = xorDecrypt(encryptedBytes, pass);
+    let textOutput = bytesToText(decryptedBytes);
+    resultLabel.innerHTML = "DECRYPTED MESSAGE";
+    resultText.innerHTML = textOutput;
+    resultArea.style.display = "block";
+    setStatus("Decryption complete", false);
+  }
+}
+
+document.getElementById("passphrase").addEventListener("keypress", function(e){
+  if(e.key === "Enter") process();
+});
+document.getElementById("inputText").addEventListener("keypress", function(e){
+  if(e.key === "Enter" && e.ctrlKey) process();
+});
+document.getElementById("copyBtn").onclick = copyResult;
+</script>
+CUSTOMHTML-END

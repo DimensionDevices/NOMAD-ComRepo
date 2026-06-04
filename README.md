@@ -1,2 +1,5 @@
 # NOMAD-ComRepo
-A repository of NOMAD .com files
+A repository of example NOMAD .com files.
+
+Offical Repo From @DimensionDevices.
+

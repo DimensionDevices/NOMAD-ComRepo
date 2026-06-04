@@ -1,0 +1,89 @@
+[
+  {
+    "date": "04/06/26"
+  },
+  {
+    "name": "manual.com",
+    "description": "The NOMAD user manual and guide",
+    "category": "info",
+    "size": 7314
+  },
+  {
+    "name": "2048.com",
+    "description": "A simple version of the 2048 game",
+    "category": "game",
+    "size": 8758
+  },
+  {
+    "name": "aid.com",
+    "description": "An off-grid first aid guide",
+    "category": "info",
+    "size": 18940
+  },
+  {
+    "name": "cipher.com",
+    "description": "A message encryption routine to send secret messages",
+    "category": "app",
+    "size": 8394
+  },
+  {
+    "name": "dnd.com",
+    "description": "DnD character generator",
+    "category": "app",
+    "size": 11771
+  },
+  {
+    "name": "jumper.com",
+    "description": "An example platformer with effects",
+    "category": "game",
+    "size": 15376
+  },
+  {
+    "name": "recipe.com",
+    "description": "A simple recipe book for NOMAD",
+    "category": "info",
+    "size": 10075
+  },
+  {
+    "name": "runner.com",
+    "description": "A simple run and jump game",
+    "category": "game",
+    "size": 13005
+  },
+  {
+    "name": "storms.com",
+    "description": "A basic guide to bad weather survival",
+    "category": "game",
+    "size": 19648
+  },
+  {
+    "name": "tapper.com",
+    "description": "A simple incremental/idle game",
+    "category": "game",
+    "size": 17367
+  },
+  {
+    "name": "tarot.com",
+    "description": "A nice tarot card reader",
+    "category": "app",
+    "size": 18644
+  },
+  {
+    "name": "tasks.com",
+    "description": "A simple task and todo list",
+    "category": "app",
+    "size": 14816
+  },
+  {
+    "name": "times.com",
+    "description": "A timezone convertor",
+    "category": "app",
+    "size": 5490
+  },
+  {
+    "name": "units.com",
+    "description": "An offline unit convertor",
+    "category": "app",
+    "size": 2446
+  }
+]

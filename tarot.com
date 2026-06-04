@@ -1,0 +1,389 @@
+PAGE: Digital Scry
+COLOR: #6c3483
+AUTHOR: NOMAD
+DATE: 2026-06-03
+DESCRIPTION: Mystical tarot readings with animated cards
+CATEGORY: app
+
+CUSTOMHTML-START
+<h1 style="text-align:center;margin:0;font-size:1.6rem;letter-spacing:4px">✦ DIGITAL SCRY ✦</h1>
+<p style="text-align:center;font-size:0.7rem;opacity:0.7;margin:4px 0 16px 0">touch the cards · listen to the symbols</p>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:12px;background:#0d0d12;color:#e8e6f0}
+.tarot-container{max-width:550px;margin:0 auto}
+.spread-selector{display:flex;gap:8px;margin-bottom:20px;justify-content:center}
+.spread-btn{background:#1e1e2a;border:1px solid #3d3d5c;border-radius:40px;padding:8px 16px;color:#ccc;font-size:0.7rem;cursor:pointer;transition:all 0.1s}
+.spread-btn.active{background:#6c3483;border-color:#facc15;color:white}
+.draw-btn{background:linear-gradient(135deg,#6c3483,#4a1d6e);border:none;border-radius:60px;padding:14px 20px;color:white;font-weight:bold;font-size:1rem;cursor:pointer;width:100%;margin-bottom:20px;transition:transform 0.05s;letter-spacing:2px}
+.draw-btn:active{transform:scale(0.97)}
+.cards-container{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:24px;}
+.card-wrapper{flex:1;min-width:80px;max-width:100px;cursor:pointer;perspective:600px}
+.card-front,.card-back{width:100%;aspect-ratio:2/3.5;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;backface-visibility:hidden;transition:all 0.2s;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+.card-front{background:linear-gradient(145deg,#2d2d44,#1a1a2e);border:1px solid #facc1544;transform:rotateY(180deg)}
+.card-back{background:linear-gradient(135deg,#1a1a2e,#0f0f18);border:1px solid #6c3483;position:absolute;top:0;left:0;transform:rotateY(0deg)}
+.card-inner{position:relative;width:100%;height:100%;transition:transform 0.5s;transform-style:preserve-3d}
+.card-wrapper.flipped .card-inner{transform:rotateY(180deg)}
+.card-front .card-symbol{font-size:2.8rem;margin-bottom:8px}
+.card-front .card-name{font-size:0.65rem;font-weight:bold;color:#facc15;padding:0 4px}
+.card-front .card-position{font-size:0.55rem;color:#888;margin-top:6px}
+.card-back .back-symbol{font-size:2rem;opacity:0.3}
+.card-back .back-text{font-size:0.55rem;color:#666;margin-top:8px;letter-spacing:2px}
+.interpretation{background:#1a1a2e;border-radius:24px;padding:20px;margin-top:8px;border-left:3px solid #facc15}
+.interpretation h4{color:#facc15;margin:0 0 12px 0;font-size:1rem;letter-spacing:1px}
+.interpretation p{font-size:0.8rem;line-height:1.5;margin:0 0 10px 0;color:#ccc}
+.interpretation .card-reading{background:#0f0f18;border-radius:16px;padding:10px;margin-bottom:8px}
+.card-reading strong{color:#facc15}
+.journal-area{margin-top:20px}
+.journal-area textarea{width:100%;padding:12px;background:#0f0f18;border:1px solid #3d3d5c;border-radius:16px;color:#e8e6f0;font-family:inherit;font-size:0.8rem;resize:vertical}
+.journal-area textarea:focus{outline:none;border-color:#6c3483}
+.save-journal{background:#2d2d44;border:none;border-radius:40px;padding:8px 16px;color:#facc15;font-size:0.7rem;cursor:pointer;margin-top:8px;width:auto}
+.reading-history{margin-top:20px}
+.reading-history summary{cursor:pointer;color:#888;font-size:0.7rem;letter-spacing:1px}
+.history-list{margin-top:12px;max-height:250px;overflow-y:auto}
+.history-item{background:#1a1a2e;border-radius:12px;padding:8px 10px;margin-bottom:6px;cursor:pointer;transition:background 0.1s}
+.history-item:hover{background:#2d2d44}
+.history-date{color:#888;font-size:0.6rem}
+.history-spread{display:flex;gap:4px;margin-top:4px;font-size:0.6rem}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:1000;align-items:center;justify-content:center}
+.modal-content{background:#1a1a2e;border-radius:32px;padding:24px;max-width:85%;width:320px;text-align:center;border:1px solid #facc1544}
+.modal-symbol{font-size:3.5rem;margin-bottom:8px}
+.modal-title{color:#facc15;margin:8px 0;font-size:1.2rem}
+.modal-meaning{font-size:0.8rem;margin:12px 0;line-height:1.5}
+.modal-reversed{font-size:0.7rem;color:#aa8ec7}
+.modal-buttons{display:flex;gap:12px;justify-content:center;margin-top:20px}
+.modal-buttons button{background:#3d3d5c;border:none;border-radius:40px;padding:8px 20px;color:white;cursor:pointer}
+@keyframes glow{0%{box-shadow:0 0 0 0 #facc1522}100%{box-shadow:0 0 20px 4px #facc1544}}
+.card-wrapper:active{transform:scale(0.96)}
+</style>
+
+<div class="tarot-container">
+  <div class="spread-selector">
+    <button class="spread-btn" data-spread="3">✦ THREE CARD ✦</button>
+    <button class="spread-btn" data-spread="1">◉ ONE CARD ◉</button>
+    <button class="spread-btn" data-spread="5">⬟ CROSSROADS ⬟</button>
+  </div>
+  
+  <button class="draw-btn" id="drawBtn">✧ DRAW SPREAD ✧</button>
+  
+  <div id="cardsContainer" class="cards-container"></div>
+  
+  <div id="interpretation" class="interpretation" style="display:none"></div>
+  
+  <div class="journal-area">
+    <textarea id="journalInput" rows="2" placeholder="✎ write your reflections here..."></textarea>
+    <button class="save-journal" id="saveJournalBtn">📖 SAVE TO READING</button>
+  </div>
+  
+  <details class="reading-history">
+    <summary>📜 PAST READINGS</summary>
+    <div id="historyList" class="history-list"></div>
+  </details>
+</div>
+
+<div id="cardModal" class="modal">
+  <div class="modal-content">
+    <div id="modalSymbol" class="modal-symbol"></div>
+    <h3 id="modalTitle" class="modal-title"></h3>
+    <p id="modalMeaning" class="modal-meaning"></p>
+    <p id="modalReversed" class="modal-reversed"></p>
+    <div class="modal-buttons">
+      <button id="closeModalBtn">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── TAROT DECK (vector-style symbols, no emojis) ──────────────
+const tarotCards = [
+  { name: "The Fool", symbol: "🌄", meaning: "New beginnings, innocence, spontaneity. Trust the journey ahead.", reversed: "Recklessness, naivety, holding back from a leap." },
+  { name: "The Magician", symbol: "⚜️", meaning: "Manifestation, resourcefulness, power. You have all the tools you need.", reversed: "Manipulation, untapped potential, trickery." },
+  { name: "The High Priestess", symbol: "🌙", meaning: "Intuition, mystery, the unconscious. Listen to your inner voice.", reversed: "Secrets, withdrawal, ignoring intuition." },
+  { name: "The Empress", symbol: "⚘", meaning: "Abundance, nurturing, creativity. Growth is blooming around you.", reversed: "Neglect, creative block, dependence." },
+  { name: "The Emperor", symbol: "♔", meaning: "Structure, authority, stability. Build your foundations.", reversed: "Domination, rigidity, lack of discipline." },
+  { name: "The Hierophant", symbol: "⌛", meaning: "Tradition, conformity, wisdom from elders.", reversed: "Rebellion, challenging norms, personal beliefs." },
+  { name: "The Lovers", symbol: "☯", meaning: "Love, harmony, choices. A crossroads of the heart.", reversed: "Imbalance, betrayal, misalignment." },
+  { name: "The Chariot", symbol: "⬟", meaning: "Willpower, determination, victory through control.", reversed: "Lack of control, aggression, detours." },
+  { name: "Strength", symbol: "◉", meaning: "Courage, patience, inner power. Tame your beasts.", reversed: "Weakness, self-doubt, raw emotion." },
+  { name: "The Hermit", symbol: "⌂", meaning: "Solitude, introspection, guidance from within.", reversed: "Isolation, loneliness, hiding from truth." },
+  { name: "Wheel of Fortune", symbol: "☯", meaning: "Change, cycles, destiny. The wheel turns.", reversed: "Bad luck, resistance to change, setbacks." },
+  { name: "Justice", symbol: "⚖", meaning: "Truth, fairness, cause and effect.", reversed: "Injustice, dishonesty, unaccountability." },
+  { name: "The Hanged Man", symbol: "Ψ", meaning: "Surrender, new perspective, pause.", reversed: "Stagnation, unwillingness to see, delays." },
+  { name: "Death", symbol: "✠", meaning: "Endings, transformation, release. Something must die to be reborn.", reversed: "Resistance to change, fear of endings." },
+  { name: "Temperance", symbol: "∇", meaning: "Balance, patience, moderation. Find the middle path.", reversed: "Imbalance, excess, conflict." },
+  { name: "The Devil", symbol: "🜏", meaning: "Attachment, materialism, shadow self. What chains you?", reversed: "Breaking free, reclaiming power, release." },
+  { name: "The Tower", symbol: "⌾", meaning: "Sudden change, upheaval, revelation. The crash is the cure.", reversed: "Avoiding disaster, fear of change." },
+  { name: "The Star", symbol: "★", meaning: "Hope, healing, inspiration. The light guides you.", reversed: "Despair, lack of faith, disconnection." },
+  { name: "The Moon", symbol: "☽", meaning: "Illusion, fear, subconscious. Trust your gut.", reversed: "Clarity, truth emerging, releasing fear." },
+  { name: "The Sun", symbol: "☼", meaning: "Joy, success, vitality. All is bright.", reversed: "Sadness, delayed success, pessimism." },
+  { name: "Judgment", symbol: "♆", meaning: "Rebirth, awakening, forgiveness. Answer the call.", reversed: "Self-doubt, refusing the call, regret." },
+  { name: "The World", symbol: "◎", meaning: "Completion, wholeness, integration. You made it.", reversed: "Incomplete, lack of closure, delay." },
+  { name: "Ace of Wands", symbol: "🜂", meaning: "Inspiration, new passion, creative spark.", reversed: "Lack of energy, delays, hesitation." },
+  { name: "Three of Cups", symbol: "◬", meaning: "Celebration, friendship, community.", reversed: "Overindulgence, gossip, isolation." }
+];
+
+const spreads = {
+  1: {
+    name: "One Card",
+    positions: [{ label: "⚡ TODAY'S ENERGY", desc: "The message for now" }]
+  },
+  3: {
+    name: "Three Card",
+    positions: [
+      { label: "⬅ PAST", desc: "What brought you here" },
+      { label: "● PRESENT", desc: "Where you stand now" },
+      { label: "➡ FUTURE", desc: "What is approaching" }
+    ]
+  },
+  5: {
+    name: "Crossroads",
+    positions: [
+      { label: "⬆ SELF", desc: "Your current state" },
+      { label: "➡ PATH", desc: "The road ahead" },
+      { label: "⬇ SHADOW", desc: "Hidden influence" },
+      { label: "⬅ ADVICE", desc: "What guides you" },
+      { label: "◉ OUTCOME", desc: "Potential result" }
+    ]
+  }
+};
+
+let currentSpreadCards = [];
+let currentPositions = [];
+let currentSpreadType = 3;
+let flippedCards = [];
+
+function getRandomCard() {
+  const card = { ...tarotCards[Math.floor(Math.random() * tarotCards.length)] };
+  card.isReversed = Math.random() < 0.28;
+  return card;
+}
+
+function drawSpread() {
+  const numCards = currentSpreadType;
+  currentPositions = spreads[numCards].positions;
+  currentSpreadCards = [];
+  flippedCards = [];
+  
+  for (let i = 0; i < numCards; i++) {
+    currentSpreadCards.push(getRandomCard());
+    flippedCards.push(false);
+  }
+  
+  renderCards();
+  // Don't show interpretation until all cards are flipped
+  document.getElementById("interpretation").style.display = "none";
+}
+
+function flipCard(index) {
+  if (flippedCards[index]) return;
+  flippedCards[index] = true;
+  
+  // Re-render that specific card
+  const wrapper = document.querySelector(`.card-wrapper[data-index="${index}"]`);
+  if (wrapper) {
+    wrapper.classList.add("flipped");
+  }
+  
+  // Check if all cards are flipped
+  const allFlipped = flippedCards.every(f => f === true);
+  if (allFlipped) {
+    renderInterpretation();
+  }
+}
+
+function renderCards() {
+  const container = document.getElementById("cardsContainer");
+  if (!container) return;
+  
+  container.innerHTML = currentSpreadCards.map((card, idx) => `
+    <div class="card-wrapper ${flippedCards[idx] ? 'flipped' : ''}" data-index="${idx}" onclick="flipCard(${idx})">
+      <div class="card-inner">
+        <div class="card-back">
+          <div class="back-symbol">✦</div>
+          <div class="back-text">TAP TO REVEAL</div>
+        </div>
+        <div class="card-front">
+          <div class="card-symbol">${card.symbol}</div>
+          <div class="card-name">${card.name}${card.isReversed ? " ⇵" : ""}</div>
+          <div class="card-position">${currentPositions[idx]?.label || ""}</div>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderInterpretation() {
+  const container = document.getElementById("interpretation");
+  if (!container || currentSpreadCards.length === 0) return;
+  
+  let html = `<h4>✧ THE READING REVEALED ✧</h4>`;
+  currentSpreadCards.forEach((card, idx) => {
+    const meaning = card.isReversed ? card.reversed : card.meaning;
+    html += `
+      <div class="card-reading">
+        <strong>${currentPositions[idx].label}</strong><br>
+        <span style="color:#facc15">${card.name}${card.isReversed ? " (Reversed)" : ""}</span><br>
+        <span style="font-size:0.75rem">${meaning}</span>
+      </div>
+    `;
+  });
+  html += `<p style="margin-top:12px;font-style:italic;font-size:0.7rem;opacity:0.7">✦ the cards speak. listen with your gut ✦</p>`;
+  container.innerHTML = html;
+  container.style.display = "block";
+}
+
+function showCardModal(card, position) {
+  const modal = document.getElementById("cardModal");
+  if (!modal) return;
+  
+  document.getElementById("modalSymbol").textContent = card.symbol;
+  document.getElementById("modalTitle").textContent = `${card.name} — ${position.label}`;
+  document.getElementById("modalMeaning").textContent = card.isReversed ? card.reversed : card.meaning;
+  document.getElementById("modalReversed").textContent = card.isReversed ? "⇵ reversed — inner work required" : "△ upright — energy flows clearly";
+  
+  modal.style.display = "flex";
+}
+
+// Make cards clickable to show modal after flipped
+function setupCardClickListeners() {
+  document.querySelectorAll('.card-front').forEach((front, idx) => {
+    front.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (flippedCards[idx]) {
+        showCardModal(currentSpreadCards[idx], currentPositions[idx]);
+      }
+    });
+  });
+}
+
+// Override flipCard to also setup listeners after render
+const originalFlipCard = flipCard;
+window.flipCard = function(idx) {
+  if (flippedCards[idx]) return;
+  flippedCards[idx] = true;
+  const wrapper = document.querySelector(`.card-wrapper[data-index="${idx}"]`);
+  if (wrapper) wrapper.classList.add("flipped");
+  const allFlipped = flippedCards.every(f => f === true);
+  if (allFlipped) {
+    renderInterpretation();
+    setupCardClickListeners();
+  }
+};
+
+// ─── JOURNAL & HISTORY ─────────────────────────────────────────
+function saveToHistory(journalText) {
+  if (!currentSpreadCards.length) return;
+  
+  const entry = {
+    id: Date.now(),
+    date: new Date().toLocaleString(),
+    spreadType: currentSpreadType,
+    spreadName: spreads[currentSpreadType].name,
+    cards: currentSpreadCards.map(c => ({ name: c.name, reversed: c.isReversed, symbol: c.symbol })),
+    positions: currentPositions,
+    journal: journalText
+  };
+  
+  let history = JSON.parse(localStorage.getItem("tarot_history_v2") || "[]");
+  history.unshift(entry);
+  if (history.length > 15) history = history.slice(0, 15);
+  localStorage.setItem("tarot_history_v2", JSON.stringify(history));
+  renderHistory();
+}
+
+function renderHistory() {
+  const container = document.getElementById("historyList");
+  if (!container) return;
+  
+  const history = JSON.parse(localStorage.getItem("tarot_history_v2") || "[]");
+  if (history.length === 0) {
+    container.innerHTML = '<div style="color:#666;text-align:center;padding:12px">✧ no readings yet ✧</div>';
+    return;
+  }
+  
+  container.innerHTML = history.map(entry => `
+    <div class="history-item" data-id="${entry.id}">
+      <div class="history-date">📅 ${entry.date} — ${entry.spreadName}</div>
+      <div class="history-spread">
+        ${entry.cards.map(c => `${c.symbol} ${c.name}${c.reversed ? "⇵" : ""}`).join(" · ")}
+      </div>
+      ${entry.journal ? `<div style="color:#888;font-size:0.6rem;margin-top:4px">✎ ${entry.journal.substring(0,50)}${entry.journal.length>50?"...":""}</div>` : ""}
+    </div>
+  `).join("");
+  
+  document.querySelectorAll(".history-item").forEach(item => {
+    item.addEventListener("click", () => {
+      const id = parseInt(item.dataset.id);
+      loadHistoryEntry(id);
+    });
+  });
+}
+
+function loadHistoryEntry(id) {
+  const history = JSON.parse(localStorage.getItem("tarot_history_v2") || "[]");
+  const entry = history.find(e => e.id === id);
+  if (!entry) return;
+  
+  currentSpreadType = entry.spreadType;
+  currentPositions = entry.positions;
+  currentSpreadCards = entry.cards.map(saved => {
+    const fullCard = tarotCards.find(c => c.name === saved.name);
+    return { ...fullCard, isReversed: saved.reversed };
+  });
+  flippedCards = new Array(currentSpreadCards.length).fill(true);
+  
+  document.getElementById("journalInput").value = entry.journal || "";
+  renderCards();
+  renderInterpretation();
+  setupCardClickListeners();
+  
+  // Update active spread button
+  document.querySelectorAll(".spread-btn").forEach(btn => {
+    btn.classList.remove("active");
+    if (btn.dataset.spread == currentSpreadType) btn.classList.add("active");
+  });
+}
+
+function saveCurrentJournal() {
+  if (!currentSpreadCards.length) {
+    alert("✧ draw a reading first ✧");
+    return;
+  }
+  const journalText = document.getElementById("journalInput")?.value || "";
+  saveToHistory(journalText);
+  alert("📖 saved to your reading history");
+}
+
+// ─── INIT ──────────────────────────────────────────────────────
+document.getElementById("drawBtn")?.addEventListener("click", () => {
+  drawSpread();
+});
+
+document.getElementById("saveJournalBtn")?.addEventListener("click", () => {
+  saveCurrentJournal();
+});
+
+document.getElementById("closeModalBtn")?.addEventListener("click", () => {
+  document.getElementById("cardModal").style.display = "none";
+});
+
+document.getElementById("cardModal")?.addEventListener("click", (e) => {
+  if (e.target === document.getElementById("cardModal")) {
+    document.getElementById("cardModal").style.display = "none";
+  }
+});
+
+document.querySelectorAll(".spread-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".spread-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentSpreadType = parseInt(btn.dataset.spread);
+    drawSpread();
+  });
+});
+
+renderHistory();
+drawSpread();
+</script>
+CUSTOMHTML-END
