@@ -8,15 +8,62 @@ CATEGORY: game
 BIGHEADER: Jumper Game
 
 CUSTOMHTML-START
-<style>*{user-select:none;touch-action:pan-y}canvas{display:block;width:100%;margin:0 auto;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,0.3);cursor:pointer}.controls{display:flex;gap:8px;justify-content:center;margin-top:12px}.ctrl{background:#334155;border:none;color:white;font-size:18px;padding:10px 20px;border-radius:40px;font-weight:bold;cursor:pointer}.info{display:flex;justify-content:space-between;margin-top:10px;padding:0 10px;font-size:12px;color:#fbbf24;font-weight:bold}</style>
-<canvas id="c" width="400" height="450"></canvas>
-<div class="controls"><button class="ctrl" ontouchstart="L=1" ontouchend="L=0" onmousedown="L=1" onmouseup="L=0">◀</button><button class="ctrl" ontouchstart="J=1" ontouchend="J=0" onmousedown="J=1" onmouseup="J=0">▲</button><button class="ctrl" ontouchstart="R=1" ontouchend="R=0" onmousedown="R=1" onmouseup="R=0">▶</button></div>
-<div class="info"><span id="sc">❤️ 3  🪙 0</span><span id="starCount">⭐ 0/0</span><span id="lvl">🌍 1/6</span><span id="pwr">⚡ None</span></div>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;user-select:none;touch-action:none}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a}
+#gw{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;background:#0a0e1a}
+#hud{display:flex;justify-content:space-around;align-items:center;padding:10px 16px;background:rgba(10,14,26,0.96);border-bottom:1px solid #1e293b;color:#fbbf24;font-size:13px;font-weight:bold;font-family:monospace;flex-shrink:0;gap:4px;flex-wrap:wrap}
+#ca{flex:1;min-height:0;overflow:hidden;display:block}
+canvas{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+#ctrl{display:flex;justify-content:space-between;align-items:center;padding:14px 32px;padding-bottom:max(20px,env(safe-area-inset-bottom,20px));background:rgba(10,14,26,0.96);border-top:1px solid #1e293b;flex-shrink:0;gap:0}
+.cg{display:flex;gap:22px;align-items:center}
+.btn{width:72px;height:72px;background:rgba(22,32,50,0.95);border:2px solid #2d3f57;color:#7a90aa;font-size:26px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;transition:all 0.08s;flex-shrink:0;outline:none;box-shadow:0 4px 14px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.05)}
+.btn.active{background:rgba(55,75,100,0.98);border-color:#4e6a88;color:#b0c4da;transform:scale(0.87);box-shadow:0 1px 5px rgba(0,0,0,0.4),inset 0 2px 4px rgba(0,0,0,0.3)}
+.btn-jump{width:84px;height:84px;background:rgba(245,158,11,0.1);border:2px solid #b07a08;color:#f59e0b;font-size:30px;box-shadow:0 0 22px rgba(245,158,11,0.18),0 4px 14px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.07)}
+.btn-jump.active{background:rgba(245,158,11,0.32);border-color:#f59e0b;color:#fcd34d;box-shadow:0 0 32px rgba(245,158,11,0.38),0 1px 5px rgba(0,0,0,0.4);transform:scale(0.88)}
+</style>
+
+<div id="gw">
+  <div id="hud">
+    <span id="sc">❤️ 3&nbsp;&nbsp;🪙 0</span>
+    <span id="starCount">⭐ 0</span>
+    <span id="lvl">🌍 1/6</span>
+    <span id="pwr">⚡ None</span>
+  </div>
+  <div id="ca"><canvas id="c" width="400" height="450"></canvas></div>
+  <div id="ctrl">
+    <div class="cg">
+      <button class="btn" id="btnL">◀</button>
+      <button class="btn" id="btnR">▶</button>
+    </div>
+    <div class="cg">
+      <button class="btn btn-jump" id="btnJ">▲</button>
+    </div>
+  </div>
+</div>
+
 <script>
 let cv=document.getElementById('c'),ctx=cv.getContext('2d'),W=400,H=450;
 let L=0,R=0,J=0;
-window.onkeydown=e=>{let k=e.key;if(k==='ArrowLeft'){L=1;e.preventDefault()}else if(k==='ArrowRight'){R=1;e.preventDefault()}else if(k==='ArrowUp'){J=1;e.preventDefault()}};
-window.onkeyup=e=>{if(e.key==='ArrowLeft')L=0;if(e.key==='ArrowRight')R=0;if(e.key==='ArrowUp')J=0};
+
+function mkBtn(id,press,release){
+  const b=document.getElementById(id);
+  const on=e=>{e.preventDefault();e.stopPropagation();b.classList.add('active');press();};
+  const off=e=>{e.preventDefault();b.classList.remove('active');release();};
+  b.addEventListener('touchstart',on,{passive:false});
+  b.addEventListener('touchend',off,{passive:false});
+  b.addEventListener('touchcancel',off,{passive:false});
+  b.addEventListener('mousedown',on);
+  b.addEventListener('mouseup',off);
+  b.addEventListener('mouseleave',off);
+}
+mkBtn('btnL',()=>{L=1},()=>{L=0});
+mkBtn('btnR',()=>{R=1},()=>{R=0});
+mkBtn('btnJ',()=>{J=1},()=>{J=0});
+
+window.onkeydown=e=>{let k=e.key;if(k==='ArrowLeft'){L=1;e.preventDefault()}else if(k==='ArrowRight'){R=1;e.preventDefault()}else if(k==='ArrowUp'||k===' '){J=1;e.preventDefault()}};
+window.onkeyup=e=>{if(e.key==='ArrowLeft')L=0;if(e.key==='ArrowRight')R=0;if(e.key==='ArrowUp'||e.key===' ')J=0};
+
 let player={x:80,y:300,w:14,h:14,vy:0,onGround:0,invincible:0,health:3,coins:0,starsCollected:0,powerup:0,powerupTimer:0,doubleJump:0};
 let camX=0,worldW=3000,gameOver=0,level=1,levelComplete=0,particles=[],screenshake=0,levelEndX=0;
 let platforms=[],movingPlatforms=[],fallingPlatforms=[],coins=[],stars=[],enemies=[],powerups=[],flagpole=null;
@@ -81,7 +128,7 @@ flagpole={x:2600,y:H-58,w:12,h:50,active:1};
 }
 }
 function rectCollide(a,b){return!(b.x>a.x+a.w||b.x+b.w<a.x||b.y>a.y+a.h||b.y+b.h<a.y);}
-function updateUI(){document.getElementById('sc').innerHTML='❤️ '+player.health+'  🪙 '+player.coins;document.getElementById('starCount').innerHTML='⭐ '+player.starsCollected;document.getElementById('lvl').innerHTML='🌍 '+level+'/6';let pwr='None';if(player.powerup===1)pwr='Jet';if(player.powerup===2)pwr='Shield';if(player.powerup===3)pwr='Magnet';document.getElementById('pwr').innerHTML='⚡ '+pwr;}
+function updateUI(){document.getElementById('sc').innerHTML='❤️ '+player.health+'&nbsp;&nbsp;🪙 '+player.coins;document.getElementById('starCount').innerHTML='⭐ '+player.starsCollected;document.getElementById('lvl').innerHTML='🌍 '+level+'/6';let pwr='None';if(player.powerup===1)pwr='Jet';if(player.powerup===2)pwr='Shield';if(player.powerup===3)pwr='Magnet';document.getElementById('pwr').innerHTML='⚡ '+pwr;}
 function addParticles(x,y,color){for(let i=0;i<5;i++){particles.push({x:x,y:y,vx:(Math.random()-0.5)*3,vy:(Math.random()-0.5)*3-2,life:20,color:color});}}
 function damage(){if(player.powerup===2){player.powerup=0;player.powerupTimer=0;return;}player.health--;player.invincible=30;player.vy=-6;screenshake=8;updateUI();if(player.health<=0)gameOver=1;}
 function nextLevel(){level++;if(level>6){level=1;resetGame();}else{buildLevel(level);player.x=80;player.y=300;camX=0;levelComplete=0;player.health=Math.min(5,player.health+1);player.starsCollected=0;updateUI();}}
