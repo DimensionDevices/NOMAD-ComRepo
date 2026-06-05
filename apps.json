@@ -33,6 +33,12 @@
     "size": 11771
   },
   {
+    "name": "flappy.com",
+    "description": "A Flappy Bird clone",
+    "category": "game",
+    "size": 11718
+  },
+  {
     "name": "jumper.com",
     "description": "An example platformer with effects",
     "category": "game",
@@ -43,12 +49,6 @@
     "description": "A simple recipe book for NOMAD",
     "category": "info",
     "size": 10075
-  },
-  {
-    "name": "runner.com",
-    "description": "A simple run and jump game",
-    "category": "game",
-    "size": 13005
   },
   {
     "name": "storms.com",
