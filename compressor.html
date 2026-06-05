@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOMAD .com Minifier - Bulk Mode</title>
+    <style>*{box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);min-height:100vh;margin:0;padding:20px;color:#eee}.container{max-width:1600px;margin:0 auto}h1{text-align:center;color:#00f3ff;margin-bottom:10px;font-family:'Courier New',monospace}.subtitle{text-align:center;color:#aaa;margin-bottom:30px;font-size:14px}.mode-switch{display:flex;justify-content:center;gap:20px;margin-bottom:20px}.mode-btn{background:#1a1a3a;border:1px solid #00f3ff;color:#00f3ff;padding:10px 30px;border-radius:8px;cursor:pointer;font-weight:bold}.mode-btn.active{background:#00f3ff;color:#000}.panel{background:rgba(0,0,0,0.6);border-radius:12px;padding:20px;border:1px solid #00f3ff33;backdrop-filter:blur(10px)}.panel h2{margin-top:0;color:#00f3ff;font-size:18px;border-bottom:1px solid #00f3ff33;padding-bottom:10px}.single-view{display:block}.bulk-view{display:none}textarea{width:100%;height:400px;background:#0a0a1a;border:1px solid #00f3ff66;color:#0f0;font-family:'Courier New',monospace;font-size:12px;padding:10px;border-radius:8px;resize:vertical}.button-group{display:flex;gap:10px;margin:15px 0;flex-wrap:wrap}button,.file-label{background:#1a1a3a;border:1px solid #00f3ff;color:#00f3ff;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:bold;transition:all 0.2s;display:inline-block;font-size:14px}button:hover,.file-label:hover{background:#00f3ff;color:#000}.file-label input{display:none}.stats{background:#0a0a1a;padding:10px;border-radius:8px;margin-top:15px;font-size:13px;display:flex;gap:20px;flex-wrap:wrap}.stat{color:#0f0}.stat span{color:#ffcc00;font-weight:bold}.warning{color:#ffaa00;font-size:12px;margin-top:10px;padding:8px;background:#ffaa0011;border-radius:6px}.footer{text-align:center;margin-top:30px;color:#666;font-size:12px}.inline-code{background:#1a1a3a;padding:2px 6px;border-radius:4px;font-family:monospace;color:#00f3ff}.file-list{max-height:300px;overflow-y:auto;background:#0a0a1a;border-radius:8px;padding:10px;margin-top:10px}.file-item{display:flex;justify-content:space-between;align-items:center;padding:8px;border-bottom:1px solid #00f3ff33;font-family:monospace;font-size:12px}.file-item:last-child{border-bottom:none}.file-name{color:#00f3ff}.file-size{color:#aaa}.file-status{font-size:11px}.status-success{color:#0f0}.status-fail{color:#f00}.status-pending{color:#ffaa00}.bulk-stats{margin-top:15px;padding:10px;background:#0a0a1a;border-radius:8px}.progress-bar{height:4px;background:#1a1a3a;border-radius:2px;margin-top:10px;overflow:hidden}.progress-fill{height:100%;background:#00f3ff;width:0%;transition:width 0.3s}@media(max-width:800px){.main-grid{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<div class="container">
+    <h1>🎯 NOMAD .com Minifier</h1>
+    <div class="subtitle">Single file or bulk mode | Minifies CSS/JS | Removes comments</div>
+
+    <div class="mode-switch">
+        <button id="singleModeBtn" class="mode-btn active">📄 Single File</button>
+        <button id="bulkModeBtn" class="mode-btn">📦 Bulk Mode (ZIP)</button>
+    </div>
+
+    <!-- SINGLE FILE MODE -->
+    <div id="singleView" class="single-view">
+        <div class="panel">
+            <h2>📁 INPUT: Original .com File</h2>
+            <textarea id="inputArea" placeholder='Paste .com content or click "Load .com File" to upload...'></textarea>
+            <div class="button-group">
+                <label class="file-label">📂 Load .com File<input type="file" id="fileInput" accept=".com,.txt"></label>
+                <button id="loadExampleBtn">📝 Example</button>
+                <button id="clearBtn">🗑️ Clear</button>
+                <button id="minifyBtn">⚡ MINIFY</button>
+            </div>
+            <div class="stats">
+                <div class="stat">📄 Lines: <span id="inputLines">0</span></div>
+                <div class="stat">📦 Size: <span id="inputSize">0</span> bytes</div>
+                <div class="stat">🎯 20KB: <span id="inputWarning">—</span></div>
+            </div>
+        </div>
+        <div class="panel">
+            <h2>🗜️ OUTPUT: Minified .com</h2>
+            <textarea id="outputArea" placeholder="Minified output will appear here..." readonly></textarea>
+            <div class="button-group">
+                <button id="copyBtn">📋 Copy</button>
+                <button id="downloadBtn">💾 Download .com</button>
+            </div>
+            <div class="stats">
+                <div class="stat">📄 Lines: <span id="outputLines">0</span></div>
+                <div class="stat">📦 Size: <span id="outputSize">0</span> bytes</div>
+                <div class="stat">💾 Saved: <span id="outputSaved">—</span></div>
+            </div>
+            <div id="outputWarning" class="warning" style="display:none">⚠️ WARNING: Exceeds 20KB! NOMAD will reject.</div>
+        </div>
+    </div>
+
+    <!-- BULK MODE -->
+    <div id="bulkView" class="bulk-view">
+        <div class="panel">
+            <h2>📦 BULK UPLOAD: Multiple .com Files</h2>
+            <div class="button-group">
+                <label class="file-label">📂 Select .com Files (multiple)<input type="file" id="bulkFileInput" multiple accept=".com,.txt"></label>
+                <button id="clearBulkBtn">🗑️ Clear All</button>
+                <button id="minifyAllBtn">⚡ MINIFY ALL &amp; Download ZIP</button>
+            </div>
+            <div id="bulkFileList" class="file-list">
+                <div style="text-align:center;color:#666;padding:20px">No files selected. Click "Select .com Files" above.</div>
+            </div>
+            <div id="bulkStats" class="bulk-stats" style="display:none">
+                <div>📊 Total: <span id="totalFiles">0</span> files | ✅ Minified: <span id="minifiedCount">0</span> | ❌ Failed: <span id="failedCount">0</span></div>
+                <div>💾 Original size: <span id="totalOriginalSize">0</span> bytes | 🗜️ Minified size: <span id="totalMinifiedSize">0</span> bytes | 💪 Saved: <span id="totalSaved">0</span> bytes</div>
+                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">• Keeps NOMAD directives on new lines • Minifies CSS/JS, removes comments • Preserves LIST/TABLE/GRID/CARD blocks • Bulk mode outputs ZIP file</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script>
+// ============ MINIFICATION ENGINE (same as before) ============
+function minifyCSS(css){
+    css=css.replace(/\/\*[\s\S]*?\*\//g,'');
+    css=css.replace(/\s*{\s*/g,'{');
+    css=css.replace(/\s*}\s*/g,'}');
+    css=css.replace(/\s*;\s*/g,';');
+    css=css.replace(/\s*:\s*/g,':');
+    css=css.replace(/\s*,\s*/g,',');
+    css=css.replace(/\s+/g,' ');
+    return css.trim();
+}
+
+function minifyJS(js){
+    js=js.replace(/\/\/(?!.*https?:\/\/).*$/gm,'');
+    js=js.replace(/\/\*[\s\S]*?\*\//g,'');
+    let lines=js.split('\n').map(l=>l.trim()).filter(l=>l.length>0);
+    let minified=lines.join(' ');
+    minified=minified.replace(/\s+/g,' ');
+    minified=minified.replace(/\s*([{}();,=<>!+\-*/%])\s*/g,'$1');
+    minified=minified.replace(/\s+-/g,'-');
+    return minified.trim();
+}
+
+function minifyCustomHTML(html){
+    html=html.replace(/<style>([\s\S]*?)<\/style>/gi,(match,cssContent)=>{
+        return `<style>${minifyCSS(cssContent)}<`+`/style>`;
+    });
+    html=html.replace(/<script>([\s\S]*?)<\/script>/gi,(match,jsContent)=>{
+        return `<script>${minifyJS(jsContent)}<`+`/script>`;
+    });
+    html=html.replace(/<!--[\s\S]*?-->/g,'');
+    html=html.replace(/\s+/g,' ').trim();
+    return html;
+}
+
+function minifyComFile(content){
+    let lines=content.split(/\r?\n/);
+    let outputLines=[];
+    let i=0;
+    let inCustomHTML=false;
+    let customHTMLBuffer=[];
+    let inList=false,inTable=false,inGrid=false,inCard=false;
+    
+    while(i<lines.length){
+        let line=lines[i];
+        let trimmed=line.trim();
+        
+        if(trimmed==='CUSTOMHTML-START'){
+            inCustomHTML=true;
+            outputLines.push('CUSTOMHTML-START');
+            i++;
+            customHTMLBuffer=[];
+            continue;
+        }
+        if(trimmed==='CUSTOMHTML-END'){
+            inCustomHTML=false;
+            let rawHTML=customHTMLBuffer.join('\n');
+            let minifiedHTML=minifyCustomHTML(rawHTML);
+            outputLines.push(minifiedHTML);
+            outputLines.push('CUSTOMHTML-END');
+            i++;
+            continue;
+        }
+        if(inCustomHTML){
+            customHTMLBuffer.push(line);
+            i++;
+            continue;
+        }
+        if(trimmed==='LIST-START'){inList=true;outputLines.push('LIST-START');i++;continue;}
+        if(trimmed==='LIST-END'){inList=false;outputLines.push('LIST-END');i++;continue;}
+        if(trimmed==='TABLE-START'){inTable=true;outputLines.push('TABLE-START');i++;continue;}
+        if(trimmed==='TABLE-END'){inTable=false;outputLines.push('TABLE-END');i++;continue;}
+        if(trimmed==='GRID-START'){inGrid=true;outputLines.push('GRID-START');i++;continue;}
+        if(trimmed==='GRID-END'){inGrid=false;outputLines.push('GRID-END');i++;continue;}
+        if(trimmed==='CARD-START'){inCard=true;outputLines.push('CARD-START');i++;continue;}
+        if(trimmed==='CARD-END'){inCard=false;outputLines.push('CARD-END');i++;continue;}
+        
+        if(!inCustomHTML && !inList && !inTable && !inGrid && !inCard){
+            if(trimmed.startsWith('LINK:')||trimmed.startsWith('BUTTON:')||trimmed.startsWith('IMAGE:')){
+                outputLines.push(trimmed);
+            }else if(trimmed.match(/^[A-Z]+:/)){
+                outputLines.push(trimmed);
+            }else if(trimmed.startsWith('ITEM:')||trimmed.startsWith('ROW:')||trimmed.startsWith('COLUMN:')||trimmed.startsWith('HEADER:')){
+                outputLines.push(trimmed);
+            }else if(trimmed.length>0 && !trimmed.startsWith('//') && !trimmed.startsWith('/*')){
+                outputLines.push(trimmed);
+            }
+        }else{
+            if(!trimmed.startsWith('//') && !trimmed.startsWith('/*') && trimmed.length>0){
+                outputLines.push(trimmed);
+            }
+        }
+        i++;
+    }
+    let result=outputLines.join('\n');
+    result=result.replace(/^\s*$/gm,'');
+    result=result.replace(/\n{3,}/g,'\n\n');
+    return result.trim();
+}
+
+// ============ SINGLE MODE FUNCTIONS ============
+function updateStats(text,linesSpan,sizeSpan,warningSpanId,isOutput=false){
+    let lines=text.split(/\r?\n/).filter(l=>l.trim().length>0||l.length===0).length;
+    let size=new Blob([text]).size;
+    let sizeKB=(size/1024).toFixed(2);
+    linesSpan.textContent=lines;
+    sizeSpan.textContent=size;
+    
+    if(isOutput){
+        let savedSpan=document.getElementById('outputSaved');
+        let inputSize=parseInt(document.getElementById('inputSize').textContent)||0;
+        let saved=inputSize-size;
+        savedSpan.textContent=saved>0?`-${saved} bytes`:(saved<0?`+${-saved} bytes`:'0 bytes');
+        savedSpan.style.color=saved>0?'#0f0':(saved<0?'#ff4444':'#aaa');
+        let warningDiv=document.getElementById('outputWarning');
+        warningDiv.style.display=size>20480?'block':'none';
+    }else{
+        let warningSpan=document.getElementById(warningSpanId);
+        if(size>20480){
+            warningSpan.textContent=`⚠️ EXCEEDS 20KB (${sizeKB}KB)`;
+            warningSpan.style.color='#ffaa00';
+        }else{
+            warningSpan.textContent=`✅ OK (${sizeKB}KB / 20KB)`;
+            warningSpan.style.color='#0f0';
+        }
+    }
+}
+
+// DOM elements - single mode
+const inputArea=document.getElementById('inputArea');
+const outputArea=document.getElementById('outputArea');
+const fileInput=document.getElementById('fileInput');
+const minifyBtn=document.getElementById('minifyBtn');
+const copyBtn=document.getElementById('copyBtn');
+const downloadBtn=document.getElementById('downloadBtn');
+const clearBtn=document.getElementById('clearBtn');
+const loadExampleBtn=document.getElementById('loadExampleBtn');
+
+const inputLines=document.getElementById('inputLines');
+const inputSize=document.getElementById('inputSize');
+const inputWarning=document.getElementById('inputWarning');
+const outputLines=document.getElementById('outputLines');
+const outputSize=document.getElementById('outputSize');
+
+const exampleCom=`PAGE: Minifier Demo
+COLOR: #00f3ff
+AUTHOR: NOMAD
+DATE: 2025-01-15
+DESCRIPTION: Test file for minifier
+
+BIGHEADER: Welcome
+
+CUSTOMHTML-START
+<style>
+    .box{background:#050510;padding:20px;}
+    .btn{border:1px solid cyan;border-radius:8px;}
+    .btn:hover{background:cyan;color:black;}
+</style>
+<script>
+    console.log("Hello");
+    function test(){return 42;}
+<\/script>
+<div class="box"><button class="btn">Click</button></div>
+CUSTOMHTML-END
+
+HEADER: Features
+LIST-START
+ITEM: Minified CSS
+ITEM: Minified JS
+LIST-END`;
+
+fileInput.addEventListener('change',(e)=>{
+    let file=e.target.files[0];
+    if(!file)return;
+    let reader=new FileReader();
+    reader.onload=function(ev){
+        inputArea.value=ev.target.result;
+        updateStats(inputArea.value,inputLines,inputSize,'inputWarning',false);
+        outputArea.value='';
+        updateStats('',outputLines,outputSize,null,true);
+    };
+    reader.readAsText(file);
+});
+
+loadExampleBtn.addEventListener('click',()=>{
+    inputArea.value=exampleCom;
+    updateStats(inputArea.value,inputLines,inputSize,'inputWarning',false);
+    outputArea.value='';
+    updateStats('',outputLines,outputSize,null,true);
+});
+
+clearBtn.addEventListener('click',()=>{
+    inputArea.value='';
+    outputArea.value='';
+    updateStats('',inputLines,inputSize,'inputWarning',false);
+    updateStats('',outputLines,outputSize,null,true);
+    fileInput.value='';
+});
+
+minifyBtn.addEventListener('click',()=>{
+    let input=inputArea.value;
+    if(!input.trim()){
+        alert('Please load or paste a .com file first!');
+        return;
+    }
+    try{
+        let minified=minifyComFile(input);
+        outputArea.value=minified;
+        updateStats(input,inputLines,inputSize,'inputWarning',false);
+        updateStats(minified,outputLines,outputSize,null,true);
+    }catch(err){
+        alert('Error: '+err.message);
+    }
+});
+
+copyBtn.addEventListener('click',async()=>{
+    if(!outputArea.value){
+        alert('Nothing to copy. Minify first.');
+        return;
+    }
+    await navigator.clipboard.writeText(outputArea.value);
+    copyBtn.textContent='✅ Copied!';
+    setTimeout(()=>copyBtn.textContent='📋 Copy',2000);
+});
+
+downloadBtn.addEventListener('click',()=>{
+    if(!outputArea.value){
+        alert('Nothing to download. Minify first.');
+        return;
+    }
+    let blob=new Blob([outputArea.value],{type:'text/plain'});
+    let url=URL.createObjectURL(blob);
+    let a=document.createElement('a');
+    a.href=url;
+    a.download='minified.com';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    downloadBtn.textContent='💾 Downloaded!';
+    setTimeout(()=>downloadBtn.textContent='💾 Download .com',2000);
+});
+
+inputArea.addEventListener('input',()=>{
+    updateStats(inputArea.value,inputLines,inputSize,'inputWarning',false);
+});
+
+// ============ BULK MODE ============
+let bulkFiles = []; // array of {name, content, originalSize, minified, minifiedSize, status}
+
+const bulkFileInput = document.getElementById('bulkFileInput');
+const clearBulkBtn = document.getElementById('clearBulkBtn');
+const minifyAllBtn = document.getElementById('minifyAllBtn');
+const bulkFileList = document.getElementById('bulkFileList');
+const bulkStats = document.getElementById('bulkStats');
+const totalFilesSpan = document.getElementById('totalFiles');
+const minifiedCountSpan = document.getElementById('minifiedCount');
+const failedCountSpan = document.getElementById('failedCount');
+const totalOriginalSizeSpan = document.getElementById('totalOriginalSize');
+const totalMinifiedSizeSpan = document.getElementById('totalMinifiedSize');
+const totalSavedSpan = document.getElementById('totalSaved');
+const progressFill = document.getElementById('progressFill');
+
+function renderBulkFileList() {
+    if (bulkFiles.length === 0) {
+        bulkFileList.innerHTML = '<div style="text-align:center;color:#666;padding:20px">No files selected. Click "Select .com Files" above.</div>';
+        bulkStats.style.display = 'none';
+        return;
+    }
+    
+    bulkStats.style.display = 'block';
+    let html = '';
+    for (let i = 0; i < bulkFiles.length; i++) {
+        const f = bulkFiles[i];
+        let statusClass = '';
+        let statusText = '';
+        if (f.status === 'pending') {
+            statusClass = 'status-pending';
+            statusText = '⏳ Pending';
+        } else if (f.status === 'success') {
+            statusClass = 'status-success';
+            statusText = `✅ Minified (${f.minifiedSize} bytes)`;
+        } else if (f.status === 'failed') {
+            statusClass = 'status-fail';
+            statusText = '❌ Failed';
+        }
+        html += `<div class="file-item">
+            <span class="file-name">📄 ${f.name}</span>
+            <span class="file-size">${f.originalSize} bytes</span>
+            <span class="file-status ${statusClass}">${statusText}</span>
+        </div>`;
+    }
+    bulkFileList.innerHTML = html;
+    
+    // Update stats
+    let total = bulkFiles.length;
+    let minified = bulkFiles.filter(f => f.status === 'success').length;
+    let failed = bulkFiles.filter(f => f.status === 'failed').length;
+    let totalOrig = bulkFiles.reduce((sum, f) => sum + f.originalSize, 0);
+    let totalMin = bulkFiles.reduce((sum, f) => sum + (f.minifiedSize || 0), 0);
+    let saved = totalOrig - totalMin;
+    
+    totalFilesSpan.textContent = total;
+    minifiedCountSpan.textContent = minified;
+    failedCountSpan.textContent = failed;
+    totalOriginalSizeSpan.textContent = totalOrig;
+    totalMinifiedSizeSpan.textContent = totalMin;
+    totalSavedSpan.textContent = saved > 0 ? `-${saved}` : (saved < 0 ? `+${-saved}` : '0');
+    totalSavedSpan.style.color = saved > 0 ? '#0f0' : (saved < 0 ? '#f00' : '#aaa');
+    
+    let progress = total === 0 ? 0 : ((minified + failed) / total) * 100;
+    progressFill.style.width = progress + '%';
+}
+
+bulkFileInput.addEventListener('change', (e) => {
+    const files = Array.from(e.target.files);
+    for (const file of files) {
+        if (!file.name.endsWith('.com') && !file.name.endsWith('.txt')) {
+            alert(`Skipping ${file.name} - only .com and .txt files are supported`);
+            continue;
+        }
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            const content = ev.target.result;
+            const existingIndex = bulkFiles.findIndex(f => f.name === file.name);
+            const newFile = {
+                name: file.name,
+                content: content,
+                originalSize: new Blob([content]).size,
+                status: 'pending',
+                minified: null,
+                minifiedSize: 0
+            };
+            if (existingIndex >= 0) {
+                bulkFiles[existingIndex] = newFile;
+            } else {
+                bulkFiles.push(newFile);
+            }
+            renderBulkFileList();
+        };
+        reader.readAsText(file);
+    }
+    bulkFileInput.value = '';
+});
+
+clearBulkBtn.addEventListener('click', () => {
+    bulkFiles = [];
+    renderBulkFileList();
+});
+
+minifyAllBtn.addEventListener('click', async () => {
+    if (bulkFiles.length === 0) {
+        alert('Please select some .com files first!');
+        return;
+    }
+    
+    // Minify all pending files
+    for (let i = 0; i < bulkFiles.length; i++) {
+        const f = bulkFiles[i];
+        if (f.status !== 'pending') continue;
+        
+        try {
+            const minified = minifyComFile(f.content);
+            f.minified = minified;
+            f.minifiedSize = new Blob([minified]).size;
+            f.status = 'success';
+        } catch (err) {
+            console.error(`Failed to minify ${f.name}:`, err);
+            f.status = 'failed';
+            f.minified = null;
+            f.minifiedSize = 0;
+        }
+        renderBulkFileList();
+        // Small delay to keep UI responsive
+        await new Promise(r => setTimeout(r, 10));
+    }
+    
+    // Create ZIP with all successfully minified files
+    const minifiedFiles = bulkFiles.filter(f => f.status === 'success');
+    if (minifiedFiles.length === 0) {
+        alert('No files were successfully minified!');
+        return;
+    }
+    
+    const JSZip = window.JSZip;
+    const zip = new JSZip();
+    
+    for (const f of minifiedFiles) {
+        // Preserve original filename
+        zip.file(f.name, f.minified);
+    }
+    
+    const zipBlob = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(zipBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'minified_nomad_files.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    alert(`Downloaded ZIP with ${minifiedFiles.length} minified files!`);
+});
+
+// ============ MODE SWITCHING ============
+const singleModeBtn = document.getElementById('singleModeBtn');
+const bulkModeBtn = document.getElementById('bulkModeBtn');
+const singleView = document.getElementById('singleView');
+const bulkView = document.getElementById('bulkView');
+
+singleModeBtn.addEventListener('click', () => {
+    singleModeBtn.classList.add('active');
+    bulkModeBtn.classList.remove('active');
+    singleView.style.display = 'block';
+    bulkView.style.display = 'none';
+});
+
+bulkModeBtn.addEventListener('click', () => {
+    bulkModeBtn.classList.add('active');
+    singleModeBtn.classList.remove('active');
+    singleView.style.display = 'none';
+    bulkView.style.display = 'block';
+});
+
+// Initialize
+updateStats('',inputLines,inputSize,'inputWarning',false);
+updateStats('',outputLines,outputSize,null,true);
+singleView.style.display = 'block';
+bulkView.style.display = 'none';
+</script>
+</body>
+</html>
