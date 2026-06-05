@@ -47,7 +47,7 @@
   {
     "name": "recipe.com",
     "description": "A simple recipe book for NOMAD",
-    "category": "info",
+    "category": "game",
     "size": 10075
   },
   {
@@ -79,6 +79,12 @@
     "description": "A timezone convertor",
     "category": "app",
     "size": 5490
+  },
+  {
+    "name": "tron.com",
+    "description": "A Tron-style surrounding game",
+    "category": "info",
+    "size": 16075
   },
   {
     "name": "units.com",
