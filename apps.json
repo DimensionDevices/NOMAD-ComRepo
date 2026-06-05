@@ -6,7 +6,7 @@
     "name": "manual.com",
     "description": "The NOMAD user manual and guide",
     "category": "info",
-    "size": 7314
+    "size": 7296
   },
   {
     "name": "2048.com",
@@ -18,78 +18,78 @@
     "name": "aid.com",
     "description": "An off-grid first aid guide",
     "category": "info",
-    "size": 18940
+    "size": 18693
   },
   {
     "name": "cipher.com",
     "description": "A message encryption routine to send secret messages",
     "category": "app",
-    "size": 8394
+    "size": 7506
   },
   {
     "name": "dnd.com",
     "description": "DnD character generator",
     "category": "app",
-    "size": 11771
+    "size": 9446
   },
   {
     "name": "flappy.com",
     "description": "A Flappy Bird clone",
     "category": "game",
-    "size": 11718
+    "size": 10248
   },
   {
     "name": "jumper.com",
     "description": "An example platformer with effects",
     "category": "game",
-    "size": 17397
+    "size": 17166
   },
   {
     "name": "recipe.com",
     "description": "A simple recipe book for NOMAD",
     "category": "game",
-    "size": 10075
+    "size": 8752
   },
   {
     "name": "storms.com",
     "description": "A basic guide to bad weather survival",
     "category": "game",
-    "size": 19648
+    "size": 19438
   },
   {
     "name": "tapper.com",
     "description": "A simple incremental/idle game",
     "category": "game",
-    "size": 17367
+    "size": 15025
   },
   {
     "name": "tarot.com",
     "description": "A nice tarot card reader",
     "category": "app",
-    "size": 18644
+    "size": 16311
   },
   {
     "name": "tasks.com",
     "description": "A simple task and todo list",
     "category": "app",
-    "size": 14816
+    "size": 12922
   },
   {
     "name": "times.com",
     "description": "A timezone convertor",
     "category": "app",
-    "size": 5490
+    "size": 5133
   },
   {
     "name": "tron.com",
     "description": "A Tron-style surrounding game",
     "category": "info",
-    "size": 16075
+    "size": 11724
   },
   {
     "name": "units.com",
     "description": "An offline unit convertor",
     "category": "app",
-    "size": 2446
+    "size": 2400
   }
 ]
