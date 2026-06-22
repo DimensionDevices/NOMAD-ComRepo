@@ -31,6 +31,7 @@ These go at the top of your file and control page-level settings.
 | `AUTHOR:` | `AUTHOR: Name` | `AUTHOR: Jane Doe` | Author metadata |
 | `DATE:` | `DATE: YYYY-MM-DD` | `DATE: 2024-01-15` | Publication date |
 | `DESCRIPTION:` | `DESCRIPTION: Text` | `DESCRIPTION: A guide to NOMAD` | Short description (shown in file listings) |
+| `CATEGORY:` | `CATEGORY: info/game/app/other` | `CATEGORY: game` | File category |
 
 **Example:**
 ```
