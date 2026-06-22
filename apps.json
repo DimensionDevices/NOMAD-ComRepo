@@ -45,6 +45,12 @@
     "size": 17166
   },
   {
+    "name": "racer.com",
+    "description": "A fast endless racer with obstacles and powerups",
+    "category": "game",
+    "size": 15862
+  },
+  {
     "name": "recipe.com",
     "description": "A simple recipe book for NOMAD",
     "category": "game",
