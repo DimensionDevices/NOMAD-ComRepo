@@ -21,6 +21,12 @@
     "size": 18693
   },
   {
+    "name": "chat.com",
+    "description": "A peer-to-peer on-device chat client",
+    "category": "app",
+    "size": 20079
+  },
+  {
     "name": "cipher.com",
     "description": "A message encryption routine to send secret messages",
     "category": "app",
@@ -49,6 +55,12 @@
     "description": "An example platformer with effects",
     "category": "game",
     "size": 17166
+  },
+  {
+    "name": "pi.txt",
+    "description": "The first 20,030 digits of Pi",
+    "category": "info",
+    "size": 20029
   },
   {
     "name": "racer.com",
