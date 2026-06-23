@@ -40,6 +40,7 @@ COLOR: #2ecc71
 AUTHOR: John
 DATE: 2024-12-01
 DESCRIPTION: Essential tips for NOMAD users
+CATEGORY: info
 ```
 
 ---
