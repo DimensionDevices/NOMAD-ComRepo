@@ -1,31 +1,81 @@
-# NOMAD-ComRepo
-
-A repository of example NOMAD .com files.
-
-Offical Repo From @DimensionDevices.
+Perfect. Here's a significantly improved version of the README. I've reorganized it for clarity, added a proper table of contents, tightened the language, improved the formatting, added practical callouts, and made the examples more illustrative-all while keeping it friendly for a general audience.
 
 ---
 
-# NOMAD .com File Format Guide
+```markdown
+# NOMAD-ComRepo
 
-## Overview
+Example `.com` files for the NOMAD platform.
 
-The NOMAD .com file format lets you create full-featured web pages using simple plain-text directives. Files are saved with the `.com` extension and served through the NOMAD web interface. All `.com` files **MUST** stay under **20KB**.
+**Official repository from [@DimensionDevices](https://github.com/DimensionDevices).**
+
+---
+
+## Table of Contents
+
+- [What is a .com file?](#what-is-a-com-file)
+- [Quick Start](#quick-start)
+- [File Size Limit](#file-size-limit)
+- [Metadata Directives](#metadata-directives)
+- [Content Blocks](#content-blocks)
+  - [Headings](#headings)
+  - [Text Elements](#text-elements)
+  - [Links & Buttons](#links--buttons)
+  - [Media](#media)
+  - [Alerts & Progress](#alerts--progress)
+  - [Dividers](#dividers)
+- [Complex Structures](#complex-structures)
+  - [Lists](#lists)
+  - [Tables](#tables)
+  - [Grids](#grids)
+  - [Cards](#cards)
+- [Custom Code](#custom-code)
+  - [CSS](#style-css)
+  - [JavaScript](#script-javascript)
+  - [Raw HTML](#customhtml)
+- [Markdown Support](#markdown-support)
+- [Full Example](#full-example)
+- [Tips & Limitations](#tips--limitations)
+
+---
+
+## What is a .com file?
+
+A `.com` file is a plain-text document that renders as a full web page inside the NOMAD interface. You write it using simple directives (like `PAGE:`, `TEXT:`, `IMAGE:`) and save it with a `.com` extension. No HTML, no build tools-just text.
+
+---
+
+## Quick Start
+
+1. Create a new text file.
+2. Add at least a `PAGE:` directive at the top.
+3. Add content using the directives below.
+4. Save with a `.com` extension (max 6 characters before the dot).
+5. Upload or serve it through your NOMAD device.
+
+> 💡 **Tip:** Use the NOMAD Studio's visual editor if you prefer a GUI-it generates these directives for you.
+
+---
+
+## File Size Limit
+
+**All `.com` files must stay under 20 KB.**  
+This includes embedded images (base64), custom CSS, and JavaScript. Compress images before embedding, and minify any custom code.
 
 ---
 
 ## Metadata Directives
 
-These go at the top of your file and control page-level settings.
+Place these at the very top of your file. They control page-level settings and are **not** rendered in the body.
 
 | Directive | Format | Example | Purpose |
 |-----------|--------|---------|---------|
-| `PAGE:` | `PAGE: Title` | `PAGE: My Cool Site` | Sets the browser tab title |
+| `PAGE:` | `PAGE: Title` | `PAGE: My Dashboard` | Browser tab title (required) |
 | `COLOR:` | `COLOR: #hex` | `COLOR: #ff6b6b` | Primary theme color (links, buttons, accents) |
 | `AUTHOR:` | `AUTHOR: Name` | `AUTHOR: Jane Doe` | Author metadata |
 | `DATE:` | `DATE: YYYY-MM-DD` | `DATE: 2024-01-15` | Publication date |
-| `DESCRIPTION:` | `DESCRIPTION: Text` | `DESCRIPTION: A guide to NOMAD` | Short description (shown in file listings) |
-| `CATEGORY:` | `CATEGORY: info/game/app/other` | `CATEGORY: game` | File category |
+| `DESCRIPTION:` | `DESCRIPTION: Text` | `DESCRIPTION: A guide to NOMAD` | Shown in file listings |
+| `CATEGORY:` | `CATEGORY: info/game/app/other` | `CATEGORY: game` | Helps organize files |
 
 **Example:**
 ```
@@ -68,13 +118,15 @@ Each block starts with a directive on its own line.
 | `LINK:` | `LINK: URL \| Text` | `LINK: https://example.com \| Click here` |
 | `BUTTON:` | `BUTTON: Label \| URL` | `BUTTON: Download \| /files/myfile.txt` |
 
+> `BUTTON:` uses the label first, then the URL-note the order.
+
 ### Media
 
 | Directive | Format | Example |
 |-----------|--------|---------|
 | `IMAGE:` | `IMAGE: Alt \| dataURL` or `IMAGE: URL \| Alt` | `IMAGE: My photo \| data:image/png;base64,...` |
 
-> **Note:** Images *must* be embedded as Data URLs (base64). Keep them small due to the 20KB file limit.
+**Important:** Images **must** be embedded as Data URLs (base64). Due to the 20 KB limit, use small, compressed images.
 
 ### Alerts & Progress
 
@@ -97,7 +149,7 @@ Each block starts with a directive on its own line.
 
 These use start/end blocks with content in between.
 
-### List
+### Lists
 
 ```
 LIST-START
@@ -107,21 +159,21 @@ ITEM: Third item
 LIST-END
 ```
 
-Renders as an unordered bullet list.
+Renders as a bulleted list.
 
-### Table
+### Tables
 
 ```
 TABLE-START
 HEADER: Name | Age | City
 ROW: Alice | 28 | London
-ROW: Bob | 34 | Paris
+ROW: Bob   | 34 | Paris
 TABLE-END
 ```
 
 Separate columns with the pipe character `|`.
 
-### Grid (responsive columns)
+### Grids
 
 ```
 GRID-START
@@ -131,9 +183,9 @@ COLUMN: Third column content
 GRID-END
 ```
 
-Creates equal-width columns that wrap on mobile.
+Creates equal-width columns that wrap on mobile. Useful for dashboards or feature comparisons.
 
-### Card (styled container)
+### Cards
 
 ```
 CARD-START
@@ -143,11 +195,13 @@ This text is inside a bordered, rounded box.
 CARD-END
 ```
 
-Supports markdown formatting inside the card.
+Cards support markdown formatting inside them. Great for highlighting key information.
 
 ---
 
 ## Custom Code
+
+Use these blocks when the built-in directives aren't enough.
 
 ### STYLE (CSS)
 
@@ -158,7 +212,7 @@ STYLE-START
 STYLE-END
 ```
 
-Adds custom CSS to your page. It is recommended that you keep all CSS minified for reason of file size and transfer speed.
+Add custom CSS. **Minify** your CSS to save space.
 
 ### SCRIPT (JavaScript)
 
@@ -169,25 +223,27 @@ document.querySelector('h1').style.color = 'red';
 SCRIPT-END
 ```
 
-Adds JavaScript. It is recommended that you keep all JS minified for reason of file size and transfer speed.
+Add JavaScript. **Minify** to stay under 20 KB.
 
 ### CUSTOMHTML
 
 ```
 CUSTOMHTML-START
-<div class="my-widget"><button onclick="alert('Clicked!')">Click me</button></div>
+<div class="my-widget">
+  <button onclick="alert('Clicked!')">Click me</button>
+</div>
 CUSTOMHTML-END
 ```
 
-Inserts raw HTML. Use this for complex layouts or interactive widgets not covered by other directives. It is recommended that you keep all HTML minified for reason of file size and transfer speed.
+Insert raw HTML for complex widgets or layouts. **Minify** your HTML.
 
-*Note:* All HTML/CSS/JS is sandboxed and executed in a safe environment.
+> **Note:** All custom HTML/CSS/JS runs in a sandboxed environment.
 
 ---
 
-## Markdown Inside Text
+## Markdown Support
 
-You can use basic markdown in `TEXT:`, `QUOTE:`, and other text blocks:
+You can use basic Markdown inside `TEXT:`, `QUOTE:`, and other text blocks:
 
 | Syntax | Result |
 |--------|--------|
@@ -198,7 +254,11 @@ You can use basic markdown in `TEXT:`, `QUOTE:`, and other text blocks:
 
 ---
 
-## Example: Complete .com File
+## Full Example
+
+Here's a complete `.com` file screenshot and .com template code that combines many of the features above:
+
+![Hillside Veggie Trade screenshot](example.png)
 
 ```
 PAGE: NOMAD Weather Station
@@ -236,16 +296,65 @@ TEXT: *Check back soon!*
 CARD-START
 **About this station**  
 Located in the backyard garden. Reports every 60 minutes.
+CARD-ENDPAGE: Hillside Veggie Trade
+COLOR: #2e7d32
+AUTHOR: GreenValley Farm
+DATE: 2025-06-01
+DESCRIPTION: Weekly produce available for trade
+CATEGORY: info
+
+BIGHEADER: 🌱 Hillside Veggie Trade
+
+SUBTITLE: Fresh from the garden — available this week
+
+DIVIDER
+
+GRID-START
+COLUMN: 🥬 **This Week's Harvest**  
+Kale • Swiss Chard • Lettuce
+COLUMN: 🍅 **Coming Soon**  
+Tomatoes (2 weeks) • Peppers (3 weeks)
+COLUMN: 🔄 **Looking For**  
+Honey • Eggs • Firewood
+GRID-END
+
+ALERT: success | New batch of pickled beets ready — trade 2:1 for eggs
+
+DIVIDER
+
+HEADER: Available Produce
+
+TABLE-START
+HEADER: Item | Quantity | Trade For
+ROW: Kale | 5 bunches | 1 doz eggs per bunch
+ROW: Swiss Chard | 3 bunches | 1 jar honey per bunch
+ROW: Lettuce | 8 heads | 2 firewood logs per head
+ROW: Herbs (mixed) | 6 bundles | 1 candle per bundle
+TABLE-END
+
+TEXT: *All produce grown without pesticides. Harvested fresh each morning.*
+
+CARD-START
+**Trade Info**  
+📍 Pickup at the farm stand (7am–10am, Sat–Sun)  
+📡 Send a NOMAD message to confirm trades  
+🔄 Open to barter — just ask!
 CARD-END
+
+QUOTE: "Good food, good folks, good trade."
 ```
 
 ---
 
 ## Tips & Limitations
 
-- **File Size Limit: 20KB**: Keep images compressed (use the Studio's image compressor)
-- **Max 6-character filenames** (plus `.com` extension)
-- **Test in preview mode** before saving to device
-- **Use the .com Studio** for visual editing: it auto-generates these directives
+- **20 KB hard limit**: every byte counts. Minify CSS/JS/HTML and compress images before embedding.
+- **Max 6 characters** for the filename (before the `.com` extension).
+- **Always preview** before saving to your device.
+- **Use the Studio** for visual editing-it writes these directives for you.
+- **Data URLs for images only**: no external image hosting.
+- **Sandboxed environment**: your custom code runs safely, but won't have access to the host system.
 
-EOF
+---
+
+**Happy building with NOMAD!**  
