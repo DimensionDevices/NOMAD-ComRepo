@@ -1,6 +1,6 @@
 [
   {
-    "date": "05/06/26"
+    "date": "23/06/26"
   },
   {
     "name": "manual.com",
@@ -28,7 +28,7 @@
   },
   {
     "name": "dnd.com",
-    "description": "DnD character generator",
+    "description": "Dungeons and Dragons character generator",
     "category": "app",
     "size": 9446
   },
@@ -63,6 +63,12 @@
     "size": 8752
   },
   {
+    "name": "shop.com",
+    "description": "An example trade-based shop site with nice styles",
+    "category": "info",
+    "size": 10367
+  },
+  {
     "name": "storms.com",
     "description": "A basic guide to bad weather survival",
     "category": "game",
@@ -95,7 +101,7 @@
   {
     "name": "tron.com",
     "description": "A Tron-style surrounding game",
-    "category": "info",
+    "category": "game",
     "size": 11724
   },
   {
