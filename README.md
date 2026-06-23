@@ -265,7 +265,7 @@ CATEGORY: info
 
 BIGHEADER: 🌱 Hillside Veggie Trade
 
-SUBTITLE: Fresh from the garden — available this week
+SUBTITLE: Available this week!
 
 DIVIDER
 
@@ -278,7 +278,7 @@ COLUMN: 🔄 **Looking For**
 Honey • Eggs • Firewood
 GRID-END
 
-ALERT: success | New batch of pickled beets ready — trade 2:1 for eggs
+ALERT: success | New batch of pickled beets ready - trade 2:1 for eggs
 
 DIVIDER
 
@@ -296,9 +296,9 @@ TEXT: *All produce grown without pesticides. Harvested fresh each morning.*
 
 CARD-START
 **Trade Info**  
-📍 Pickup at the farm stand (7am–10am, Sat–Sun)  
+📍 Pickup at the farm stand (7am-10am, Sat-Sun)  
 📡 Send a NOMAD message to confirm trades  
-🔄 Open to barter — just ask!
+🔄 Open to barter, just ask!
 CARD-END
 
 QUOTE: "Good food, good folks, good trade."
