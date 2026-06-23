@@ -10,7 +10,7 @@ Offical Repo From @DimensionDevices.
 
 ## Overview
 
-The NOMAD .com file format lets you create full-featured web pages using simple plain-text directives. Files are saved with the `.com` extension and served through the NOMAD web interface. All `.com` files **MUST** stay under **20KB** (about 2,000 packets over LoRa).
+The NOMAD .com file format lets you create full-featured web pages using simple plain-text directives. Files are saved with the `.com` extension and served through the NOMAD web interface. All `.com` files **MUST** stay under **20KB**.
 
 ---
 
@@ -241,7 +241,7 @@ ROW: Tue | 22° | 15° | 🌧️ Rain
 ROW: Wed | 23° | 14° | ⛅ Partly cloudy
 TABLE-END
 
-TEXT: Data updates every hour via LoRa. *Check back soon!*
+TEXT: *Check back soon!*
 
 CARD-START
 **About this station**  
