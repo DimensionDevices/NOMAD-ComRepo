@@ -39,6 +39,12 @@
     "size": 10248
   },
   {
+    "name": "horo.com",
+    "description": "A horoscope generator",
+    "category": "app",
+    "size": 7545
+  },
+  {
     "name": "jumper.com",
     "description": "An example platformer with effects",
     "category": "game",
