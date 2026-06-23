@@ -251,7 +251,7 @@ You can use basic Markdown inside `TEXT:`, `QUOTE:`, and other text blocks:
 
 ## Full Example
 
-Here's a complete `.com` file screenshot and .com template code that combines many of the features above:
+Here's a complete `.com` file screenshot and template code that combines many of the features above:
 
 ![Hillside Veggie Trade screenshot](example.png)
 
