@@ -74,7 +74,7 @@ Each block starts with a directive on its own line.
 |-----------|--------|---------|
 | `IMAGE:` | `IMAGE: Alt \| dataURL` or `IMAGE: URL \| Alt` | `IMAGE: My photo \| data:image/png;base64,...` |
 
-> **Note:** Images must be embedded as Data URLs (base64). Keep them small (<5KB recommended) due to the 20KB file limit.
+> **Note:** Images *must* be embedded as Data URLs (base64). Keep them small due to the 20KB file limit.
 
 ### Alerts & Progress
 
