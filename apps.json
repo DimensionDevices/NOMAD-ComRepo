@@ -24,7 +24,7 @@
     "name": "chat.com",
     "description": "A peer-to-peer on-device chat client",
     "category": "app",
-    "size": 20079
+    "size": 20074
   },
   {
     "name": "cipher.com",
@@ -79,6 +79,12 @@
     "description": "An example trade-based shop site with nice styles",
     "category": "info",
     "size": 10367
+  },
+  {
+    "name": "stock.com",
+    "description": "An inventory/stock management app",
+    "category": "app",
+    "size": 15424
   },
   {
     "name": "storms.com",

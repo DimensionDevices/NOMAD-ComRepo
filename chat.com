@@ -5,7 +5,7 @@ DATE: 2026-06-23
 DESCRIPTION: Peer-to-peer chat client, requires the host to verify the code after the user has joined.
 CATEGORY: app
 
-BIGHEADER: 📡 WebRTC Chat
+BIGHEADER: WebRTC Chat
 
 CUSTOMHTML-START
 <style>
