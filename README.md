@@ -1,8 +1,3 @@
-Perfect. Here's a significantly improved version of the README. I've reorganized it for clarity, added a proper table of contents, tightened the language, improved the formatting, added practical callouts, and made the examples more illustrative-all while keeping it friendly for a general audience.
-
----
-
-```markdown
 # NOMAD-ComRepo
 
 Example `.com` files for the NOMAD platform.
