@@ -261,42 +261,7 @@ Here's a complete `.com` file screenshot and .com template code that combines ma
 ![Hillside Veggie Trade screenshot](example.png)
 
 ```
-PAGE: NOMAD Weather Station
-COLOR: #3498db
-AUTHOR: WeatherBot
-DATE: 2024-12-01
-DESCRIPTION: Live weather data from my NOMAD node
-
-BIGHEADER: Weather Station
-
-GRID-START
-COLUMN: 📡 **Temperature**  
-22.4°C
-COLUMN: 💧 **Humidity**  
-58%
-COLUMN: 🌬️ **Wind**  
-12 km/h
-GRID-END
-
-ALERT: info | Last updated 2 minutes ago
-
-DIVIDER
-
-HEADER: Weekly Forecast
-
-TABLE-START
-HEADER: Day | High | Low | Condition
-ROW: Mon | 24° | 16° | ☀️ Sunny
-ROW: Tue | 22° | 15° | 🌧️ Rain
-ROW: Wed | 23° | 14° | ⛅ Partly cloudy
-TABLE-END
-
-TEXT: *Check back soon!*
-
-CARD-START
-**About this station**  
-Located in the backyard garden. Reports every 60 minutes.
-CARD-ENDPAGE: Hillside Veggie Trade
+PAGE: Hillside Veggie Trade
 COLOR: #2e7d32
 AUTHOR: GreenValley Farm
 DATE: 2025-06-01
