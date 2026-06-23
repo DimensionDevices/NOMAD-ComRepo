@@ -14,12 +14,6 @@ The NOMAD .com file format lets you create full-featured web pages using simple 
 
 ---
 
-## Quick Start
-
-Create a new `.com` file via the **Studio** button on the NOMAD dashboard, or manually write a text file with the directives below.
-
----
-
 ## Metadata Directives
 
 These go at the top of your file and control page-level settings.
@@ -37,7 +31,7 @@ These go at the top of your file and control page-level settings.
 ```
 PAGE: NOMAD Tips
 COLOR: #2ecc71
-AUTHOR: John
+AUTHOR: BigJohn
 DATE: 2024-12-01
 DESCRIPTION: Essential tips for NOMAD users
 CATEGORY: info
@@ -159,16 +153,12 @@ Supports markdown formatting inside the card.
 
 ```
 STYLE-START
-.block:hover {
-    background: #f0f0f0;
-}
-.custom-class {
-    padding: 1rem;
-}
+.block:hover { background: #f0f0f0; }
+.custom-class { padding: 1rem; }
 STYLE-END
 ```
 
-Adds custom CSS to your page.
+Adds custom CSS to your page. It is recommended that you keep all CSS minified for reason of file size and transfer speed.
 
 ### SCRIPT (JavaScript)
 
@@ -179,19 +169,19 @@ document.querySelector('h1').style.color = 'red';
 SCRIPT-END
 ```
 
-Adds JavaScript. Runs in an isolated iframe context.
+Adds JavaScript. It is recommended that you keep all JS minified for reason of file size and transfer speed.
 
 ### CUSTOMHTML
 
 ```
 CUSTOMHTML-START
-<div class="my-widget">
-    <button onclick="alert('Clicked!')">Click me</button>
-</div>
+<div class="my-widget"><button onclick="alert('Clicked!')">Click me</button></div>
 CUSTOMHTML-END
 ```
 
-Inserts raw HTML. Use this for complex layouts or interactive widgets not covered by other directives.
+Inserts raw HTML. Use this for complex layouts or interactive widgets not covered by other directives. It is recommended that you keep all HTML minified for reason of file size and transfer speed.
+
+*Note:* All HTML/CSS/JS is sandboxed and executed in a safe environment.
 
 ---
 
@@ -253,20 +243,9 @@ CARD-END
 
 ## Tips & Limitations
 
-- **File Size Limit: 20KB** — Keep images compressed (use the Studio's image compressor)
+- **File Size Limit: 20KB**: Keep images compressed (use the Studio's image compressor)
 - **Max 6-character filenames** (plus `.com` extension)
-- **Max 150 characters** per chat message (if using messenger features)
 - **Test in preview mode** before saving to device
-- **Use the .com Studio** for visual editing — it auto-generates these directives
+- **Use the .com Studio** for visual editing: it auto-generates these directives
 
----
-
-## Troubleshooting
-
-| Problem | Solution |
-|---------|----------|
-| File won't save (size error) | Remove large images or shorten text |
-| Images not loading | Ensure data URLs are complete and valid |
-| Layout breaks on mobile | Use `GRID:` instead of fixed-width tables |
-| Custom HTML doesn't render | Check closing tags — malformed HTML breaks the parser |
-
+EOF
