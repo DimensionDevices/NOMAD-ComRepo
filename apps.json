@@ -58,9 +58,9 @@
   },
   {
     "name": "pi.com",
-    "description": "The first 19,634 digits of Pi",
+    "description": "20,000 digits of Pi",
     "category": "info",
-    "size": 19801
+    "size": 20137
   },
   {
     "name": "racer.com",
