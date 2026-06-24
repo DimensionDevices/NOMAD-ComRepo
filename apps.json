@@ -6,67 +6,67 @@
     "name": "manual.com",
     "description": "The NOMAD user manual and guide",
     "category": "info",
-    "size": 7296
+    "size": 7281
   },
   {
     "name": "2048.com",
     "description": "A simple version of the 2048 game",
     "category": "game",
-    "size": 8758
+    "size": 8743
   },
   {
     "name": "aid.com",
     "description": "An off-grid first aid guide",
     "category": "info",
-    "size": 18693
+    "size": 18678
   },
   {
     "name": "chat.com",
     "description": "A peer-to-peer on-device chat client",
     "category": "app",
-    "size": 20074
+    "size": 20059
   },
   {
     "name": "cipher.com",
     "description": "A message encryption routine to send secret messages",
     "category": "app",
-    "size": 7506
+    "size": 7492
   },
   {
     "name": "dnd.com",
     "description": "Dungeons and Dragons character generator",
     "category": "app",
-    "size": 9446
+    "size": 9492
   },
   {
     "name": "flappy.com",
     "description": "A Flappy Bird clone",
     "category": "game",
-    "size": 10248
+    "size": 10233
   },
   {
     "name": "horo.com",
     "description": "A horoscope generator",
     "category": "app",
-    "size": 7545
+    "size": 7530
   },
   {
     "name": "jumper.com",
     "description": "An example platformer with effects",
     "category": "game",
-    "size": 17166
+    "size": 17151
   },
   {
     "name": "pi.com",
     "description": "20,000 digits of Pi, great for testing",
     "category": "info",
-    "size": 20137
+    "size": 20122
   },
   {
     "name": "racer.com",
     "description": "A fast endless racer with obstacles and powerups",
     "category": "game",
-    "size": 15862
+    "size": 15847
   },
   {
     "name": "recipe.com",
@@ -78,13 +78,13 @@
     "name": "shop.com",
     "description": "An example trade-based shop site with nice styles",
     "category": "info",
-    "size": 10367
+    "size": 10352
   },
   {
     "name": "stock.com",
     "description": "An inventory/stock management app",
     "category": "app",
-    "size": 15424
+    "size": 15410
   },
   {
     "name": "storms.com",
@@ -96,25 +96,31 @@
     "name": "tapper.com",
     "description": "A simple incremental/idle game",
     "category": "game",
-    "size": 15025
+    "size": 15010
   },
   {
     "name": "tarot.com",
     "description": "A nice tarot card reader",
     "category": "app",
-    "size": 16311
+    "size": 16297
   },
   {
     "name": "tasks.com",
     "description": "A simple task and todo list",
     "category": "app",
-    "size": 12922
+    "size": 12908
   },
   {
     "name": "times.com",
     "description": "A timezone convertor",
     "category": "app",
-    "size": 5133
+    "size": 5119
+  },
+  {
+    "name": "todo.com",
+    "description": "A simple todo list",
+    "category": "app",
+    "size": 3629
   },
   {
     "name": "tron.com",
