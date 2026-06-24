@@ -3,7 +3,6 @@ COLOR: #b91c1c
 AUTHOR: NOMAD
 DATE: 2026-06-03
 DESCRIPTION: Severe injury and wound care without hospital access. No phone. No ambulance. Prolonged field care only.
-CATEGORY: info
 CUSTOMHTML-START
 <style>.toc-button{display:block;width:100%;text-align:left;background:#1e1e2e;color:#cdd6f4;border:1px solid #313244;padding:8px 12px;margin:4px 0;border-radius:6px;cursor:pointer;font-size:14px;}.toc-button:hover{background:#313244;}.section-anchor{scroll-margin-top:20px;}</style>
 CUSTOMHTML-END

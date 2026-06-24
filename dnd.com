@@ -3,7 +3,6 @@ COLOR: #e67e22
 AUTHOR: NOMAD User
 DATE: 2026-06-03
 DESCRIPTION: Roll a random D&D 5e character with stats.
-CATEGORY: app
 BIGHEADER: D&D Character Generator
 TEXT: Click the button below to generate a unique Level 1 character with ability scores, race, class, personality traits, and a quick backstory. Perfect for one-shots or inspiration.
 BUTTON: Generate New Character | javascript:generateChar()

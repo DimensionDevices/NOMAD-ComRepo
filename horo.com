@@ -3,7 +3,6 @@ COLOR: #e74c3c
 AUTHOR: StarGazer
 DATE: 2026-06-23
 DESCRIPTION: Your daily horoscope, procedurally generated and tied to your birth date.
-CATEGORY: game
 
 BIGHEADER: 🌌 Horoscope
 

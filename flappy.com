@@ -3,7 +3,6 @@ COLOR: #0f172a
 AUTHOR: NOMAD
 DATE: 2026-06-05
 DESCRIPTION: Flappy Bird style arcade game
-CATEGORY: game
 CUSTOMHTML-START
 <div id="flappyStatus" style="text-align:center;font-size:1rem;font-weight:bold;margin:4px 0 6px 0;color:#facc15;">🐦 TAP / SPACE TO START</div> <div style="display:flex;justify-content:center;margin:0 auto;"> <canvas id="flappyCanvas" width="400" height="520" style="width:100%;max-width:400px;height:auto;background:#0f172a;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,0.4);cursor:pointer;display:block;touch-action:manipulation;"></canvas> </div> <div style="display:flex;justify-content:space-between;align-items:center;max-width:400px;margin:10px auto 6px;padding:0 12px;"> <div style="background:#1e293b;padding:4px 16px;border-radius:40px;"><span style="color:#facc15;">🏆 SCORE</span> <span id="flappyScore" style="color:white;font-weight:bold;font-size:1.3rem;margin-left:6px;">0</span></div> <div style="background:#1e293b;padding:4px 16px;border-radius:40px;"><span style="color:#facc15;">⭐ BEST</span> <span id="flappyBest" style="color:#ffd700;font-weight:bold;font-size:1.3rem;margin-left:6px;">0</span></div> </div> <div style="display:flex;gap:12px;justify-content:center;margin:4px 0 8px;"> <button id="flappyResetBtn" style="background:#3b3b6e;border:none;padding:6px 28px;border-radius:60px;color:white;font-weight:bold;font-size:0.9rem;touch-action:manipulation;transition:transform 0.05s;">🔄 RESTART</button> </div>
 CUSTOMHTML-END

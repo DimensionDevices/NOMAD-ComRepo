@@ -3,7 +3,6 @@ COLOR: #547540
 AUTHOR: NOMAD Project
 DATE: 2026-06-03
 DESCRIPTION: Guide to using your NOMAD LoRa mesh device.
-CATEGORY: info
 BIGHEADER: NOMAD User Manual
 SUBTITLE: Network for Open Messaging & Data
 HEADER: 1. System Dashboard

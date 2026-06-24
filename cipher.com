@@ -3,7 +3,6 @@ COLOR: #2c7a32
 AUTHOR: NOMAD
 DATE: 2026-06-03
 DESCRIPTION: Simple XOR encryption for off-grid secure messaging.
-CATEGORY: app
 STYLE-START
 *{user-select:none;-webkit-tap-highlight-color:transparent;box-sizing:border-box;}
 body{background:#0f0f0f;margin:0;padding:8px;min-height:100vh;font-family:'Courier New','SF Mono',monospace;}

@@ -70,7 +70,6 @@ Place these at the very top of your file. They control page-level settings and a
 | `AUTHOR:` | `AUTHOR: Name` | `AUTHOR: Jane Doe` | Author metadata |
 | `DATE:` | `DATE: YYYY-MM-DD` | `DATE: 2024-01-15` | Publication date |
 | `DESCRIPTION:` | `DESCRIPTION: Text` | `DESCRIPTION: A guide to NOMAD` | Shown in file listings |
-| `CATEGORY:` | `CATEGORY: info/game/app/other` | `CATEGORY: game` | Helps organize files |
 
 **Example:**
 ```
@@ -79,7 +78,6 @@ COLOR: #2ecc71
 AUTHOR: BigJohn
 DATE: 2024-12-01
 DESCRIPTION: Essential tips for NOMAD users
-CATEGORY: info
 ```
 
 ---
@@ -261,7 +259,6 @@ COLOR: #2e7d32
 AUTHOR: GreenValley Farm
 DATE: 2025-06-01
 DESCRIPTION: Weekly produce available for trade
-CATEGORY: info
 
 BIGHEADER: 🌱 Hillside Veggie Trade
 

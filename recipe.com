@@ -3,7 +3,6 @@ COLOR: #e67e22
 AUTHOR: Cook
 DATE: 2026-06-02
 DESCRIPTION: A recipe book for all your favourite recipes
-CATEGORY: info
 CUSTOMHTML-START
 <h1 style="padding:8px 0 0 0;margin-bottom:12px;font-size:1.8rem">NOMAD Recipe Box</h1>
 CUSTOMHTML-END
