@@ -9,6 +9,7 @@ Example `.com` files for the NOMAD platform.
 ## Table of Contents
 
 - [What is a .com file?](#what-is-a-com-file)
+- [Git Repo File List](#git-repo-files)
 - [Quick Start](#quick-start)
 - [File Size Limit](#file-size-limit)
 - [Metadata Directives](#metadata-directives)
@@ -40,7 +41,7 @@ A `.com` file is a plain-text document that renders as a full web page inside th
 
 ---
 
-## .com Git Repo Files
+## Git Repo File List
 
 Included in this Git repo are the below files:
 
@@ -79,7 +80,7 @@ Included in this Git repo are the below files:
 4. Save with a `.com` extension (max 6 characters before the dot).
 5. Upload or serve it through your NOMAD device.
 
-> 💡 **Tip:** Use the NOMAD Studio's visual editor if you prefer a GUI-it generates these directives for you.
+> 💡 **Tip:** Use the NOMAD Studio's visual editor if you prefer a GUI; it generates these directives for you.
 
 ---
 
@@ -339,9 +340,9 @@ QUOTE: "Good food, good folks, good trade."
 - **20 KB hard limit**: every byte counts. Minify CSS/JS/HTML and compress images before embedding.
 - **Max 6 characters** for the filename (before the `.com` extension).
 - **Always preview** before saving to your device.
-- **Use the Studio** for visual editing-it writes these directives for you.
+- **Use the Studio** for visual editing; it writes these directives for you.
 - **Data URLs for images only**: no external image hosting.
-- **Sandboxed environment**: your custom code runs safely, but won't have access to the host system.
+- **Sandboxed environment**: your custom code runs safely.
 
 ---
 
