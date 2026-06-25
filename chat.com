@@ -2,7 +2,6 @@ PAGE: WebRTC Chat
 COLOR: #6c5ce7
 AUTHOR: NOMAD
 DATE: 2026-06-23
-DESCRIPTION: Peer-to-peer chat client, requires the host to verify the code after the user has joined.
 BIGHEADER: WebRTC Chat
 
 CUSTOMHTML-START

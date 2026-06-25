@@ -2,7 +2,6 @@ PAGE: Off-Grid Farm Shop
 COLOR: #5d4037
 AUTHOR: Hillside Homestead
 DATE: 2026-06-23
-DESCRIPTION: Local farm produce available for trade in our off-grid community.
 
 CUSTOMHTML-START
 <style>

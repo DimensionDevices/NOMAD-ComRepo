@@ -101,7 +101,6 @@ Place these at the very top of your file. They control page-level settings and a
 | `COLOR:` | `COLOR: #hex` | `COLOR: #ff6b6b` | Primary theme color (links, buttons, accents) |
 | `AUTHOR:` | `AUTHOR: Name` | `AUTHOR: Jane Doe` | Author metadata |
 | `DATE:` | `DATE: YYYY-MM-DD` | `DATE: 2024-01-15` | Publication date |
-| `DESCRIPTION:` | `DESCRIPTION: Text` | `DESCRIPTION: A guide to NOMAD` | Shown in file listings |
 
 **Example:**
 ```
@@ -109,7 +108,6 @@ PAGE: NOMAD Tips
 COLOR: #2ecc71
 AUTHOR: BigJohn
 DATE: 2024-12-01
-DESCRIPTION: Essential tips for NOMAD users
 ```
 
 ---
@@ -290,7 +288,6 @@ PAGE: Hillside Veggie Trade
 COLOR: #2e7d32
 AUTHOR: GreenValley Farm
 DATE: 2025-06-01
-DESCRIPTION: Weekly produce available for trade
 
 BIGHEADER: 🌱 Hillside Veggie Trade
 
