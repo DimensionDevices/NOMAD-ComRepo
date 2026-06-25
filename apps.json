@@ -63,6 +63,12 @@
     "size": 20100
   },
   {
+    "name": "qr.com",
+    "description": "QR Code generator",
+    "category": "app",
+    "size": 4384
+  },
+  {
     "name": "racer.com",
     "description": "A fast endless drift-racer with obstacles and powerups",
     "category": "game",
