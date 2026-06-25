@@ -6,7 +6,7 @@
     "name": "manual.com",
     "description": "The NOMAD user manual and guide",
     "category": "info",
-    "size": 7281
+    "size": 7200
   },
   {
     "name": "2048.com",
@@ -72,7 +72,7 @@
     "name": "recipe.com",
     "description": "A simple recipe book for NOMAD",
     "category": "game",
-    "size": 870
+    "size": 8700
   },
   {
     "name": "shop.com",
