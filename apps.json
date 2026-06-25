@@ -4,55 +4,55 @@
   },
   {
     "name": "manual.com",
-    "description": "The NOMAD user manual and guide",
+    "description": "The NOMAD user manual and guide.",
     "category": "info",
     "size": 7200
   },
   {
     "name": "2048.com",
-    "description": "A simple version of the 2048 game",
+    "description": "A simple version of the 2048 game, where the aim is to get 2048 on a single tile",
     "category": "game",
     "size": 8700
   },
   {
     "name": "aid.com",
-    "description": "An off-grid first aid guide",
+    "description": "An off-grid first aid guide, including information for treating a variety of wounds",
     "category": "info",
     "size": 18600
   },
   {
     "name": "chat.com",
-    "description": "A peer-to-peer on-device chat client",
+    "description": "A peer-to-peer (WebRTC) on-device chat client, two or more people may connect to each other through NOMAD to chat in realtime (WiFi only)",
     "category": "app",
     "size": 20000
   },
   {
     "name": "cipher.com",
-    "description": "A message encryption routine to send secret messages",
+    "description": "A message encryption routine to encrypt messages using a secret key that may then be shared",
     "category": "app",
     "size": 7400
   },
   {
     "name": "dnd.com",
-    "description": "Dungeons and Dragons character generator",
+    "description": "A simple example Dungeons and Dragons 5e character generator",
     "category": "app",
     "size": 9400
   },
   {
     "name": "flappy.com",
-    "description": "A Flappy Bird clone",
+    "description": "A simple Flappy Bird clone",
     "category": "game",
     "size": 10200
   },
   {
     "name": "horo.com",
-    "description": "A horoscope generator",
+    "description": "A simple horoscope generator",
     "category": "app",
     "size": 7500
   },
   {
     "name": "jumper.com",
-    "description": "An example platformer with effects",
+    "description": "A simple fast paced, albeit basic, platformer",
     "category": "game",
     "size": 17100
   },
@@ -64,49 +64,49 @@
   },
   {
     "name": "racer.com",
-    "description": "A fast endless racer with obstacles and powerups",
+    "description": "A fast endless drift-racer with obstacles and powerups",
     "category": "game",
     "size": 15800
   },
   {
     "name": "recipe.com",
-    "description": "A simple recipe book for NOMAD",
+    "description": "A simple recipe/cookbook book for NOMAD",
     "category": "game",
     "size": 8700
   },
   {
     "name": "shop.com",
-    "description": "An example trade-based shop site with nice styles",
+    "description": "An example trade-based shop .com file with simple styles",
     "category": "info",
     "size": 10300
   },
   {
     "name": "stock.com",
-    "description": "An inventory/stock management app",
+    "description": "A basic inventory/stock management app, great for off-grid communities",
     "category": "app",
     "size": 15400
   },
   {
     "name": "storms.com",
-    "description": "A basic guide to bad weather survival",
+    "description": "A text-based guide to extreme weather survival",
     "category": "game",
-    "size": 1940
+    "size": 19400
   },
   {
     "name": "tapper.com",
-    "description": "A simple incremental/idle game",
+    "description": "A very simple incremental/idle game",
     "category": "game",
     "size": 15000
   },
   {
     "name": "tarot.com",
-    "description": "A nice tarot card reader",
+    "description": "A simple interactive and animated tarot card reader",
     "category": "app",
     "size": 16200
   },
   {
     "name": "tasks.com",
-    "description": "A simple task and todo list",
+    "description": "A basic off-grid tasks list system",
     "category": "app",
     "size": 12900
   },
@@ -130,7 +130,7 @@
   },
   {
     "name": "units.com",
-    "description": "An offline unit convertor",
+    "description": "An offline length/volume/unit convertor",
     "category": "app",
     "size": 2400
   }
