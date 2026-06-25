@@ -9,7 +9,6 @@ Example `.com` files for the NOMAD platform.
 ## Table of Contents
 
 - [What is a .com file?](#what-is-a-com-file)
-- [Git Repo File List](#git-repo-files)
 - [Quick Start](#quick-start)
 - [File Size Limit](#file-size-limit)
 - [Metadata Directives](#metadata-directives)
@@ -38,37 +37,6 @@ Example `.com` files for the NOMAD platform.
 ## What is a .com file?
 
 A `.com` file is a plain-text document that renders as a full web page inside the NOMAD interface. You write it using simple directives (like `PAGE:`, `TEXT:`, `IMAGE:`) and save it with a `.com` extension. No HTML, no build tools-just text.
-
----
-
-## Git Repo File List
-
-Included in this Git repo are the below files:
-
-| Filename | Description |
-|----------|-------------|
-| [manual.com](manual.com) | The NOMAD user manual and guide |
-| [2048.com](2048.com) | A simple version of the 2048 game |
-| [aid.com](aid.com) | An off-grid first aid guide |
-| [chat.com](chat.com) | A peer-to-peer on-device chat client |
-| [cipher.com](cipher.com) | A message encryption routine to send secret messages |
-| [dnd.com](dnd.com) | Dungeons and Dragons character generator |
-| [flappy.com](flappy.com) | A Flappy Bird clone |
-| [horo.com](horo.com) | A horoscope generator |
-| [jumper.com](jumper.com) | An example platformer with effects |
-| [pi.com](pi.com) | 20,000 digits of Pi, great for testing |
-| [racer.com](racer.com) | A fast endless racer with obstacles and powerups |
-| [recipe.com](recipe.com) | A simple recipe book for NOMAD |
-| [shop.com](shop.com) | An example trade-based shop site with nice styles |
-| [stock.com](stock.com) | An inventory/stock management app |
-| [storms.com](storms.com) | A basic guide to bad weather survival |
-| [tapper.com](tapper.com) | A simple incremental/idle game |
-| [tarot.com](tarot.com) | A nice tarot card reader |
-| [tasks.com](tasks.com) | A simple task and todo list |
-| [times.com](times.com) | A timezone convertor |
-| [todo.com](todo.com) | A simple todo list |
-| [tron.com](tron.com) | A Tron-style surrounding game |
-| [units.com](units.com) | An offline unit convertor |
 
 ---
 
