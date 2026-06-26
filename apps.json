@@ -45,6 +45,12 @@
     "size": 10200
   },
   {
+    "name": "go.com",
+    "description": "A 1 or 2 player implementation of the game Go (with VERY simple computer turns)",
+    "category": "game",
+    "size": 11200
+  },
+  {
     "name": "horo.com",
     "description": "A simple horoscope generator",
     "category": "app",
