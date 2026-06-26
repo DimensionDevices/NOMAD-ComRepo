@@ -22,7 +22,7 @@
   },
   {
     "name": "chat.com",
-    "description": "An official chat client for NOMAD hosted by DimensionDevices.co.uk",
+    "description": "An official chat client for NOMAD hosted by DimensionDevices.co.uk. WiFi cvonnection to NOMAD is *required*.",
     "category": "app",
     "size": 15600
   },
