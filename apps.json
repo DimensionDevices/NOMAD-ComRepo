@@ -22,9 +22,9 @@
   },
   {
     "name": "chat.com",
-    "description": "A peer-to-peer (WebRTC) on-device chat client, two or more people may connect to each other through NOMAD to chat in realtime (WiFi only)",
+    "description": "An official chat client for NOMAD hosted by DimensionDevices.co.uk",
     "category": "app",
-    "size": 20000
+    "size": 15600
   },
   {
     "name": "cipher.com",
