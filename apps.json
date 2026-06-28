@@ -9,6 +9,18 @@
     "size": 20100
   },
   {
+    "name": "chat.com",
+    "description": "An official chat client for NOMAD hosted by DimensionDevices.co.uk. WiFi cvonnection to NOMAD is *required*.",
+    "category": "app",
+    "size": 19300
+  },
+  {
+    "name": "forum.com",
+    "description": "An official forum for talking about NOMAD.",
+    "category": "app",
+    "size": 16400
+  },
+  {
     "name": "2048.com",
     "description": "A simple version of the 2048 game, where the aim is to get 2048 on a single tile",
     "category": "game",
@@ -19,12 +31,6 @@
     "description": "An off-grid first aid guide, including information for treating a variety of wounds",
     "category": "info",
     "size": 18600
-  },
-  {
-    "name": "chat.com",
-    "description": "An official chat client for NOMAD hosted by DimensionDevices.co.uk. WiFi cvonnection to NOMAD is *required*.",
-    "category": "app",
-    "size": 19300
   },
   {
     "name": "cipher.com",
