@@ -15,10 +15,22 @@
     "size": 19300
   },
   {
+    "name": "clock.ext",
+    "description": "A NOMAD extension for a customisable clock",
+    "category": "ext",
+    "size": 11000
+  },
+  {
     "name": "diary.com",
     "description": "A simple journal style app",
     "category": "app",
     "size": 10500
+  },
+  {
+    "name": "emoji.ext",
+    "description": "A NOMAD extension for an emoji picker for the LoRa messenger",
+    "category": "ext",
+    "size": 8200
   },
   {
     "name": "2048.com",
@@ -73,6 +85,12 @@
     "description": "A simple fast paced, albeit basic, platformer",
     "category": "game",
     "size": 17100
+  },
+  {
+    "name": "log.ext",
+    "description": "A NOMAD extension for user interaction logging",
+    "category": "ext",
+    "size": 5000
   },
   {
     "name": "marble.com",
@@ -181,12 +199,6 @@
     "description": "A length/volume/unit convertor",
     "category": "app",
     "size": 2400
-  },
-  {
-    "name": "log.ext",
-    "description": "A NOMAD extension for user interaction logging",
-    "category": "ext",
-    "size": 5000
   },
   {
     "name": "wifi.ext",
