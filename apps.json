@@ -81,6 +81,12 @@
     "size": 15700
   },
   {
+    "name": "mandal.com",
+    "description": "A simple Mandala image generator",
+    "category": "game",
+    "size": 7900
+  },
+  {
     "name": "pi.com",
     "description": "20,000 digits of Pi, great for testing",
     "category": "info",
