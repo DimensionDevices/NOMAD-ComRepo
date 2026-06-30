@@ -117,6 +117,12 @@
     "size": 4384
   },
   {
+    "name": "quote.com",
+    "description": "A NOMAD extension for quotes on the main menu",
+    "category": "ext",
+    "size": 14700
+  },
+  {
     "name": "racer.com",
     "description": "A fast endless drift-racer with obstacles and powerups",
     "category": "game",
