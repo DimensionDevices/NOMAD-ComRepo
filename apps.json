@@ -15,6 +15,12 @@
     "size": 19300
   },
   {
+    "name": "diary.com",
+    "description": "A simple journal style app",
+    "category": "app",
+    "size": 10500
+  },
+  {
     "name": "2048.com",
     "description": "A simple version of the 2048 game, where the aim is to get 2048 on a single tile",
     "category": "game",
