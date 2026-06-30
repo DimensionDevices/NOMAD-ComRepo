@@ -181,5 +181,17 @@
     "description": "A length/volume/unit convertor",
     "category": "app",
     "size": 2400
+  },
+  {
+    "name": "log.ext",
+    "description": "A NOMAD extension for user interaction logging",
+    "category": "ext",
+    "size": 5000
+  },
+  {
+    "name": "wifi.ext",
+    "description": "A NOMAD extension for WiFi debugging/data",
+    "category": "ext",
+    "size": 2500
   }
 ]
