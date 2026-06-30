@@ -15,12 +15,6 @@
     "size": 19300
   },
   {
-    "name": "forum.com",
-    "description": "An official forum for talking about NOMAD.",
-    "category": "app",
-    "size": 16400
-  },
-  {
     "name": "2048.com",
     "description": "A simple version of the 2048 game, where the aim is to get 2048 on a single tile",
     "category": "game",
@@ -49,6 +43,12 @@
     "description": "A simple Flappy Bird clone",
     "category": "game",
     "size": 10200
+  },
+  {
+    "name": "forum.com",
+    "description": "An official forum for talking about NOMAD.",
+    "category": "app",
+    "size": 16400
   },
   {
     "name": "go.com",
