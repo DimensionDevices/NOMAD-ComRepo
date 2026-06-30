@@ -129,6 +129,12 @@
     "size": 20100
   },
   {
+    "name": "synth.com",
+    "description": "A midi sounding audio synth",
+    "category": "app",
+    "size": 17000
+  },
+  {
     "name": "tapper.com",
     "description": "A very simple incremental/idle game",
     "category": "game",
