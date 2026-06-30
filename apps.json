@@ -190,7 +190,7 @@
   },
   {
     "name": "wifi.ext",
-    "description": "A NOMAD extension for WiFi debugging/data",
+    "description": "A NOMAD extension for WiFi debugging",
     "category": "ext",
     "size": 2500
   }
