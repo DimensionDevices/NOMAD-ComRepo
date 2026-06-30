@@ -117,6 +117,12 @@
     "size": 19400
   },
   {
+    "name": "sunny.com",
+    "description": "A simple internet weather API caller using OpenWeatherMap.org",
+    "category": "app",
+    "size": 20100
+  },
+  {
     "name": "tapper.com",
     "description": "A very simple incremental/idle game",
     "category": "game",
