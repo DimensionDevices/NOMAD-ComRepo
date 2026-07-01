@@ -414,9 +414,7 @@ Your extensions can interact with the NOMAD device via these API endpoints:
 | `/api/nodes` | GET | List of nearby nodes |
 | `/api/files` | GET | List of local files |
 | `/api/view-file` | GET | Get file content |
-| `/api/beacon-config` | GET/POST | Manage beacon visibility |
 | `/api/chat/messages` | GET | Get chat history |
-| `/api/chat/send` | POST | Send a chat message |
 
 **Example API Call in JS:**
 ```javascript
