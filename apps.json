@@ -69,6 +69,12 @@
     "size": 16400
   },
   {
+    "name": "glass.ext",
+    "description": "A NOMAD extension for an experimental glass theme",
+    "category": "ext",
+    "size": 20200
+  },
+  {
     "name": "go.com",
     "description": "A 1 or 2 player implementation of the game Go (with VERY simple computer turns)",
     "category": "game",
@@ -117,7 +123,7 @@
     "size": 4384
   },
   {
-    "name": "quote.com",
+    "name": "quote.ext",
     "description": "A NOMAD extension for quotes on the main menu",
     "category": "ext",
     "size": 14700
@@ -149,7 +155,7 @@
   {
     "name": "storms.com",
     "description": "A text-based guide to extreme weather survival",
-    "category": "game",
+    "category": "app",
     "size": 19400
   },
   {
