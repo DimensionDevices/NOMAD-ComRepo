@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk HTML/MD → MD · 20KB compressed-size split</title>
+    <style>
+        /* ===== styles from style.css.h (simplified & embedded) ===== */
+        :root {--bg: #fdfaf1; --bg-gradient: linear-gradient(145deg, #fdfaf1 0%, #f5f0e1 100%); --surface: rgba(255, 255, 255, 0.65); --border: rgba(84, 117, 64, 0.15); --text: #2c3e2d; --text-dim: #5c6e5d; --accent: #547540; --accent-hover: #456334; --card-bg: rgba(84, 117, 64, 0.05); --stat-val: #1b3012; --danger: #b0413e; --shadow: 0 4px 20px rgba(0,0,0,0.08);}
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 1.5rem; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { border: 1px solid var(--border); background: var(--card-bg); padding: 16px 20px; margin-bottom: 1.5rem; border-radius: 16px; }
+        .header h1 { font-size: 1.8rem; font-weight: 800; }
+        .subtitle { font-size: 0.9rem; opacity: 0.8; }
+        .status-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 15px; }
+        .stat-card { background: var(--card-bg); padding: 12px; border-radius: 10px; }
+        .stat-label { font-size: 0.7rem; text-transform: uppercase; opacity: 0.8; font-weight: 600; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; }
+        .section { background: var(--card-bg); padding: 15px 20px; margin-bottom: 1.5rem; border: 1px solid var(--border); border-radius: 16px; }
+        .drop-zone { border: 2px dashed var(--border); border-radius: 16px; padding: 2.5rem 1rem; text-align: center; background: var(--surface); cursor: pointer; transition: 0.2s; }
+        .drop-zone:hover { border-color: var(--accent); background: var(--card-bg); }
+        .file-list { margin-top: 1rem; max-height: 200px; overflow-y: auto; }
+        .file-item { background: var(--surface); padding: 8px 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; border: 1px solid var(--border); }
+        .file-name { font-weight: 600; }
+        .file-size { font-size: 0.8rem; color: var(--text-dim); }
+        .action-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; margin-top: 1.2rem; }
+        .btn { background: var(--accent); color: white; border: none; padding: 0.6rem 1.8rem; border-radius: 60px; font-weight: 600; cursor: pointer; transition: 0.15s; }
+        .btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .btn:disabled { opacity: 0.5; pointer-events: none; }
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+        .btn-outline:hover { background: var(--card-bg); }
+        .log-area { background: var(--surface); border-radius: 12px; padding: 0.8rem 1.2rem; max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.85rem; border: 1px solid var(--border); margin-top: 1.2rem; }
+        .log-entry { padding: 0.1rem 0; }
+        .log-entry.ok { color: #0f7b4a; }
+        .log-entry.warn { color: #a1651a; }
+        .log-entry.info { color: #1a4b7a; }
+        .badge { background: var(--border); padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.75rem; }
+        .flex-row { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; }
+        #fileInput { display: none; }
+        .stats { font-weight: 500; color: var(--text-dim); }
+        .compression-badge { background: var(--accent); color: white; padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.7rem; margin-left: 0.5rem; }
+        .progress-container { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-top: 10px; overflow: hidden; display: none; }
+        .progress-bar { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+        @media (max-width: 600px) { .status-bar { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📄➜📝 HTML/MD → MD <span class="compression-badge">ZIP download</span></h1>
+        <div class="subtitle">Bulk conversion · split based on base64+gzip size (20KB) · .md files are split without conversion</div>
+        <div class="status-bar">
+            <div class="stat-card"><div class="stat-label">Files</div><div class="stat-value" id="fileCountStat">0</div></div>
+            <div class="stat-card"><div class="stat-label">Total size</div><div class="stat-value" id="totalSizeStat">0 KB</div></div>
+            <div class="stat-card"><div class="stat-label">Volumes</div><div class="stat-value" id="volumeStat">-</div></div>
+            <div class="stat-card"><div class="stat-label">Max volume</div><div class="stat-value">20 KB <small style="font-weight:400;">(base64+gzip)</small></div></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="drop-zone" id="dropZone">
+            <div style="font-size:2.8rem;">📂</div>
+            <p><strong>Drop .html / .md files here</strong> or click to select</p>
+            <p style="font-size:0.85rem; color:var(--text-dim);">.md files are split (no conversion) · .html files are converted to markdown</p>
+            <input type="file" id="fileInput" multiple accept=".html,.htm,.md">
+        </div>
+        <div id="fileListContainer" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin:0.5rem 0;">
+                <span class="stats" id="fileCountLabel">0 files</span>
+                <button class="btn btn-outline" id="clearFilesBtn" style="padding:0.2rem 1.2rem;">✕ clear</button>
+            </div>
+            <div class="file-list" id="fileList"></div>
+        </div>
+        <div class="action-bar">
+            <div class="flex-row">
+                <button class="btn" id="convertBtn" disabled>⚡ Convert & download ZIP</button>
+                <button class="btn btn-outline" id="sampleBtn">📄 Load sample</button>
+            </div>
+            <span class="stats" id="statusMsg">Ready</span>
+        </div>
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="log-area" id="logArea">
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+    (function() {
+        // ----- DOM refs -----
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileListContainer = document.getElementById('fileListContainer');
+        const fileList = document.getElementById('fileList');
+        const fileCountLabel = document.getElementById('fileCountLabel');
+        const fileCountStat = document.getElementById('fileCountStat');
+        const totalSizeStat = document.getElementById('totalSizeStat');
+        const volumeStat = document.getElementById('volumeStat');
+        const clearFilesBtn = document.getElementById('clearFilesBtn');
+        const convertBtn = document.getElementById('convertBtn');
+        const sampleBtn = document.getElementById('sampleBtn');
+        const statusMsg = document.getElementById('statusMsg');
+        const logArea = document.getElementById('logArea');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+
+        // ----- state -----
+        let files = []; // { file, name, size }
+
+        // ----- GZIP compression helpers (EXACTLY matching the provided code) -----
+        function supportsNativeCompression() {
+            return typeof CompressionStream !== 'undefined' && typeof DecompressionStream !== 'undefined';
+        }
+
+        function bytesToBase64(bytes) {
+            let binary = '';
+            for (let i = 0; i < bytes.length; i += 32768) {
+                binary += String.fromCharCode.apply(null, bytes.subarray(i, i + 32768));
+            }
+            return btoa(binary);
+        }
+
+        async function gzipCompressText(text) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(text);
+            const stream = new CompressionStream('gzip');
+            const writer = stream.writable.getWriter();
+            writer.write(data);
+            writer.close();
+            const response = new Response(stream.readable);
+            const arrayBuffer = await response.arrayBuffer();
+            return new Uint8Array(arrayBuffer);
+        }
+
+        // CRITICAL: This returns the base64-encoded compressed size, which is what matters for storage
+        async function getStoredByteSize(text) {
+            if (!supportsNativeCompression()) {
+                return new Blob([text]).size;
+            }
+            try {
+                const compressed = await gzipCompressText(text);
+                return bytesToBase64(compressed).length;
+            } catch (e) {
+                console.warn('Gzip compression failed, using uncompressed size:', e);
+                return new Blob([text]).size;
+            }
+        }
+
+        // ----- helpers -----
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+
+        function log(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = message;
+            logArea.appendChild(entry);
+            logArea.scrollTop = logArea.scrollHeight;
+        }
+
+        function updateUI() {
+            const count = files.length;
+            fileCountLabel.textContent = count + ' file' + (count !== 1 ? 's' : '');
+            fileCountStat.textContent = count;
+            fileListContainer.style.display = count > 0 ? 'block' : 'none';
+            convertBtn.disabled = count === 0;
+            const totalSize = files.reduce((sum, f) => sum + f.size, 0);
+            totalSizeStat.textContent = formatSize(totalSize);
+            if (count === 0) {
+                statusMsg.textContent = 'No files loaded';
+                volumeStat.textContent = '-';
+            } else {
+                statusMsg.textContent = `${count} file(s) · total ${formatSize(totalSize)}`;
+                volumeStat.textContent = 'pending';
+            }
+            // render file list
+            fileList.innerHTML = '';
+            files.forEach((f) => {
+                const div = document.createElement('div');
+                div.className = 'file-item';
+                const ext = f.name.split('.').pop().toLowerCase();
+                const label = ext === 'md' ? '📝' : '📄';
+                div.innerHTML = `<span class="file-name">${label} ${f.name}</span><span class="file-size">${formatSize(f.size)}</span>`;
+                fileList.appendChild(div);
+            });
+        }
+
+        // ----- add files (accept .html, .htm, .md) -----
+        function addFiles(fileListFromInput) {
+            let added = 0;
+            for (const file of fileListFromInput) {
+                const ext = file.name.split('.').pop().toLowerCase();
+                if (ext !== 'html' && ext !== 'htm' && ext !== 'md') {
+                    log(`⛔ Skipped "${file.name}" — not .html/.htm/.md`, 'warn');
+                    continue;
+                }
+                const exists = files.some(f => f.name === file.name && f.size === file.size);
+                if (exists) {
+                    log(`⏩ "${file.name}" already in list`, 'warn');
+                    continue;
+                }
+                files.push({ file, name: file.name, size: file.size });
+                added++;
+            }
+            if (added > 0) {
+                log(`✅ Added ${added} file(s)`, 'ok');
+                updateUI();
+            } else {
+                log(`ℹ️ No new files added`, 'info');
+            }
+        }
+
+        function clearFiles() {
+            if (files.length === 0) return;
+            files = [];
+            updateUI();
+            log('🗑️ Cleared all files', 'info');
+            statusMsg.textContent = 'Ready';
+            volumeStat.textContent = '-';
+            progressContainer.style.display = 'none';
+            progressBar.style.width = '0%';
+        }
+
+        // ----- HTML → Markdown (basic) -----
+        function htmlToMarkdown(htmlString) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+            const body = doc.body || doc;
+            ['script','style','noscript'].forEach(sel => body.querySelectorAll(sel).forEach(el => el.remove()));
+
+            function convertNode(node) {
+                if (node.nodeType === Node.TEXT_NODE) return node.textContent;
+                if (node.nodeType !== Node.ELEMENT_NODE) return '';
+                const tag = node.tagName.toLowerCase();
+                const children = Array.from(node.childNodes);
+                let inner = children.map(child => convertNode(child)).join('').trim();
+                if (/^h[1-6]$/.test(tag)) {
+                    const level = parseInt(tag[1]);
+                    return '\n' + '#'.repeat(level) + ' ' + inner + '\n';
+                }
+                if (tag === 'p') return '\n' + inner + '\n';
+                if (tag === 'li') return '- ' + inner + '\n';
+                if (tag === 'ul' || tag === 'ol') return '\n' + inner + '\n';
+                if (tag === 'a') {
+                    const href = node.getAttribute('href') || '';
+                    return `[${inner}](${href})`;
+                }
+                if (tag === 'img') {
+                    const src = node.getAttribute('src') || '';
+                    const alt = node.getAttribute('alt') || '';
+                    return `![${alt}](${src})`;
+                }
+                if (tag === 'strong' || tag === 'b') return '**' + inner + '**';
+                if (tag === 'em' || tag === 'i') return '*' + inner + '*';
+                if (tag === 'code') return '`' + inner + '`';
+                if (tag === 'pre') return '\n```\n' + inner + '\n```\n';
+                if (tag === 'blockquote') return '\n> ' + inner + '\n';
+                if (tag === 'hr') return '\n---\n';
+                if (tag === 'br') return '\n';
+                return inner;
+            }
+            let md = convertNode(body);
+            md = md.replace(/\n{3,}/g, '\n\n').trim();
+            if (md.length > 0) md += '\n';
+            return md;
+        }
+
+        // ----- generate filename: base (2‑6 chars) + volume number + .md -----
+        function generateFileName(originalName, volumeIndex, totalVolumes) {
+            let base = originalName.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9]/g, '');
+            if (base.length === 0) base = 'doc';
+            
+            let finalBase;
+            if (totalVolumes === 1) {
+                if (base.length < 2) base = base.padEnd(2, 'x');
+                else if (base.length > 6) base = base.slice(0, 6);
+                finalBase = base;
+            } else {
+                const volStr = String(volumeIndex);
+                const maxVolDigits = String(totalVolumes).length;
+                let allowedBaseLen = Math.max(2, 6 - maxVolDigits);
+                if (base.length > allowedBaseLen) base = base.slice(0, allowedBaseLen);
+                if (base.length < 2) base = base.padEnd(2, 'x');
+                let candidate = base + volStr;
+                if (candidate.length > 6) {
+                    base = base.slice(0, 6 - volStr.length);
+                    if (base.length < 1) base = 'x';
+                    candidate = base + volStr;
+                }
+                finalBase = candidate;
+            }
+            return finalBase + '.md';
+        }
+
+        // ----- Split using stored (base64+gzip) size -----
+        async function splitIntoVolumesByStoredSize(markdown, maxBytes) {
+            const SAFETY_MARGIN = 64;
+            const TARGET_BYTES = maxBytes - SAFETY_MARGIN;
+            
+            const totalStoredSize = await getStoredByteSize(markdown);
+            if (totalStoredSize <= maxBytes) {
+                return [markdown];
+            }
+
+            // split by paragraphs (or lines for MD)
+            const paragraphs = markdown.split(/\n(?=\S)/);
+            const volumes = [];
+            let currentChunk = '';
+            
+            for (let para of paragraphs) {
+                const testChunk = currentChunk + (currentChunk ? '\n' : '') + para;
+                const testSize = await getStoredByteSize(testChunk);
+                
+                if (testSize > TARGET_BYTES && currentChunk.length > 0) {
+                    volumes.push(currentChunk);
+                    currentChunk = para;
+                } else {
+                    currentChunk = testChunk;
+                }
+            }
+            
+            if (currentChunk.length > 0) {
+                volumes.push(currentChunk);
+            }
+            
+            // Fine-tune: if any volume still exceeds max, split character by character
+            const finalVolumes = [];
+            for (let vol of volumes) {
+                const volSize = await getStoredByteSize(vol);
+                if (volSize > maxBytes) {
+                    let chars = vol.split('');
+                    let chunk = '';
+                    for (let char of chars) {
+                        const testChunk = chunk + char;
+                        const testSize = await getStoredByteSize(testChunk);
+                        if (testSize > TARGET_BYTES && chunk.length > 0) {
+                            finalVolumes.push(chunk);
+                            chunk = char;
+                        } else {
+                            chunk = testChunk;
+                        }
+                    }
+                    if (chunk.length > 0) finalVolumes.push(chunk);
+                } else {
+                    finalVolumes.push(vol);
+                }
+            }
+            
+            return finalVolumes;
+        }
+
+        // ----- conversion & download as ZIP (handles both .html and .md) -----
+        async function convertAndDownload() {
+            if (files.length === 0) {
+                log('⚠️ No files to convert', 'warn');
+                return;
+            }
+
+            const MAX_BYTES = 20 * 1024;
+            const zip = new JSZip();
+            let totalVolumes = 0;
+            let processed = 0;
+            
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+
+            if (!supportsNativeCompression()) {
+                log('⚠️ CompressionStream not supported. Using uncompressed size.', 'warn');
+            }
+
+            for (const fileObj of files) {
+                try {
+                    const ext = fileObj.name.split('.').pop().toLowerCase();
+                    let mdContent;
+                    
+                    if (ext === 'md') {
+                        // .md file: no conversion, just read as text
+                        mdContent = await fileObj.file.text();
+                        log(`📝 "${fileObj.name}" loaded as markdown (no conversion)`, 'info');
+                    } else {
+                        // .html / .htm: convert to markdown
+                        const htmlContent = await fileObj.file.text();
+                        mdContent = htmlToMarkdown(htmlContent);
+                        log(`🔄 "${fileObj.name}" converted from HTML to Markdown`, 'info');
+                    }
+                    
+                    const volumes = await splitIntoVolumesByStoredSize(mdContent, MAX_BYTES);
+                    
+                    const totalVols = volumes.length;
+                    for (let i = 0; i < volumes.length; i++) {
+                        const volNumber = i + 1;
+                        const chunk = volumes[i];
+                        const fileName = generateFileName(fileObj.name, volNumber, totalVols);
+                        
+                        const uncompressedSize = new Blob([chunk]).size;
+                        const storedSize = await getStoredByteSize(chunk);
+                        
+                        zip.file(fileName, chunk);
+                        
+                        totalVolumes++;
+                        log(`📄 ${fileName} (uncompressed: ${formatSize(uncompressedSize)}, stored: ${formatSize(storedSize)})`, 'ok');
+                        
+                        if (storedSize > MAX_BYTES) {
+                            log(`⚠️ ${fileName} stored size ${formatSize(storedSize)} exceeds 20KB!`, 'warn');
+                        }
+                    }
+
+                    processed++;
+                    const progress = (processed / files.length) * 100;
+                    progressBar.style.width = progress + '%';
+                    
+                } catch (err) {
+                    log(`❌ Error processing "${fileObj.name}": ${err.message}`, 'warn');
+                    processed++;
+                }
+            }
+
+            // Generate and download ZIP
+            try {
+                log('📦 Generating ZIP archive...', 'info');
+                const zipBlob = await zip.generateAsync({ type: 'blob' });
+                const url = URL.createObjectURL(zipBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'converted_markdown.zip';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                volumeStat.textContent = totalVolumes;
+                log(`🎉 Done! ${files.length} file(s) → ${totalVolumes} volume(s) in ZIP`, 'ok');
+                statusMsg.textContent = `✔️ ${totalVolumes} volumes in ZIP`;
+                progressBar.style.width = '100%';
+            } catch (err) {
+                log(`❌ Error creating ZIP: ${err.message}`, 'warn');
+            }
+        }
+
+        // ----- sample files (includes .md sample) -----
+        function loadSampleFiles() {
+            clearFiles();
+            const smallHtml = `<!DOCTYPE html><html><head><title>Sample small</title></head><body>
+<h1>Hello world</h1>
+<p>This is a <strong>sample</strong> HTML file with <a href="https://example.com">a link</a>.</p>
+<ul><li>item 1</li><li>item 2</li></ul>
+</body></html>`;
+            let largeHtml = `<!DOCTYPE html><html><head><title>Large sample</title></head><body>\n`;
+            for (let i = 0; i < 150; i++) {
+                largeHtml += `<p>Paragraph ${i}: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\n`;
+            }
+            largeHtml += `</body></html>`;
+            
+            // Sample markdown file (will be split without conversion)
+            const sampleMd = `# Sample Markdown Document\n\nThis is a markdown file that will be split without conversion.\n\n` +
+                Array.from({ length: 100 }, (_, i) => `Paragraph ${i}: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`).join('\n\n');
+            
+            const smallFile = new File([smallHtml], 'sample_small.html', { type: 'text/html' });
+            const largeFile = new File([largeHtml], 'sample_large.html', { type: 'text/html' });
+            const mdFile = new File([sampleMd], 'sample_doc.md', { type: 'text/markdown' });
+            
+            addFiles([smallFile, largeFile, mdFile]);
+            log('📄 Loaded sample files (HTML + MD, some >20KB)', 'info');
+        }
+
+        // ----- event binding -----
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.style.borderColor = 'var(--accent)'; });
+        dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '';
+            if (e.dataTransfer.files.length) addFiles(e.dataTransfer.files);
+        });
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) addFiles(e.target.files);
+            fileInput.value = '';
+        });
+        clearFilesBtn.addEventListener('click', clearFiles);
+        convertBtn.addEventListener('click', convertAndDownload);
+        sampleBtn.addEventListener('click', loadSampleFiles);
+
+        // prevent default drag on window
+        document.addEventListener('dragover', e => e.preventDefault());
+        document.addEventListener('drop', e => e.preventDefault());
+
+        updateUI();
+        log('🚀 Ready · drop .html/.htm/.md files or click to select', 'info');
+        log('📛 Filename rule: 2‑6 chars total (including volume number)', 'info');
+        log('📦 All files will be downloaded as a single ZIP archive', 'info');
+        log('📝 .md files are split without any conversion', 'info');
+        if (!supportsNativeCompression()) {
+            log('⚠️ CompressionStream not available in this browser. Using uncompressed size.', 'warn');
+        }
+    })();
+</script>
+</body>
+</html>
