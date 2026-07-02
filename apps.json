@@ -51,6 +51,12 @@
     "size": 10500
   },
   {
+    "name": "doom.com",
+    "description": "A version of Doom, WiFi is required to download the game data",
+    "category": "game",
+    "size": 6300
+  },
+  {
     "name": "emoji.ext",
     "description": "A NOMAD extension for an emoji picker for the LoRa messenger",
     "category": "ext",
