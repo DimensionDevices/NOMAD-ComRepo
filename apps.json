@@ -165,6 +165,12 @@
     "size": 17000
   },
   {
+    "name": "tamago.ext",
+    "description": "A NOMAD extension for a little virtual pet",
+    "category": "ext",
+    "size": 16600
+  },
+  {
     "name": "tapper.com",
     "description": "A very simple incremental/idle game",
     "category": "game",
