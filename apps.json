@@ -147,6 +147,12 @@
     "size": 10300
   },
   {
+    "name": "stats.ext",
+    "description": "A NOMAD extension to extend the stats panel to include colour and realtime graphs",
+    "category": "ext",
+    "size": 7400
+  },
+  {
     "name": "stock.com",
     "description": "A basic inventory/stock management app, great for off-grid communities",
     "category": "app",
@@ -155,7 +161,7 @@
   {
     "name": "storms.com",
     "description": "A text-based guide to extreme weather survival",
-    "category": "app",
+    "category": "info",
     "size": 19400
   },
   {
