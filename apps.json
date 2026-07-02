@@ -9,10 +9,34 @@
     "size": 20100
   },
   {
+    "name": "2048.com",
+    "description": "A simple version of the 2048 game, where the aim is to get 2048 on a single tile",
+    "category": "game",
+    "size": 8700
+  },
+  {
+    "name": "aid.com",
+    "description": "An off-grid first aid guide, including information for treating a variety of wounds",
+    "category": "info",
+    "size": 18600
+  },
+  {
+    "name": "ascii.ext",
+    "description": "A NOMAD extension to add ASCII title to the main screen",
+    "category": "info",
+    "size": 7900
+  },
+  {
     "name": "chat.com",
     "description": "An official chat client for NOMAD hosted by DimensionDevices.co.uk. WiFi connection to NOMAD is *required*.",
     "category": "app",
     "size": 19300
+  },
+  {
+    "name": "cipher.com",
+    "description": "A message encryption routine to encrypt messages using a secret key that may then be shared",
+    "category": "app",
+    "size": 7400
   },
   {
     "name": "clock.ext",
@@ -31,24 +55,6 @@
     "description": "A NOMAD extension for an emoji picker for the LoRa messenger",
     "category": "ext",
     "size": 8200
-  },
-  {
-    "name": "2048.com",
-    "description": "A simple version of the 2048 game, where the aim is to get 2048 on a single tile",
-    "category": "game",
-    "size": 8700
-  },
-  {
-    "name": "aid.com",
-    "description": "An off-grid first aid guide, including information for treating a variety of wounds",
-    "category": "info",
-    "size": 18600
-  },
-  {
-    "name": "cipher.com",
-    "description": "A message encryption routine to encrypt messages using a secret key that may then be shared",
-    "category": "app",
-    "size": 7400
   },
   {
     "name": "dnd.com",
