@@ -123,6 +123,12 @@
     "size": 7900
   },
   {
+    "name": "notes.ext",
+    "description": "A NOMAD extension for note keeping",
+    "category": "ext",
+    "size": 12000
+  },
+  {
     "name": "pi.com",
     "description": "20,000 digits of Pi, great for testing",
     "category": "info",
