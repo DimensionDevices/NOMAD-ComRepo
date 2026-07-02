@@ -159,6 +159,12 @@
     "size": 10300
   },
   {
+    "name": "sounds.ext",
+    "description": "A NOMAD extension to add sounds to the web ui for events and actions",
+    "category": "ext",
+    "size": 13800
+  },
+  {
     "name": "stats.ext",
     "description": "A NOMAD extension to extend the stats panel to include colour and realtime graphs",
     "category": "ext",
