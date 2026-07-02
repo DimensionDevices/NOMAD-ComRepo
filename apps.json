@@ -1,6 +1,6 @@
 [
   {
-    "date": "30/06/26"
+    "date": "02/07/26"
   },
   {
     "name": "manual.com",
@@ -183,6 +183,12 @@
     "size": 12900
   },
   {
+    "name": "theme.ext",
+    "description": "A NOMAD customisable theme extension",
+    "category": "ext",
+    "size": 14000
+  },
+  {
     "name": "times.com",
     "description": "A timezone convertor",
     "category": "app",
@@ -205,6 +211,18 @@
     "description": "A length/volume/unit convertor",
     "category": "app",
     "size": 2400
+  },
+  {
+    "name": "upload.ext",
+    "description": "A NOMAD extension for a quick upload button on the main screen",
+    "category": "ext",
+    "size": 3400
+  },
+  {
+    "name": "visual.ext",
+    "description": "A NOMAD extension for a fun interactive visualiser",
+    "category": "ext",
+    "size": 11100
   },
   {
     "name": "wifi.ext",
