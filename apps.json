@@ -23,7 +23,7 @@
   {
     "name": "ascii.ext",
     "description": "A NOMAD extension to add ASCII title to the main screen",
-    "category": "info",
+    "category": "ext",
     "size": 7900
   },
   {
