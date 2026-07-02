@@ -99,6 +99,12 @@
     "size": 7500
   },
   {
+    "name": "hotmap.ext",
+    "description": "A NOMAD extension for a Node heatmap",
+    "category": "ext",
+    "size": 7900
+  },
+  {
     "name": "jumper.com",
     "description": "A simple fast paced, albeit basic, platformer",
     "category": "game",
