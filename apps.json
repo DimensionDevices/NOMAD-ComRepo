@@ -99,6 +99,12 @@
     "size": 5000
   },
   {
+    "name": "lstore.ext",
+    "description": "A NOMAD extension for managing localStorage on your device",
+    "category": "ext",
+    "size": 5800
+  },
+  {
     "name": "marble.com",
     "description": "A version of Marble Madness",
     "category": "game",
