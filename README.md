@@ -6,6 +6,16 @@ Some files are fully functional apps/games while others are more geared towards 
 
 Details for how these files are created and managed are in the links below.
 
+## Tools
+
+**minify-com-file.html**
+
+This file is used to minify created .com files, this essentially removed extra whitespace and minifies everything as much as possible without external libraries or compression.
+
+**html-2-md.html**
+
+This file converts .html and .md files to multi-volume NOMAD safe files that may be uploaded directly to your device.
+
 ## Documentation
 
 Click below to read details on how to create your own .com files outside of NOMAD (or to just brush up on the techniques used):
