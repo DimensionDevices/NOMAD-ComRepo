@@ -8,11 +8,11 @@ Details for how these files are created and managed are in the links below.
 
 ## NOMAD Tools
 
-**minify-com-file.html**
+**tools/minify-com-file.html**
 
 This file is used to minify created .com files, this essentially removed extra whitespace and minifies everything as much as possible without external libraries or compression. This tool does *not* compress the content, it only reduces whitespace and layout. This is worthwhile due to the packet limitation of LoRa, all filesize savings are important.
 
-**volume-splitter.html**
+**tools/volume-splitter.html**
 
 This file converts .html and .md files to multi-volume NOMAD safe files that may be uploaded directly to your device. These split volumes are pre-calculated for compression to accurately measure the volumes' content that may fit into 20kb compressed per volume (the NOMAD limit).
 
