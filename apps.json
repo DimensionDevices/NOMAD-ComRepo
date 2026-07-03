@@ -87,6 +87,12 @@
     "size": 20200
   },
   {
+    "name": "graphs.ext",
+    "description": "A NOMAD extension to extend the stats panel to include colour and realtime graphs",
+    "category": "ext",
+    "size": 7400
+  },
+  {
     "name": "go.com",
     "description": "A 1 or 2 player implementation of the game Go (with VERY simple computer turns)",
     "category": "game",
@@ -190,9 +196,9 @@
   },
   {
     "name": "stats.ext",
-    "description": "A NOMAD extension to extend the stats panel to include colour and realtime graphs",
+    "description": "A NOMAD extension add stat collection for various things",
     "category": "ext",
-    "size": 7400
+    "size": 15100
   },
   {
     "name": "stock.com",
