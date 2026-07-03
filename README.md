@@ -12,9 +12,9 @@ Details for how these files are created and managed are in the links below.
 
 This file is used to minify created .com files, this essentially removed extra whitespace and minifies everything as much as possible without external libraries or compression.
 
-**html-2-md.html**
+**volume-splitter.html**
 
-This file converts .html and .md files to multi-volume NOMAD safe files that may be uploaded directly to your device.
+This file converts .html and .md files to multi-volume NOMAD safe files (~20kb per volume) that may be uploaded directly to your device.
 
 ## NOMAD File Types Documentation
 
