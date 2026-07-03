@@ -16,13 +16,13 @@
   },
   {
     "name": "aid.com",
-    "description": "An off-grid first aid guide, including information for treating a variety of wounds",
+    "description": "An off-grid first aid guide, including information for treating a variety of wounds with quicklinks to sections",
     "category": "info",
     "size": 18600
   },
   {
     "name": "ascii.ext",
-    "description": "A NOMAD extension to add ASCII title to the main screen",
+    "description": "A NOMAD extension to add ASCII title to the main screen, purely aesthetic",
     "category": "ext",
     "size": 7900
   },
@@ -40,19 +40,19 @@
   },
   {
     "name": "cipher.com",
-    "description": "A message encryption routine to encrypt messages using a secret key that may then be shared",
+    "description": "A message encryption routine to encrypt messages using a secret key that may then be shared via whatever means you want to use",
     "category": "app",
     "size": 7400
   },
   {
     "name": "clock.ext",
-    "description": "A NOMAD extension for a customisable clock",
+    "description": "A NOMAD extension for a customisable clock on the main screen",
     "category": "ext",
     "size": 11000
   },
   {
     "name": "diary.com",
-    "description": "A simple journal style app",
+    "description": "A simple journal style app allowing you to store information on an adhoc basis",
     "category": "app",
     "size": 10500
   },
