@@ -4,7 +4,7 @@
   },
   {
     "name": "manual.com",
-    "description": "The NOMAD user manual and guide.",
+    "description": "The NOMAD user manual and guide",
     "category": "info",
     "size": 20100
   },
@@ -34,7 +34,7 @@
   },
   {
     "name": "chat.com",
-    "description": "An official chat client for NOMAD hosted by DimensionDevices.co.uk. WiFi connection to NOMAD is *required*.",
+    "description": "An official chat client for NOMAD hosted by DimensionDevices.co.uk. WiFi connection to NOMAD is required",
     "category": "app",
     "size": 19300
   },
@@ -82,7 +82,7 @@
   },
   {
     "name": "forum.com",
-    "description": "An official forum for talking about NOMAD.",
+    "description": "An official forum for talking about NOMAD",
     "category": "app",
     "size": 16400
   },
@@ -154,7 +154,7 @@
   },
   {
     "name": "ovrlay.ext",
-    "description": "A NOMAD extension for a nice blended image overlay",
+    "description": "A NOMAD extension for a nice blended image overlay. WiFi connection is required",
     "category": "ext",
     "size": 8200
   },
