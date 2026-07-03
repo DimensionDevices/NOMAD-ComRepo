@@ -147,6 +147,12 @@
     "size": 20100
   },
   {
+    "name": "prot.ext",
+    "description": "A NOMAD extension for scanning files for nefarious activity",
+    "category": "ext",
+    "size": 17800
+  },
+  {
     "name": "qr.com",
     "description": "QR Code generator",
     "category": "app",
@@ -265,12 +271,6 @@
     "description": "A NOMAD extension for a quick upload button on the main screen",
     "category": "ext",
     "size": 3400
-  },
-  {
-    "name": "visual.ext",
-    "description": "A NOMAD extension for a fun interactive visualiser",
-    "category": "ext",
-    "size": 11100
   },
   {
     "name": "wifi.ext",
