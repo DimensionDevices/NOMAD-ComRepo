@@ -337,6 +337,7 @@ Think of them as "plugins" that can:
 
 ```json
 {
+  "description": "A brief extension description",
   "html": "<your HTML here>",
   "css": "<your CSS here>",
   "js": "<your JavaScript here>",
@@ -355,6 +356,7 @@ Think of them as "plugins" that can:
 
 | Field | Type | Description |
 |-------|------|-------------|
+| `description` | string | A brief description of what the extension does |
 | `css` | string | CSS styles to add to the page |
 | `js` | string | JavaScript to execute (runs in browser context) |
 
