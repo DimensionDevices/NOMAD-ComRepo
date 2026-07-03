@@ -168,7 +168,7 @@
     "name": "prot.ext",
     "description": "A NOMAD extension for scanning files for nefarious activity",
     "category": "ext",
-    "size": 17800
+    "size": 17700
   },
   {
     "name": "qr.com",
