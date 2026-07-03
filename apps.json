@@ -27,6 +27,12 @@
     "size": 7900
   },
   {
+    "name": "backup.ext",
+    "description": "A NOMAD extension which adds a backup button to the options menu to download all files in a single zip",
+    "category": "ext",
+    "size": 11100
+  },
+  {
     "name": "chat.com",
     "description": "An official chat client for NOMAD hosted by DimensionDevices.co.uk. WiFi connection to NOMAD is *required*.",
     "category": "app",
