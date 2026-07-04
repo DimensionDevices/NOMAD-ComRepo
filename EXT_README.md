@@ -1,5 +1,21 @@
 # NOMAD Extensions
 
+## Table of Contents
+- [What Are `.ext` Files?](#what-are-ext-files)
+- [Extension File Format](#extension-file-format)
+- [Required Fields](#required-fields)
+- [Optional Fields](#optional-fields)
+- [Injection Targets](#injection-targets)
+- [Step-by-Step: Your First Extension](#step-by-step-your-first-extension)
+- [Available NOMAD API Endpoints](#available-nomad-api-endpoints)
+- [CSS Styling Guide](#css-styling-guide)
+- [Best Practices](#best-practices)
+- [Common Use Cases & Examples](#common-use-cases--examples)
+- [Technical Reference](#technical-reference)
+- [Quick Reference Card](#quick-reference-card)
+
+---
+
 ### What Are `.ext` Files?
 
 `.ext` files are **UI extensions** for your NOMAD device. They allow you to add custom sections, widgets, and functionality to the web interface without modifying the device's firmware.
@@ -256,4 +272,4 @@ Extensions are loaded in alphabetical order by filename. If you need dependencie
 
 ---
 
-**Happy building with NOMAD!**  
+**Happy building with NOMAD!**
