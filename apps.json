@@ -123,6 +123,12 @@
     "size": 17100
   },
   {
+    "name": "lock.ext",
+    "description": "A NOMAD extension that completely locks down the user iterface, only the /config panel is accessible. To remove this extension you must delete it from the /config panel directly.",
+    "category": "ext",
+    "size": 5600
+  },
+  {
     "name": "log.ext",
     "description": "A NOMAD extension for user interaction logging",
     "category": "ext",
