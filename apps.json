@@ -123,6 +123,12 @@
     "size": 17100
   },
   {
+    "name": "launch.ext",
+    "description": "A NOMAD extension which replaces the default user interface with a mobile-app style icon interface.",
+    "category": "ext",
+    "size": 12800
+  },
+  {
     "name": "lock.ext",
     "description": "A NOMAD extension that completely locks down the user iterface, only the /config panel is accessible. To remove this extension you must delete it from the /config panel directly.",
     "category": "ext",
