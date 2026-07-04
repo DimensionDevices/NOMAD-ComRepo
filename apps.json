@@ -39,6 +39,12 @@
     "size": 19300
   },
   {
+    "name": "chip8.com",
+    "description": "A Chip8 console emulator that supports loading of .ch8 files from your client device (phone etc)",
+    "category": "game",
+    "size": 7600
+  },
+  {
     "name": "cipher.com",
     "description": "A message encryption routine to encrypt messages using a secret key that may then be shared via whatever means you want to use",
     "category": "app",
