@@ -124,13 +124,13 @@
   },
   {
     "name": "launch.ext",
-    "description": "A NOMAD extension which replaces the default user interface with a mobile-app style icon interface.",
+    "description": "A NOMAD extension which replaces the default user interface with a mobile-app style icon interface [USE ONLY ONE UI REPLACEMENT OF THIS TYPE]",
     "category": "ext",
     "size": 12900
   },
   {
     "name": "lock.ext",
-    "description": "A NOMAD extension that completely locks down the user iterface, only the /config panel is accessible. To remove this extension you must delete it from the /config panel directly.",
+    "description": "A NOMAD extension that completely locks down the user iterface, only the /config panel is accessible. To remove this extension you must delete it from the /config panel directly",
     "category": "ext",
     "size": 5600
   },
@@ -199,6 +199,12 @@
     "description": "A simple recipe/cookbook book for NOMAD",
     "category": "game",
     "size": 8700
+  },
+  {
+    "name": "sdebar.com",
+    "description": "A NOMAD extension to replace the layout with a sidebar [USE ONLY ONE UI REPLACEMENT OF THIS TYPE]",
+    "category": "info",
+    "size": 12500
   },
   {
     "name": "shop.com",
