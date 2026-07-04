@@ -1,6 +1,6 @@
 [
   {
-    "date": "02/07/26"
+    "date": "04/07/26"
   },
   {
     "name": "manual.com",
@@ -126,7 +126,7 @@
     "name": "launch.ext",
     "description": "A NOMAD extension which replaces the default user interface with a mobile-app style icon interface.",
     "category": "ext",
-    "size": 12800
+    "size": 12900
   },
   {
     "name": "lock.ext",
