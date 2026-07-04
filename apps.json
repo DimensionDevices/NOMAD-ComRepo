@@ -165,6 +165,12 @@
     "size": 7900
   },
   {
+    "name": "midi.com",
+    "description": "A simple midi music sequencer to create old school sounds",
+    "category": "app",
+    "size": 18600
+  },
+  {
     "name": "notes.ext",
     "description": "A NOMAD extension for note keeping",
     "category": "ext",
