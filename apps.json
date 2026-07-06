@@ -15,6 +15,12 @@
     "size": 8700
   },
   {
+    "name": "access.ext",
+    "description": "A NOMAD extension to add accessibility options to your device, such as: high contrast theme, focus indicators, colour blind options and various font options",
+    "category": "ext",
+    "size": 11700
+  },
+  {
     "name": "aid.com",
     "description": "An off-grid first aid guide, including information for treating a variety of wounds with quicklinks to sections",
     "category": "info",
