@@ -195,6 +195,12 @@
     "size": 20100
   },
   {
+    "name": "pie.ext",
+    "description": "A NOMAD extension to add pie charts to the main screen for stats",
+    "category": "ext",
+    "size": 12500
+  },
+  {
     "name": "prot.ext",
     "description": "A NOMAD extension for scanning files for nefarious activity",
     "category": "ext",
