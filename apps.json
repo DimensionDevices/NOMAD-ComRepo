@@ -39,6 +39,12 @@
     "size": 11100
   },
   {
+    "name": "calndr.ext",
+    "description": "A NOMAD extension to add a calendar and schedule to the main screen",
+    "category": "ext",
+    "size": 9900
+  },
+  {
     "name": "chat.com",
     "description": "An official chat client for NOMAD hosted by DimensionDevices.co.uk. WiFi connection to NOMAD is required",
     "category": "app",
