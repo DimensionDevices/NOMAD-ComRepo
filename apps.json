@@ -244,9 +244,9 @@
   },
   {
     "name": "shop.com",
-    "description": "An example trade-based shop .com file with simple styles",
+    "description": "An example of a shop that uses data storage on NOMAD via a .com file with simple styles",
     "category": "info",
-    "size": 10300
+    "size": 17100
   },
   {
     "name": "sounds.ext",
