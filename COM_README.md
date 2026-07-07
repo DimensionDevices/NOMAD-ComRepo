@@ -37,7 +37,7 @@ Example `.com` files for the NOMAD platform.
 
 ## What is a .com file?
 
-A `.com` file is a plain-text document that renders as a full web page inside the NOMAD interface. You write it using simple directives (like `PAGE:`, `TEXT:`, `IMAGE:`) and save it with a `.com` extension. No HTML, no build tools-just text.
+A `.com` file is a plain-text document that renders as a full web page inside the NOMAD interface. You write it using simple directives (like `PAGE:`, `TEXT:`, `IMAGE:`) and save it with a `.com` extension. HTML completely optional.
 
 ---
 
