@@ -195,6 +195,12 @@
     "size": 8200
   },
   {
+    "name": "prticl.ext",
+    "description": "A NOMAD extension which overlays interactive particle animation over the mains screen",
+    "category": "ext",
+    "size": 3700
+  },
+  {
     "name": "pi.com",
     "description": "20,000 digits of Pi, great for testing",
     "category": "info",
