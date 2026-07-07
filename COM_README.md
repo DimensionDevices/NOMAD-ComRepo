@@ -32,7 +32,6 @@ Example `.com` files for the NOMAD platform.
 - [Full Example](#full-example)
 - [Tips & Limitations](#tips--limitations)
 - [Data Storage](#data-storage)
-- [NOMAD Extensions](#nomad-extensions)
 
 ---
 
