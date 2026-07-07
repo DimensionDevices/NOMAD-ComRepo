@@ -315,6 +315,12 @@
     "size": 12900
   },
   {
+    "name": "termnl.ext",
+    "description": "A NOMAD extension to add a terminal style view to the main screen",
+    "category": "ext",
+    "size": 12900
+  },
+  {
     "name": "theme.ext",
     "description": "A NOMAD customisable theme extension",
     "category": "ext",
