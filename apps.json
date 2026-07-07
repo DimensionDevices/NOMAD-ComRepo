@@ -288,7 +288,7 @@
     "name": "tamago.ext",
     "description": "A NOMAD extension for a little virtual pet, keep it happy by interacting with it and finding new nodes!",
     "category": "ext",
-    "size": 16600
+    "size": 16300
   },
   {
     "name": "tapper.com",
