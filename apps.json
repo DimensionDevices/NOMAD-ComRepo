@@ -243,9 +243,9 @@
     "size": 8700
   },
   {
-    "name": "sdebar.com",
+    "name": "sdebar.ext",
     "description": "A NOMAD extension to replace the layout with a sidebar [USE ONLY ONE UI REPLACEMENT OF THIS TYPE]",
-    "category": "info",
+    "category": "ext",
     "size": 12500
   },
   {
