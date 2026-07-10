@@ -99,6 +99,12 @@
     "size": 10200
   },
   {
+    "name": "font.ext",
+    "description": "A NOMAD extension to replace the font with a custom DataURL .WOFF2 font",
+    "category": "ext",
+    "size": 10200
+  },
+  {
     "name": "forum.com",
     "description": "An official forum for talking about NOMAD",
     "category": "app",
