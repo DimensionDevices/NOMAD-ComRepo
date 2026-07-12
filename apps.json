@@ -183,6 +183,12 @@
     "size": 7900
   },
   {
+    "name": "maze.com",
+    "description": "A 3D simple interactive maze game",
+    "category": "game",
+    "size": 20100
+  },
+  {
     "name": "mcrypt.ext",
     "description": "A NOMAD extension to add message encryption to the LoRa messenger",
     "category": "ext",
