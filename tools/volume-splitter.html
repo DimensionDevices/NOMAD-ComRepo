@@ -48,7 +48,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>📄➜📝 HTML/MD → MD <span class="compression-badge">ZIP download</span></h1>
+        <h1>HTML/MD 2 MD <span class="compression-badge">ZIP download</span></h1>
         <div class="subtitle">Bulk conversion · split based on base64+gzip size (20KB) · .md files are split without conversion</div>
         <div class="status-bar">
             <div class="stat-card"><div class="stat-label">Files</div><div class="stat-value" id="fileCountStat">0</div></div>
@@ -74,8 +74,8 @@
         </div>
         <div class="action-bar">
             <div class="flex-row">
-                <button class="btn" id="convertBtn" disabled>⚡ Convert & download ZIP</button>
-                <button class="btn btn-outline" id="sampleBtn">📄 Load sample</button>
+                <button class="btn" id="convertBtn" disabled>Convert & download ZIP</button>
+                <button class="btn btn-outline" id="sampleBtn">Load sample</button>
             </div>
             <span class="stats" id="statusMsg">Ready</span>
         </div>
@@ -185,7 +185,7 @@
                 const div = document.createElement('div');
                 div.className = 'file-item';
                 const ext = f.name.split('.').pop().toLowerCase();
-                const label = ext === 'md' ? '📝' : '📄';
+                const label = ext === 'md' ? '' : '';
                 div.innerHTML = `<span class="file-name">${label} ${f.name}</span><span class="file-size">${formatSize(f.size)}</span>`;
                 fileList.appendChild(div);
             });
@@ -197,19 +197,19 @@
             for (const file of fileListFromInput) {
                 const ext = file.name.split('.').pop().toLowerCase();
                 if (ext !== 'html' && ext !== 'htm' && ext !== 'md') {
-                    log(`⛔ Skipped "${file.name}" — not .html/.htm/.md`, 'warn');
+                    log(`Skipped "${file.name}" — not .html/.htm/.md`, 'warn');
                     continue;
                 }
                 const exists = files.some(f => f.name === file.name && f.size === file.size);
                 if (exists) {
-                    log(`⏩ "${file.name}" already in list`, 'warn');
+                    log(`"${file.name}" already in list`, 'warn');
                     continue;
                 }
                 files.push({ file, name: file.name, size: file.size });
                 added++;
             }
             if (added > 0) {
-                log(`✅ Added ${added} file(s)`, 'ok');
+                log(`Added ${added} file(s)`, 'ok');
                 updateUI();
             } else {
                 log(`ℹ️ No new files added`, 'info');
@@ -220,7 +220,7 @@
             if (files.length === 0) return;
             files = [];
             updateUI();
-            log('🗑️ Cleared all files', 'info');
+            log('Cleared all files', 'info');
             statusMsg.textContent = 'Ready';
             volumeStat.textContent = '-';
             progressContainer.style.display = 'none';
@@ -358,7 +358,7 @@
         // ----- conversion & download as ZIP (handles both .html and .md) -----
         async function convertAndDownload() {
             if (files.length === 0) {
-                log('⚠️ No files to convert', 'warn');
+                log('⚠No files to convert', 'warn');
                 return;
             }
 
@@ -371,7 +371,7 @@
             progressBar.style.width = '0%';
 
             if (!supportsNativeCompression()) {
-                log('⚠️ CompressionStream not supported. Using uncompressed size.', 'warn');
+                log('⚠CompressionStream not supported. Using uncompressed size.', 'warn');
             }
 
             for (const fileObj of files) {
@@ -407,7 +407,7 @@
                         log(`📄 ${fileName} (uncompressed: ${formatSize(uncompressedSize)}, stored: ${formatSize(storedSize)})`, 'ok');
                         
                         if (storedSize > MAX_BYTES) {
-                            log(`⚠️ ${fileName} stored size ${formatSize(storedSize)} exceeds 20KB!`, 'warn');
+                            log(`⚠${fileName} stored size ${formatSize(storedSize)} exceeds 20KB!`, 'warn');
                         }
                     }
 
@@ -416,7 +416,7 @@
                     progressBar.style.width = progress + '%';
                     
                 } catch (err) {
-                    log(`❌ Error processing "${fileObj.name}": ${err.message}`, 'warn');
+                    log(`Error processing "${fileObj.name}": ${err.message}`, 'warn');
                     processed++;
                 }
             }
@@ -439,7 +439,7 @@
                 statusMsg.textContent = `✔️ ${totalVolumes} volumes in ZIP`;
                 progressBar.style.width = '100%';
             } catch (err) {
-                log(`❌ Error creating ZIP: ${err.message}`, 'warn');
+                log(`Error creating ZIP: ${err.message}`, 'warn');
             }
         }
 
@@ -466,7 +466,7 @@
             const mdFile = new File([sampleMd], 'sample_doc.md', { type: 'text/markdown' });
             
             addFiles([smallFile, largeFile, mdFile]);
-            log('📄 Loaded sample files (HTML + MD, some >20KB)', 'info');
+            log('Loaded sample files (HTML + MD, some >20KB)', 'info');
         }
 
         // ----- event binding -----
@@ -491,12 +491,12 @@
         document.addEventListener('drop', e => e.preventDefault());
 
         updateUI();
-        log('🚀 Ready · drop .html/.htm/.md files or click to select', 'info');
-        log('📛 Filename rule: 2‑6 chars total (including volume number)', 'info');
-        log('📦 All files will be downloaded as a single ZIP archive', 'info');
-        log('📝 .md files are split without any conversion', 'info');
+        log('Ready · drop .html/.htm/.md files or click to select', 'info');
+        log('Filename rule: 2‑6 chars total (including volume number)', 'info');
+        log('All files will be downloaded as a single ZIP archive', 'info');
+        log('.md files are split without any conversion', 'info');
         if (!supportsNativeCompression()) {
-            log('⚠️ CompressionStream not available in this browser. Using uncompressed size.', 'warn');
+            log('⚠CompressionStream not available in this browser. Using uncompressed size.', 'warn');
         }
     })();
 </script>
