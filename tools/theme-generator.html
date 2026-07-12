@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOMAD Theme Builder · .ext generator</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; }
+        body {
+            background: #f4f2eb;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 2rem 1.5rem;
+            color: #1f2a1f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(255, 250, 240, 0.7);
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            padding: 2rem 2rem 2.5rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border: 1px solid #e2dcd0;
+        }
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #2c3e2d;
+            margin-bottom: 0.25rem;
+        }
+        .sub {
+            color: #5a6e5a;
+            font-weight: 400;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid #8aa77a;
+            padding-left: 14px;
+        }
+        .builder-grid {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 28px 30px;
+        }
+        @media (max-width: 1000px) {
+            .builder-grid { grid-template-columns: 1fr; }
+            .container { padding: 1.5rem; }
+        }
+        .controls-card {
+            background: #fdfcf7;
+            border-radius: 20px;
+            padding: 1.4rem 1.6rem 1.6rem;
+            border: 1px solid #dad4c6;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            align-self: start;
+            position: sticky;
+            top: 20px;
+        }
+        .controls-card h3 {
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: #4f624f;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px dashed #d6cebd;
+            padding-bottom: 0.5rem;
+        }
+        .color-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .color-row label {
+            min-width: 85px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #2f402f;
+        }
+        .color-row input[type="color"] {
+            width: 38px;
+            height: 38px;
+            border: 2px solid #cbc2b0;
+            border-radius: 40px;
+            background: none;
+            cursor: pointer;
+            padding: 2px;
+        }
+        .color-row input[type="text"] {
+            flex: 1;
+            min-width: 80px;
+            padding: 6px 10px;
+            border-radius: 40px;
+            border: 1px solid #ccc3b0;
+            background: white;
+            font-family: 'SF Mono', monospace;
+            font-size: 0.8rem;
+        }
+        .color-row input[type="range"] {
+            flex: 1;
+            min-width: 80px;
+        }
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 14px 0 8px;
+            flex-wrap: wrap;
+        }
+        .toggle-row label {
+            font-weight: 500;
+            color: #2f402f;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .toggle-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #547540;
+            cursor: pointer;
+        }
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-top: 1.2rem;
+            border-top: 1px solid #ddd5c4;
+            padding-top: 1.2rem;
+        }
+        .btn {
+            background: #547540;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+        .btn:hover { background: #3d5e2e; transform: scale(0.98); }
+        .btn-outline {
+            background: transparent;
+            color: #3d5e2e;
+            border: 1.5px solid #8aa77a;
+        }
+        .btn-outline:hover { background: #e8efe2; }
+        .file-name-hint {
+            background: #e7e2d4;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            display: inline-block;
+            color: #2f402f;
+        }
+        .flex { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .code-area {
+            background: #1d261d;
+            color: #d6dccd;
+            padding: 1rem 1.2rem;
+            border-radius: 16px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.75rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 200px;
+            overflow: auto;
+            border: 1px solid #3c4a3a;
+            margin: 12px 0 4px;
+        }
+        .copy-badge {
+            background: #2f3f2a;
+            color: #d0dbc0;
+            padding: 3px 14px;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+        }
+        .preview-frame {
+            width: 100%;
+            height: 700px;
+            border: 1px solid #dad4c6;
+            border-radius: 16px;
+            background: #fdfaf1;
+            overflow: hidden;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .preview-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fdfaf1;
+        }
+        .code-section {
+            margin-top: 1rem;
+            background: #fdfcf7;
+            border-radius: 16px;
+            padding: 0.8rem 1.2rem 1.2rem;
+            border: 1px solid #dad4c6;
+        }
+        .mt-1 { margin-top: 0.8rem; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🎨 NOMAD Theme · .ext builder</h1>
+    <div class="sub">Generate a <strong>.ext</strong> file that overrides the UI theme. Live preview using your actual layout.</div>
+
+    <div class="builder-grid">
+        <!-- LEFT: controls -->
+        <div class="controls-card">
+            <h3>🎯 Theme variables</h3>
+            <div class="color-row">
+                <label>—bg</label>
+                <input type="color" id="bgColor" value="#fdfaf1">
+                <input type="text" id="bgText" value="#fdfaf1">
+            </div>
+            <div class="color-row">
+                <label>—surface</label>
+                <input type="color" id="surfaceColor" value="#f5f0e3">
+                <input type="text" id="surfaceText" value="#f5f0e3">
+            </div>
+            <div class="color-row">
+                <label>—text</label>
+                <input type="color" id="textColor" value="#2c3e2d">
+                <input type="text" id="textText" value="#2c3e2d">
+            </div>
+            <div class="color-row">
+                <label>—text-dim</label>
+                <input type="color" id="dimColor" value="#5c6e5d">
+                <input type="text" id="dimText" value="#5c6e5d">
+            </div>
+            <div class="color-row">
+                <label>—accent</label>
+                <input type="color" id="accentColor" value="#547540">
+                <input type="text" id="accentText" value="#547540">
+            </div>
+            <div class="color-row">
+                <label>—accent-light</label>
+                <input type="color" id="accentLightColor" value="#7da064">
+                <input type="text" id="accentLightText" value="#7da064">
+            </div>
+            <div class="color-row">
+                <label>—border</label>
+                <input type="color" id="borderColor" value="#b4aa96">
+                <input type="text" id="borderText" value="#b4aa96">
+            </div>
+            <div class="color-row">
+                <label>—danger</label>
+                <input type="color" id="dangerColor" value="#b0413e">
+                <input type="text" id="dangerText" value="#b0413e">
+            </div>
+            <div class="color-row">
+                <label>—stat-val</label>
+                <input type="color" id="statColor" value="#1b3012">
+                <input type="text" id="statText" value="#1b3012">
+            </div>
+            <div class="color-row">
+                <label>shadow</label>
+                <input type="range" id="shadowRange" min="0" max="30" value="8">
+                <span id="shadowVal" style="font-size:0.8rem;min-width:28px;">8</span>
+            </div>
+            <div class="toggle-row">
+                <label>
+                    <input type="checkbox" id="invertSvgToggle"> 🔄 Invert SVG icons (filter: invert(1))
+                </label>
+                <label>
+                    <input type="checkbox" id="darkPreviewToggle" checked> 🌙 Dark preview
+                </label>
+            </div>
+            <div class="flex">
+                <span class="file-name-hint">📁 theme-<span id="fileNameHint">custom</span>.ext</span>
+                <input type="text" id="customFileName" placeholder="custom" value="forest" style="flex:1;padding:5px 10px;border-radius:40px;border:1px solid #ccc3b0;background:white;min-width:70px;font-size:0.85rem;">
+            </div>
+            <div class="flex-row">
+                <button class="btn" id="generateBtn">⚡ Generate</button>
+                <button class="btn btn-outline" id="downloadBtn">⬇️ Download .ext</button>
+                <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
+            </div>
+            <div style="margin-top: 0.8rem; font-size:0.7rem; color:#5e705a; text-align:center;">
+                ⚡ Generated .ext follows NOMAD spec. Upload via web interface.
+            </div>
+        </div>
+
+        <!-- RIGHT: live preview -->
+        <div>
+            <div class="preview-frame">
+                <iframe id="previewIframe" srcdoc=""></iframe>
+            </div>
+            <div class="code-section">
+                <div class="flex" style="justify-content: space-between;">
+                    <span style="font-weight:500; color:#3d4f3a; font-size:0.85rem;">📄 Generated .ext JSON</span>
+                    <span class="copy-badge" id="copyBadge">📋 copy</span>
+                </div>
+                <div class="code-area" id="codeOutput">{
+  "description": "Custom theme — forest",
+  "target": "header",
+  "css": ":root { --bg: #fdfaf1; ... }"
+}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function() {
+        // DOM refs
+        const bgColor = document.getElementById('bgColor');
+        const bgText = document.getElementById('bgText');
+        const surfaceColor = document.getElementById('surfaceColor');
+        const surfaceText = document.getElementById('surfaceText');
+        const textColor = document.getElementById('textColor');
+        const textText = document.getElementById('textText');
+        const dimColor = document.getElementById('dimColor');
+        const dimText = document.getElementById('dimText');
+        const accentColor = document.getElementById('accentColor');
+        const accentText = document.getElementById('accentText');
+        const accentLightColor = document.getElementById('accentLightColor');
+        const accentLightText = document.getElementById('accentLightText');
+        const borderColor = document.getElementById('borderColor');
+        const borderText = document.getElementById('borderText');
+        const dangerColor = document.getElementById('dangerColor');
+        const dangerText = document.getElementById('dangerText');
+        const statColor = document.getElementById('statColor');
+        const statText = document.getElementById('statText');
+        const shadowRange = document.getElementById('shadowRange');
+        const shadowVal = document.getElementById('shadowVal');
+        const customFileName = document.getElementById('customFileName');
+        const fileNameHint = document.getElementById('fileNameHint');
+        const invertSvgToggle = document.getElementById('invertSvgToggle');
+        const darkPreviewToggle = document.getElementById('darkPreviewToggle');
+
+        const iframe = document.getElementById('previewIframe');
+        const codeOutput = document.getElementById('codeOutput');
+        const generateBtn = document.getElementById('generateBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const copyBadge = document.getElementById('copyBadge');
+
+        // sync color inputs
+        function syncColor(inputColor, inputText) {
+            inputColor.addEventListener('input', () => {
+                inputText.value = inputColor.value;
+                updateAll();
+            });
+            inputText.addEventListener('input', () => {
+                if (/^#[0-9a-fA-F]{6}$/.test(inputText.value)) {
+                    inputColor.value = inputText.value;
+                    updateAll();
+                }
+            });
+        }
+        syncColor(bgColor, bgText);
+        syncColor(surfaceColor, surfaceText);
+        syncColor(textColor, textText);
+        syncColor(dimColor, dimText);
+        syncColor(accentColor, accentText);
+        syncColor(accentLightColor, accentLightText);
+        syncColor(borderColor, borderText);
+        syncColor(dangerColor, dangerText);
+        syncColor(statColor, statText);
+
+        shadowRange.addEventListener('input', () => {
+            shadowVal.textContent = shadowRange.value;
+            updateAll();
+        });
+        invertSvgToggle.addEventListener('change', updateAll);
+        darkPreviewToggle.addEventListener('change', updateAll);
+        customFileName.addEventListener('input', () => {
+            const val = customFileName.value.trim() || 'custom';
+            fileNameHint.textContent = val;
+            updateAll();
+        });
+
+        function getThemeObj() {
+            const shadow = parseInt(shadowRange.value, 10);
+            return {
+                bg: bgColor.value,
+                surface: surfaceColor.value,
+                text: textColor.value,
+                textDim: dimColor.value,
+                accent: accentColor.value,
+                accentLight: accentLightColor.value,
+                border: borderColor.value,
+                danger: dangerColor.value,
+                statVal: statColor.value,
+                shadow: shadow,
+                invertSvg: invertSvgToggle.checked,
+                dark: darkPreviewToggle.checked
+            };
+        }
+
+        // Build the complete CSS with !important overrides
+        function buildCSS(t) {
+            const invertRule = t.invertSvg ? `
+          /* --- invert SVGs inside .menu-item, .floating-btn, and general svg --- */
+          .circular-menu .menu-item svg,
+          .circular-menu .floating-btn svg,
+          .circular-menu .menu-item svg *,
+          .circular-menu .floating-btn svg *,
+          svg:not(.no-invert) {
+            filter: invert(1) !important;
+          }
+          .circular-menu .menu-item svg path,
+          .circular-menu .floating-btn svg path {
+            fill: #fff !important;
+            stroke: #fff !important;
+          }
+        ` : '';
+
+            return `:root {
+          --bg: ${t.bg};
+          --surface: ${t.surface};
+          --text: ${t.text};
+          --text-dim: ${t.textDim};
+          --accent: ${t.accent};
+          --accent-light: ${t.accentLight};
+          --border: ${t.border};
+          --danger: ${t.danger};
+          --stat-val: ${t.statVal};
+          --shadow: 0 4px ${t.shadow}px rgba(0,0,0,0.08);
+          --bg-gradient: linear-gradient(145deg, ${t.bg} 0%, ${t.surface} 100%);
+          --card-bg: ${t.surface};
+          --accent-hover: ${t.accentLight};
+        }
+
+        /* --- Force ALL text colors --- */
+        body,
+        .header h1,
+        .header .subtitle,
+        .stat-label,
+        .stat-value,
+        .stat-value .unit,
+        .file-name,
+        .file-name strong,
+        .file-size,
+        .node-field-label,
+        .node-field-value,
+        .node-header h3,
+        .transfer-item-header strong,
+        .transfer-percentage,
+        #favoritesList .file-name,
+        .modal-header h2,
+        .md-render h1,
+        .md-render h2,
+        .md-render p,
+        .md-render li,
+        .md-render blockquote,
+        summary h2,
+        .empty-state p,
+        .btn:not(.btn-primary):not(.btn-danger):not(.btn-success),
+        label,
+        input,
+        textarea,
+        select,
+        select option,
+        .modal-close,
+        .directory-actions .btn-icon,
+        .refresh-btn,
+        summary,
+        h1, h2, h3, h4, h5, h6,
+        p, span, div, li, a, strong, em {
+          color: var(--text) !important;
+        }
+
+        /* --- Force ALL backgrounds --- */
+        body,
+        .header,
+        .section,
+        .stat-card,
+        .file-item,
+        .node-card,
+        .transfer-item,
+        .modal-content,
+        .md-render code,
+        .md-render pre,
+        .upload-area,
+        .directory-actions .btn-icon,
+        #fileSearch,
+        .container,
+        .preview-box,
+        .card,
+        .controls-card,
+        .file-item-buttons .btn:not(.btn-primary):not(.btn-danger):not(.btn-success),
+        .status-overlay,
+        #customModal .modal-content {
+          background: var(--surface) !important;
+        }
+
+        /* --- Force ALL borders --- */
+        .header,
+        .section,
+        .file-item,
+        .node-card,
+        .transfer-item,
+        .modal-content,
+        #fileSearch,
+        .upload-area,
+        .directory-actions .btn-icon,
+        .md-render pre,
+        .md-render table th,
+        .md-render table td,
+        .directory-actions .btn-icon,
+        #customModal .modal-content,
+        .file-item,
+        .node-card {
+          border-color: var(--border) !important;
+        }
+
+        /* --- circular menu + floating button --- */
+        .circular-menu .floating-btn {
+          background-color: ${t.accent} !important;
+          color: ${t.text} !important;
+        }
+        .circular-menu.active .floating-btn {
+          background-color: ${t.surface} !important;
+          color: ${t.text} !important;
+        }
+        .circular-menu:after {
+          background-color: ${t.accent} !important;
+        }
+        .circular-menu .menu-item {
+          background: ${t.accent} !important;
+          color: ${t.text} !important;
+        }
+        .circular-menu .menu-item:hover {
+          background: ${t.accentLight} !important;
+        }
+
+        /* --- form elements: inputs, textareas, selects --- */
+        input, textarea, select {
+          background: ${t.surface} !important;
+          color: ${t.text} !important;
+          border-color: ${t.border} !important;
+        }
+        input:focus, textarea:focus, select:focus {
+          border-color: ${t.accent} !important;
+          outline: 2px solid ${t.accent}44 !important;
+        }
+        input::placeholder, textarea::placeholder {
+          color: ${t.textDim} !important;
+          opacity: 0.7 !important;
+        }
+        select option {
+          background: ${t.surface} !important;
+          color: ${t.text} !important;
+        }
+
+        /* --- buttons --- */
+        .btn-primary {
+          background: ${t.accent} !important;
+          color: white !important;
+        }
+        .btn-primary:hover {
+          background: ${t.accentLight} !important;
+        }
+        .btn-danger {
+          background: ${t.danger} !important;
+          color: white !important;
+        }
+        .btn-success {
+          background: #2e7d32 !important;
+          color: white !important;
+        }
+        .btn {
+          color: white !important;
+        }
+
+        /* --- progress bars --- */
+        .progress-fill {
+          background: ${t.accent} !important;
+        }
+
+        /* --- badges --- */
+        .signal-excellent { background: #2e7d32 !important; }
+        .signal-good { background: #689f38 !important; }
+        .signal-fair { background: #f57c00 !important; }
+        .signal-weak { background: #c62828 !important; }
+
+        /* --- star button --- */
+        .star-btn {
+          color: var(--text) !important;
+        }
+        .starred {
+          color: #fbc02d !important;
+        }
+
+        /* --- modal --- */
+        .modal {
+          background: var(--surface) !important;
+        }
+        .modal-close {
+          color: var(--text) !important;
+        }
+        ${invertRule}`;
+        }
+
+        function generateExtJSON() {
+            const t = getThemeObj();
+            const name = customFileName.value.trim() || 'custom';
+            const css = buildCSS(t);
+            const json = {
+                description: `Custom theme — ${name}`,
+                target: "header",
+                css: css,
+                html: `<!-- Theme injected via .ext: ${name} --><style>${css}</style>`
+            };
+            return JSON.stringify(json, null, 2);
+        }
+
+        // Build the full HTML for the iframe preview using the provided theme.html layout
+        function buildPreviewHTML() {
+            const t = getThemeObj();
+            const css = buildCSS(t);
+            // extract the theme.html content and inject our custom CSS at the top
+            // We'll use a template based on the provided theme.html but with our dynamic CSS
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOMAD</title>
+<style type="text/css">
+/* --- INJECTED THEME --- */
+${css}
+/* --- base styles from theme.html (simplified, but keeps layout) --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 20px; transition: background 0.3s, color 0.3s; }
+* { tap-highlight-color: transparent; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
+.container { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 12px; }
+.header { flex: 1 1 100%; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); padding: 25px 30px; border-radius: 16px; margin-bottom: 12px; position: relative; }
+.header h1 { font-size: 1.8rem; font-weight: 800; }
+.header .subtitle { font-size: 0.65rem; opacity: 0.9; font-weight:normal;}
+.status-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 15px; }
+.stat-card { background: var(--card-bg); padding: 12px; border-radius: 10px; }
+.stat-label { font-size: 0.7rem; text-transform: uppercase; opacity: 0.8; font-weight: 600; margin-bottom: 4px; }
+.stat-value { font-size: 1.1rem; font-weight: 700; }
+.unit { font-size: 0.75rem; opacity: 0.7; font-weight: 400; }
+.section { flex: 1 1 calc(50% - 6px); min-width: 300px; background: var(--card-bg); padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--border); }
+summary { font-weight: 700; cursor: pointer; user-select: none; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+summary::-webkit-details-marker { display: none; }
+summary h2 { margin: 0; flex: 1; font-size: 1.1rem; }
+.btn { background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+.btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn-danger { background: var(--danger); }
+.btn-small { padding: 4px 8px; font-size: 1rem; }
+.btn-success { background: #2e7d32; }
+.star-btn { color: var(--text); font-size: 1.4em; cursor: pointer; border: none; background: transparent !important; padding: 4px 8px !important; }
+.starred { color: #fbc02d; }
+.file-item { background: var(--surface); padding: 8px 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; border: 1px solid var(--border); transition: 0.2s; }
+.file-info { display: flex; align-items: center; gap: 10px; }
+.file-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+.file-size { font-size: 0.75rem; color: var(--text-dim); }
+#fileSearch { width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); outline: none; }
+.node-card { background: var(--surface); padding: 15px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--border); transition: 0.2s; }
+.node-header { display: flex; justify-content: space-between; align-items: center; }
+.badge { padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: white; }
+.signal-excellent { background: #2e7d32; }.signal-good { background: #689f38; }.signal-fair { background: #f57c00; }.signal-weak { background: #c62828; }
+.node-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.node-field-label { font-size: 0.6rem; text-transform: uppercase; color: var(--text-dim); font-weight: 700; }
+.node-field-value { font-size: 0.9rem; font-weight: 600; color: var(--stat-val); }
+.transfer-item { background: var(--card-bg); padding: 12px; border-radius: 10px; margin-top: 8px; border: 1px solid var(--border); }
+.progress-bar { height: 6px; background: rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden; margin-top: 8px; }
+.progress-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); backdrop-filter: blur(6px); display: none; z-index: 1000; will-change: opacity; }
+.modal-content { margin: 0; width: 100vw; height: 100vh; max-width: none; max-height: none; display: flex; flex-direction: column; overflow: hidden; color: var(--text); background: var(--card-bg); will-change: transform; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--border); }
+.modal-body { padding: 20px; overflow-y: auto; flex: 1; }
+.md-render { color: var(--text); line-height: 1.6; }
+.md-render h1 { font-size: 1.75em; line-height: 1.2em; }
+.md-render h2 { font-size: 1.3em; line-height: 1.2em; }
+.md-render h1, .md-render h2 { color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.3em; margin: 0.5em 0 0.5em; }
+.md-render code { background: var(--card-bg); padding: 0.2em 0.4em; border-radius: 4px; font-family: monospace; }
+.md-render pre { background: var(--card-bg); padding: 12px; border-radius: 8px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); }
+.directory-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.btn-icon { padding: 4px 8px; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); color: var(--accent); min-width: 32px; height: 32px; }
+.file-item-buttons .btn { float:right;margin-right:6px;}
+.file-item-buttons .btn:first-child { float:none;margin-right:0px;}
+@media (max-width: 768px) { 
+  .node-info { grid-template-columns: 1fr 1fr; }
+  .header h1 { font-size: 1.3rem; }
+  .status-bar { grid-template-columns: 1fr 1fr; }
+  .file-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .container { flex-direction: column; }
+  .section { flex: 1 1 100%; }
+}
+#favoritesList{display:flex;gap:10px;}
+#nodeList{display:block !important;}
+</style>
+</head>
+<body>
+<div class="container">
+    <details class="header" id="headerDetails" open>
+        <summary style="margin-bottom:0px;">
+            <h1 style="display: inline-block;">
+              NOMAD <sup>v1.0</sup>
+              <p class="subtitle">Network for Open Messaging &amp; Data</p>
+            </h1>
+        </summary>
+        <div class="status-bar">
+            <div class="stat-card"><div class="stat-label">Device ID</div><div class="stat-value">NODE_001</div></div>
+            <div class="stat-card"><div class="stat-label">Nearby Nodes</div><div class="stat-value">3</div></div>
+            <div class="stat-card"><div class="stat-label">Local Files</div><div class="stat-value">8</div></div>
+            <div class="stat-card"><div class="stat-label">Duty Cycle</div><div class="stat-value">12%</div><div style="background:#2a2a2a;height:8px;border-radius:4px;margin-top:4px;overflow:hidden;"><div style="height:100%;width:12%;background:var(--accent);transition:width 0.3s;"></div></div></div>
+            <div class="stat-card"><div class="stat-label">Free Memory</div><div class="stat-value">256 kB</div><div style="background:#2a2a2a;height:8px;border-radius:4px;margin-top:4px;overflow:hidden;"><div style="height:100%;width:50%;background:var(--accent);transition:width 0.3s;"></div></div></div>
+            <div class="stat-card"><div class="stat-label">Storage Space</div><div class="stat-value">245/1024 kB</div><div style="background:#2a2a2a;height:8px;border-radius:4px;margin-top:4px;overflow:hidden;"><div style="height:100%;width:24%;background:var(--accent);transition:width 0.3s;"></div></div></div>
+            <div class="stat-card"><div class="stat-label">LoRa Frequency</div><div class="stat-value">915.0 <span class="unit">MHz</span></div></div>
+            <div class="stat-card"><div class="stat-label">Spreading Factor</div><div class="stat-value">SF7</div></div>
+            <div class="stat-card"><div class="stat-label">Child-Safe Filter</div><div class="stat-value">ENABLED</div></div>
+            <button class="btn">User Manual</button>
+        </div>
+    </details>
+    
+    <details class="section" id="bookmarkDetails" open>
+        <summary><h2>Bookmarks</h2></summary>
+        <ul id="favoritesList">
+            <li style="list-style-type:none;"><div class="file-item" style="cursor:default;"><div class="file-info"><span class="file-name"><strong>config.txt</strong></span></div><div class="file-item-buttons"><button class="btn btn-small star-btn starred">★</button><button class="btn btn-success btn-small"><svg fill='#ffffff' width='20px' height='20px' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path d='M12.027 9.92L16 13.95 14 16l-4.075-3.976A6.465 6.465 0 0 1 6.5 13C2.91 13 0 10.083 0 6.5 0 2.91 2.917 0 6.5 0 10.09 0 13 2.917 13 6.5a6.463 6.463 0 0 1-.973 3.42zM1.997 6.452c0 2.48 2.014 4.5 4.5 4.5 2.48 0 4.5-2.015 4.5-4.5 0-2.48-2.015-4.5-4.5-4.5-2.48 0-4.5 2.014-4.5 4.5z' fill-rule='evenodd'/></svg></button></div></div></li>
+            <li style="list-style-type:none;"><div class="file-item" style="cursor:default;"><div class="file-info"><span class="file-name"><strong>notes.md</strong></span></div><div class="file-item-buttons"><button class="btn btn-small star-btn starred">★</button><button class="btn btn-success btn-small"><svg fill='#ffffff' width='20px' height='20px' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path d='M12.027 9.92L16 13.95 14 16l-4.075-3.976A6.465 6.465 0 0 1 6.5 13C2.91 13 0 10.083 0 6.5 0 2.91 2.917 0 6.5 0 10.09 0 13 2.917 13 6.5a6.463 6.463 0 0 1-.973 3.42zM1.997 6.452c0 2.48 2.014 4.5 4.5 4.5 2.48 0 4.5-2.015 4.5-4.5 0-2.48-2.015-4.5-4.5-4.5-2.48 0-4.5 2.014-4.5 4.5z' fill-rule='evenodd'/></svg></button></div></div></li>
+        </ul>
+    </details>
+    
+    <details class="section" id="filesDetails" open>
+        <summary><h2>File Directory</h2><div class="directory-actions"><button class="btn btn-icon btn-small">Upload</button><button class="btn btn-icon btn-small">Create</button><button class="refresh-btn">Refresh</button></div></summary>
+        <input autocomplete="off" id="fileSearch" placeholder="File search...">
+        <div id="fileList">
+            <div class="file-item" style="cursor:pointer;"><div class="file-info"><span class="file-name"><strong>10kb.txt</strong></span><br><span class="file-size">10000 bytes</span><br><span class="file-size">~55 packets</span></div><div class="file-item-buttons"><button class="btn btn-small star-btn starred">★</button><button class="btn btn-success btn-small"><svg fill='#ffffff' width='20px' height='20px' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path d='M12.027 9.92L16 13.95 14 16l-4.075-3.976A6.465 6.465 0 0 1 6.5 13C2.91 13 0 10.083 0 6.5 0 2.91 2.917 0 6.5 0 10.09 0 13 2.917 13 6.5a6.463 6.463 0 0 1-.973 3.42zM1.997 6.452c0 2.48 2.014 4.5 4.5 4.5 2.48 0 4.5-2.015 4.5-4.5 0-2.48-2.015-4.5-4.5-4.5-2.48 0-4.5 2.014-4.5 4.5z' fill-rule='evenodd'/></svg></button><button class="btn btn-primary btn-small"><svg fill='#ffffff' width='20px' height='20px' viewBox='0 0 32 32' version='1.1' xmlns='http://www.w3.org/2000/svg'><path d='M0 16q0 2.912 1.824 5.088t4.576 2.752q0.032 0 0.032-0.032v-0.064t0.032-0.032q0.544-1.344 1.344-2.176t2.208-1.184v-2.336q0-2.496 1.728-4.256t4.256-1.76 4.256 1.76 1.76 4.256v2.336q1.376 0.384 2.176 1.216t1.344 2.144l0.096 0.288h0.384q2.464 0 4.224-1.76t1.76-4.224v-2.016q0-2.464-1.76-4.224t-4.224-1.76q-0.096 0-0.32 0.032 0.32-1.152 0.32-2.048 0-3.296-2.368-5.632t-5.632-2.368q-2.88 0-5.056 1.824t-2.784 4.544q-1.152-0.352-2.176-0.352-3.296 0-5.664 2.336t-2.336 5.664v1.984zM10.016 25.824q-0.096 0.928 0.576 1.6l4 4q0.576 0.576 1.408 0.576t1.408-0.576l4-4q0.672-0.672 0.608-1.6-0.064-0.32-0.16-0.576-0.224-0.576-0.736-0.896t-1.12-0.352h-1.984v-5.984q0-0.832-0.608-1.408t-1.408-0.608-1.408 0.608-0.576 1.408v5.984h-2.016q-0.608 0-1.12 0.352t-0.736 0.896q-0.096 0.288-0.128 0.576z'></path></svg></button><button class="btn btn-danger btn-small"><svg width='20px' height='20px' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'><path fill='#ffffff' d='M352 192V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64H96a32 32 0 0 1 0-64h256zm64 0h192v-64H416v64zM192 960a32 32 0 0 1-32-32V256h704v672a32 32 0 0 1-32 32H192zm224-192a32 32 0 0 0 32-32V416a32 32 0 0 0-64 0v320a32 32 0 0 0 32 32zm192 0a32 32 0 0 0 32-32V416a32 32 0 0 0-64 0v320a32 32 0 0 0 32 32z'/></svg></button></div></div>
+            <div class="file-item" style="cursor:pointer;"><div class="file-info"><span class="file-name"><strong>config.txt</strong></span><br><span class="file-size">2048 bytes</span><br><span class="file-size">~12 packets</span></div><div class="file-item-buttons"><button class="btn btn-small star-btn starred">★</button><button class="btn btn-success btn-small"><svg fill='#ffffff' width='20px' height='20px' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path d='M12.027 9.92L16 13.95 14 16l-4.075-3.976A6.465 6.465 0 0 1 6.5 13C2.91 13 0 10.083 0 6.5 0 2.91 2.917 0 6.5 0 10.09 0 13 2.917 13 6.5a6.463 6.463 0 0 1-.973 3.42zM1.997 6.452c0 2.48 2.014 4.5 4.5 4.5 2.48 0 4.5-2.015 4.5-4.5 0-2.48-2.015-4.5-4.5-4.5-2.48 0-4.5 2.014-4.5 4.5z' fill-rule='evenodd'/></svg></button><button class="btn btn-primary btn-small"><svg fill='#ffffff' width='20px' height='20px' viewBox='0 0 32 32' version='1.1' xmlns='http://www.w3.org/2000/svg'><path d='M0 16q0 2.912 1.824 5.088t4.576 2.752q0.032 0 0.032-0.032v-0.064t0.032-0.032q0.544-1.344 1.344-2.176t2.208-1.184v-2.336q0-2.496 1.728-4.256t4.256-1.76 4.256 1.76 1.76 4.256v2.336q1.376 0.384 2.176 1.216t1.344 2.144l0.096 0.288h0.384q2.464 0 4.224-1.76t1.76-4.224v-2.016q0-2.464-1.76-4.224t-4.224-1.76q-0.096 0-0.32 0.032 0.32-1.152 0.32-2.048 0-3.296-2.368-5.632t-5.632-2.368q-2.88 0-5.056 1.824t-2.784 4.544q-1.152-0.352-2.176-0.352-3.296 0-5.664 2.336t-2.336 5.664v1.984zM10.016 25.824q-0.096 0.928 0.576 1.6l4 4q0.576 0.576 1.408 0.576t1.408-0.576l4-4q0.672-0.672 0.608-1.6-0.064-0.32-0.16-0.576-0.224-0.576-0.736-0.896t-1.12-0.352h-1.984v-5.984q0-0.832-0.608-1.408t-1.408-0.608-1.408 0.608-0.576 1.408v5.984h-2.016q-0.608 0-1.12 0.352t-0.736 0.896q-0.096 0.288-0.128 0.576z'></path></svg></button><button class="btn btn-danger btn-small"><svg width='20px' height='20px' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'><path fill='#ffffff' d='M352 192V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64H96a32 32 0 0 1 0-64h256zm64 0h192v-64H416v64zM192 960a32 32 0 0 1-32-32V256h704v672a32 32 0 0 1-32 32H192zm224-192a32 32 0 0 0 32-32V416a32 32 0 0 0-64 0v320a32 32 0 0 0 32 32zm192 0a32 32 0 0 0 32-32V416a32 32 0 0 0-64 0v320a32 32 0 0 0 32 32z'/></svg></button></div></div>
+        </div>
+    </details>
+    
+    <details class="section" id="nodesDetails" open>
+        <summary><h2>Nearby Nodes</h2><button class="refresh-btn">Refresh</button></summary>
+        <div id="nodeList">
+            <div class="node-card"><div class="node-header"><h3>NODE_ABC123</h3><span class="badge signal-excellent">Excellent</span></div><div class="node-info"><div class="node-field"><div class="node-field-label">RSSI</div><div class="node-field-value">-65 dBm</div></div><div class="node-field"><div class="node-field-label">SNR</div><div class="node-field-value">12.5 dB</div></div><div class="node-field"><div class="node-field-label">Distance</div><div class="node-field-value">~150m</div></div><div class="node-field"><div class="node-field-label">Last Seen</div><div class="node-field-value">15s ago</div></div><div class="node-field"><div class="node-field-label">Files</div><div class="node-field-value">5</div></div><div class="node-field"><div class="node-field-label">Uptime</div><div class="node-field-value">120m</div></div></div><div class="node-actions"><button class="btn">Discover Files</button></div></div>
+            <div class="node-card"><div class="node-header"><h3>NODE_DEF456</h3><span class="badge signal-good">Good</span></div><div class="node-info"><div class="node-field"><div class="node-field-label">RSSI</div><div class="node-field-value">-78 dBm</div></div><div class="node-field"><div class="node-field-label">SNR</div><div class="node-field-value">8.2 dB</div></div><div class="node-field"><div class="node-field-label">Distance</div><div class="node-field-value">~300m</div></div><div class="node-field"><div class="node-field-label">Last Seen</div><div class="node-field-value">45s ago</div></div><div class="node-field"><div class="node-field-label">Files</div><div class="node-field-value">3</div></div><div class="node-field"><div class="node-field-label">Uptime</div><div class="node-field-value">90m</div></div></div><div class="node-actions"><button class="btn">Discover Files</button></div></div>
+        </div>
+    </details>
+    
+    <details class="section" id="transfersDetails" open>
+        <summary><h2>Active Transfers</h2><button class="refresh-btn">Refresh</button></summary>
+        <div id="transferList">
+            <div class="transfer-item"><div class="transfer-item-header"><strong>📥 config.txt</strong><span class="transfer-percentage">45%</span></div><div style="font-size:13px;margin-bottom:10px;opacity:0.9;">from NODE_ABC123</div><div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div></div>
+        </div>
+    </details>
+</div>
+<div class="modal" id="fileModal" style="display:none;"><div class="modal-content"><div class="modal-header"><h2>File Viewer</h2><button class="btn btn-danger modal-close">×</button></div><div class="modal-body"><div class="md-render"><h1>Example Markdown</h1><p>Sample content</p></div></div></div></div>
+<div class="status-overlay" style="display:none;"></div>
+</body>
+</html>`;
+        }
+
+        function updateAll() {
+            const t = getThemeObj();
+            const name = customFileName.value.trim() || 'custom';
+            fileNameHint.textContent = name;
+            const jsonStr = generateExtJSON();
+            codeOutput.textContent = jsonStr.replace(/\\n/g, ' ').replace(/\s+/g, ' ');
+            // update iframe
+            iframe.srcdoc = buildPreviewHTML();
+            // apply dark class if toggle is on
+            setTimeout(() => {
+                try {
+                    const doc = iframe.contentDocument;
+                    if (doc) {
+                        // always clear any previously injected dark-mode style first
+                        const old = doc.querySelector('style[data-dark]');
+                        if (old) old.remove();
+                        if (t.dark) {
+                            doc.body.classList.add('dark');
+                            // "Dark preview" just previews the theme as-is (no color
+                            // overrides) — the user's chosen colors are the source of truth.
+                            // Only apply light structural tweaks that don't touch --bg/--surface/etc.
+                            const style = doc.createElement('style');
+                            style.setAttribute('data-dark', '');
+                            style.textContent = `
+                                body.dark .modal-content { background: var(--surface); }
+                                body.dark input, body.dark textarea { background: var(--surface); color: var(--text); }
+                                body.dark .file-item, body.dark .node-card, body.dark .transfer-item { background: var(--surface); }
+                            `;
+                            doc.head.appendChild(style);
+                        } else {
+                            doc.body.classList.remove('dark');
+                        }
+                    }
+                } catch(e) { /* cross-origin iframe may not allow access */ }
+            }, 100);
+        }
+
+        function downloadExt() {
+            const jsonStr = generateExtJSON();
+            const name = customFileName.value.trim() || 'custom';
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${name}.ext`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function copyCode() {
+            const text = codeOutput.textContent;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBadge.textContent = '✅ copied!';
+                    setTimeout(() => { copyBadge.textContent = '📋 copy'; }, 1800);
+                }).catch(() => fallbackCopy(text));
+            } else {
+                fallbackCopy(text);
+            }
+        }
+        function fallbackCopy(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                document.execCommand('copy');
+                copyBadge.textContent = '✅ copied!';
+                setTimeout(() => { copyBadge.textContent = '📋 copy'; }, 1800);
+            } catch (e) {
+                alert('Could not copy. Select the code and copy manually.');
+            }
+            document.body.removeChild(ta);
+        }
+
+        function resetDefaults() {
+            const defaults = {
+                bg: '#fdfaf1',
+                surface: '#f5f0e3',
+                text: '#2c3e2d',
+                dim: '#5c6e5d',
+                accent: '#547540',
+                accentLight: '#7da064',
+                border: '#b4aa96',
+                danger: '#b0413e',
+                stat: '#1b3012',
+                shadow: 8,
+                name: 'forest',
+                invert: false,
+                dark: true
+            };
+            bgColor.value = defaults.bg; bgText.value = defaults.bg;
+            surfaceColor.value = defaults.surface; surfaceText.value = defaults.surface;
+            textColor.value = defaults.text; textText.value = defaults.text;
+            dimColor.value = defaults.dim; dimText.value = defaults.dim;
+            accentColor.value = defaults.accent; accentText.value = defaults.accent;
+            accentLightColor.value = defaults.accentLight; accentLightText.value = defaults.accentLight;
+            borderColor.value = defaults.border; borderText.value = defaults.border;
+            dangerColor.value = defaults.danger; dangerText.value = defaults.danger;
+            statColor.value = defaults.stat; statText.value = defaults.stat;
+            shadowRange.value = defaults.shadow; shadowVal.textContent = defaults.shadow;
+            customFileName.value = defaults.name;
+            invertSvgToggle.checked = defaults.invert;
+            darkPreviewToggle.checked = defaults.dark;
+            updateAll();
+        }
+
+        // events
+        generateBtn.addEventListener('click', updateAll);
+        downloadBtn.addEventListener('click', downloadExt);
+        resetBtn.addEventListener('click', resetDefaults);
+        copyBadge.addEventListener('click', copyCode);
+
+        // init
+        resetDefaults();
+        // also update on any change
+        document.querySelectorAll('input[type="color"], input[type="text"], input[type="range"], input[type="checkbox"]').forEach(el => {
+            el.addEventListener('input', updateAll);
+            el.addEventListener('change', updateAll);
+        });
+        customFileName.addEventListener('input', updateAll);
+    })();
+</script>
+</body>
+</html>

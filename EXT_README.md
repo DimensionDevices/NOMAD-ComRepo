@@ -89,10 +89,12 @@ Create a file called `logger.ext` with this content:
 
 ```json
 {
-  "html": "<details class='section' id='myCustomSection'>\n  <summary>\n    <h2>\n      <svg style='position:relative;top:6px' width='24px' height='24px' viewBox='0 0 24 24' fill='none' stroke='var(--text)' stroke-width='2'>\n        <circle cx='12' cy='12' r='10'></circle>\n        <line x1='12' y1='8' x2='12' y2='12'></line>\n        <line x1='12' y1='16' x2='12.01' y2='16'></line>\n      </svg>\n      &nbsp;My Custom Widget\n    </h2>\n  </summary>\n  <div style='padding:10px;text-align:center;color:var(--text-dim);'>\n    Hello from my extension!\n  </div>\n</details>",
+  "html": "<details class='section' id='myCustomSection'><summary><h2><svg style='position:relative;top:6px' width='24px' height='24px' viewBox='0 0 24 24' fill='none' stroke='var(--text)' stroke-width='2'><circle cx='12' cy='12' r='10'></circle><line x1='12' y1='8' x2='12' y2='12'></line><line x1='12' y1='16' x2='12.01' y2='16'></line></svg>&nbsp;My Custom Widget</h2></summary><div style='padding:10px;text-align:center;color:var(--text-dim);'>Hello from my extension!</div></details>",
   "target": "footer"
 }
 ```
+
+Note that this is created inside a `<details class='section'><summary>`, this gives the section the same collapsible look as the rest of the main screen.
 
 ### 2. Upload to Your NOMAD
 
@@ -203,7 +205,7 @@ fetch('/api/status')
 ### 1. Node Status Widget
 ```json
 {
-  "html": "<details class='section'>\n  <summary>\n    <h2>🌐 Network Overview</h2>\n  </summary>\n  <div id='nodeOverview' style='padding:10px;'>Loading...</div>\n</details>",
+  "html": "<details class='section'><summary> <h2>🌐 Network Overview</h2></summary><div id='nodeOverview' style='padding:10px;'>Loading...</div></details>",
   "css": ".stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:12px; }",
   "js": "function updateNodeStats(){fetch('/api/nodes').then(r=>r.json()).then(data=>{var html='<div class=stat-grid>';data.nodes.forEach(n=>{html+='<div style=\"background:var(--surface);padding:12px;border-radius:8px;text-align:center;\"><strong>'+n.id+'</strong><br>'+n.signal+'</div>'});html+='</div>';document.getElementById('nodeOverview').innerHTML=html})}setInterval(updateNodeStats,5000);updateNodeStats();",
   "target": "footer"
@@ -213,7 +215,7 @@ fetch('/api/status')
 ### 2. Storage Monitor
 ```json
 {
-  "html": "<div style='padding:12px 20px;background:var(--surface);border-radius:12px;margin:8px 0;'>\n  <div style='display:flex;justify-content:space-between;'>\n    <span>📦 Storage</span>\n    <span id='storageStatus'>Loading...</span>\n  </div>\n</div>",
+  "html": "<div style='padding:12px 20px;background:var(--surface);border-radius:12px;margin:8px 0;'><div style='display:flex;justify-content:space-between;'> <span>📦 Storage</span><span id='storageStatus'>Loading...</span></div></div>",
   "css": "",
   "js": "setInterval(function(){fetch('/api/status').then(r=>r.json()).then(data=>{if(data.storage){var used=data.storage.usedKB;var total=data.storage.totalKB;document.getElementById('storageStatus').textContent=used+'/'+total+' KB'}})},10000);",
   "target": "header"

@@ -183,6 +183,12 @@
     "size": 7900
   },
   {
+    "name": "mcrypt.ext",
+    "description": "A NOMAD extension to add message encryption to the LoRa messenger",
+    "category": "ext",
+    "size": 6700
+  },
+  {
     "name": "midi.com",
     "description": "A simple midi music sequencer to create old school sounds",
     "category": "app",
@@ -337,6 +343,12 @@
     "description": "A timezone convertor",
     "category": "app",
     "size": 5100
+  },
+  {
+    "name": "tmzone.com",
+    "description": "A NOMAD extension for a timezone display on the main screen",
+    "category": "ext",
+    "size": 3000
   },
   {
     "name": "todo.com",
