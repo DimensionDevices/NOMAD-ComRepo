@@ -1,6 +1,6 @@
 PAGE: Racer
 COLOR: #ff4444
-AUTHOR: NOMAD Racer
+AUTHOR: DimensionDevices
 DATE: 2026-06-21
 
 STYLE-START

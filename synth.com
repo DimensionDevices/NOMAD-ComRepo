@@ -1,6 +1,6 @@
 PAGE: An advanced retro piano/synth
 COLOR: #6a4c9c
-AUTHOR: NOMAD
+AUTHOR: DimensionDevices
 DATE: 2026-06-30
 CUSTOMHTML-START
 <style>

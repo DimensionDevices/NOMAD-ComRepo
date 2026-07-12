@@ -1,6 +1,6 @@
 PAGE: Recipe Box
 COLOR: #e67e22
-AUTHOR: Cook
+AUTHOR: DimensionDevices
 DATE: 2026-06-02
 CUSTOMHTML-START
 <h1 style="padding:8px 0 0 0;margin-bottom:12px;font-size:1.8rem">NOMAD Recipe Box</h1>

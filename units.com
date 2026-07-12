@@ -1,6 +1,6 @@
 PAGE: Unit Converter
 COLOR: #3b82f6
-AUTHOR: NOMAD
+AUTHOR: DimensionDevices
 DATE: 2025-01-15
 BIGHEADER: Unit Converter
 CUSTOMHTML-START

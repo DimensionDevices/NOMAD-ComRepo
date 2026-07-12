@@ -1,6 +1,6 @@
 PAGE: Timezone Converter
 COLOR: #8b5cf6
-AUTHOR: NOMAD
+AUTHOR: DimensionDevices
 DATE: 2025-01-15
 BIGHEADER: Timezone Converter
 CUSTOMHTML-START

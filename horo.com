@@ -1,6 +1,6 @@
 PAGE: Procedural Daily Horoscope
 COLOR: #e74c3c
-AUTHOR: StarGazer
+AUTHOR: DimensionDevices
 DATE: 2026-06-23
 
 BIGHEADER: 🌌 Horoscope

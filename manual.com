@@ -1,6 +1,6 @@
 PAGE: NOMAD - Complete User Manual
 COLOR: #547540
-AUTHOR: NOMAD Project
+AUTHOR: DimensionDevices
 DATE: 2026-06-25
 BIGHEADER: NOMAD User Manual
 

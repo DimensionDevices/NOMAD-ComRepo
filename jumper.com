@@ -1,6 +1,6 @@
 PAGE: Stomper
 COLOR: #f59e0b
-AUTHOR: NOMAD
+AUTHOR: DimensionDevices
 DATE: 2025-01-15
 BIGHEADER: Jumper Game
 CUSTOMHTML-START

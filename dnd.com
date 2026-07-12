@@ -1,6 +1,6 @@
 PAGE: D&D Character Generator
 COLOR: #e67e22
-AUTHOR: NOMAD User
+AUTHOR: DimensionDevices
 DATE: 2026-06-03
 BIGHEADER: D&D Character Generator
 TEXT: Click the button below to generate a unique Level 1 character with ability scores, race, class, personality traits, and a quick backstory. Perfect for one-shots or inspiration.

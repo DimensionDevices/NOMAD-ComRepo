@@ -1,6 +1,6 @@
 PAGE: Stock Manager
 COLOR: #1e293b
-AUTHOR: NOMAD User
+AUTHOR: DimensionDevices
 DATE: 2026-06-23
 
 STYLE-START

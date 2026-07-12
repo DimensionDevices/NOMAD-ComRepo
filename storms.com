@@ -1,6 +1,6 @@
 PAGE: Extreme Weather Survival Guide | Complete Manual
 COLOR: #d35400
-AUTHOR: Emergency Preparedness Corps
+AUTHOR: DimensionDevices
 DATE: 2026-06-03
 BIGHEADER: WEATHER SURVIVAL
 QUOTE: "Disasters don't wait. Neither should you. Every minute of preparation saves lives when conditions turn deadly."

@@ -1,6 +1,6 @@
 PAGE: NOMAD Cipher
 COLOR: #2c7a32
-AUTHOR: NOMAD
+AUTHOR: DimensionDevices
 DATE: 2026-06-03
 STYLE-START
 *{user-select:none;-webkit-tap-highlight-color:transparent;box-sizing:border-box;}

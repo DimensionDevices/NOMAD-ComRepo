@@ -1,6 +1,6 @@
 PAGE: Doom
 COLOR: red
-AUTHOR: NOMAD
+AUTHOR: DimensionDevices
 DATE: 2026-06-28
 CUSTOMHTML-START
 <style type="text/css">

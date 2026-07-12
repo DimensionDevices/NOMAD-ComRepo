@@ -1,6 +1,6 @@
 PAGE: A simple journal
 COLOR: #3a86ff
-AUTHOR: NOMAD
+AUTHOR: DimensionDevices
 DATE: 2026-06-28
 CUSTOMHTML-START
 <style>

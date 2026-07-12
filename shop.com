@@ -1,6 +1,6 @@
 PAGE: Off-Grid Farm Shop
 COLOR: #5d4037
-AUTHOR: Hillside Homestead
+AUTHOR: DimensionDevices
 DATE: 2026-06-23
 
 CUSTOMHTML-START

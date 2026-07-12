@@ -1,6 +1,6 @@
 PAGE: Off-Grid Task Manager
 COLOR: #4a7c59
-AUTHOR: Homesteader
+AUTHOR: DimensionDevices
 DATE: 2026-06-02
 BIGHEADER: NOMAD Task List
 CUSTOMHTML-START

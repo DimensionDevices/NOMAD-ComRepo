@@ -1,6 +1,6 @@
 PAGE: NOMAD WebChat
 COLOR: #2c7a32
-AUTHOR: NOMAD
+AUTHOR: DimensionDevices
 DATE: 2026-06-03
 CUSTOMHTML-START
 <style type="text/css">
