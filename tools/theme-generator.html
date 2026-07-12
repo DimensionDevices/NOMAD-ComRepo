@@ -192,7 +192,7 @@
         }
         .preview-frame {
             width: 100%;
-            height: 700px;
+            height: 1260px;
             border: 1px solid #dad4c6;
             border-radius: 16px;
             background: #fdfaf1;
@@ -217,13 +217,12 @@
 </head>
 <body>
 <div class="container">
-    <h1>🎨 NOMAD Theme · .ext builder</h1>
-    <div class="sub">Generate a <strong>.ext</strong> file that overrides the UI theme. Live preview using your actual layout.</div>
-
+    <h1>NOMAD Theme Extension Builder</h1>
+    <br>
     <div class="builder-grid">
         <!-- LEFT: controls -->
         <div class="controls-card">
-            <h3>🎯 Theme variables</h3>
+            <h3>Theme variables</h3>
             <div class="color-row">
                 <label>—bg</label>
                 <input type="color" id="bgColor" value="#fdfaf1">
@@ -276,23 +275,23 @@
             </div>
             <div class="toggle-row">
                 <label>
-                    <input type="checkbox" id="invertSvgToggle"> 🔄 Invert SVG icons (filter: invert(1))
+                    <input type="checkbox" id="invertSvgToggle"> Invert SVG icons (filter: invert(1))
                 </label>
                 <label>
-                    <input type="checkbox" id="darkPreviewToggle" checked> 🌙 Dark preview
+                    <input type="checkbox" id="darkPreviewToggle" checked> Dark preview
                 </label>
             </div>
             <div class="flex">
-                <span class="file-name-hint">📁 theme-<span id="fileNameHint">custom</span>.ext</span>
-                <input type="text" id="customFileName" placeholder="custom" value="forest" style="flex:1;padding:5px 10px;border-radius:40px;border:1px solid #ccc3b0;background:white;min-width:70px;font-size:0.85rem;">
+                <span class="file-name-hint"><span id="fileNameHint">nomad</span>.ext</span>
+                <input type="text" id="customFileName" placeholder="..." value="nomad" style="flex:1;padding:5px 10px;border-radius:40px;border:1px solid #ccc3b0;background:white;min-width:70px;font-size:0.85rem;">
             </div>
             <div class="flex-row">
-                <button class="btn" id="generateBtn">⚡ Generate</button>
-                <button class="btn btn-outline" id="downloadBtn">⬇️ Download .ext</button>
-                <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
+                <button class="btn" id="generateBtn">Generate</button>
+                <button class="btn btn-outline" id="downloadBtn">⬇Download .ext</button>
+                <button class="btn btn-outline" id="resetBtn">Reset</button>
             </div>
             <div style="margin-top: 0.8rem; font-size:0.7rem; color:#5e705a; text-align:center;">
-                ⚡ Generated .ext follows NOMAD spec. Upload via web interface.
+                Generated .ext follows NOMAD spec. Upload via web interface.
             </div>
         </div>
 
@@ -303,11 +302,11 @@
             </div>
             <div class="code-section">
                 <div class="flex" style="justify-content: space-between;">
-                    <span style="font-weight:500; color:#3d4f3a; font-size:0.85rem;">📄 Generated .ext JSON</span>
-                    <span class="copy-badge" id="copyBadge">📋 copy</span>
+                    <span style="font-weight:500; color:#3d4f3a; font-size:0.85rem;">Generated .ext JSON</span>
+                    <span class="copy-badge" id="copyBadge">Copy</span>
                 </div>
                 <div class="code-area" id="codeOutput">{
-  "description": "Custom theme — forest",
+  "description": "Custom theme: nomad",
   "target": "header",
   "css": ":root { --bg: #fdfaf1; ... }"
 }</div>
@@ -853,7 +852,7 @@ summary h2 { margin: 0; flex: 1; font-size: 1.1rem; }
                 danger: '#b0413e',
                 stat: '#1b3012',
                 shadow: 8,
-                name: 'forest',
+                name: 'nomad',
                 invert: false,
                 dark: true
             };
