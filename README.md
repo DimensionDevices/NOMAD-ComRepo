@@ -8,6 +8,10 @@ Details for how these files are created and managed are in the links below.
 
 ## NOMAD Tools
 
+- **tools/theme-generator.html**
+
+This file is used to generate .ext files that overwrite the default theme of your NOMAD device. Edit your theme and download the .ext file, upload to your NOMAD and restart the device to apply. To remove, simply delete the .ext file and restart the device.
+
 - **tools/minify-com-file.html**
 
 This file is used to minify created .com files, this essentially removed extra whitespace and minifies everything as much as possible without external libraries or compression. This tool does *not* compress the content, it only reduces whitespace and layout. This is worthwhile due to the packet limitation of LoRa, all filesize savings are important.
