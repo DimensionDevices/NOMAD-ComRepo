@@ -69,6 +69,12 @@
     "size": 11000
   },
   {
+    "name": "dsktop.ext",
+    "description": "A NOMAD extension to change the main screen into a hybrid icon/drawer layout [USE ONLY ONE UI REPLACEMENT OF THIS TYPE]",
+    "category": "ext",
+    "size": 10300
+  },
+  {
     "name": "diary.com",
     "description": "A simple journal style app allowing you to store information on an adhoc basis",
     "category": "app",
