@@ -69,9 +69,9 @@
     "size": 11000
   },
   {
-    "name": "dsktop.ext",
-    "description": "A NOMAD extension to change the main screen into a hybrid icon/drawer layout [USE ONLY ONE UI REPLACEMENT OF THIS TYPE]",
-    "category": "ext",
+    "name": "dsktop.thm",
+    "description": "A NOMAD theme extension to change the main screen into a hybrid icon/drawer layout",
+    "category": "thm",
     "size": 10300
   },
   {
@@ -153,9 +153,9 @@
     "size": 17100
   },
   {
-    "name": "launch.ext",
-    "description": "A NOMAD extension which replaces the default user interface with a mobile-app style icon interface [USE ONLY ONE UI REPLACEMENT OF THIS TYPE]",
-    "category": "ext",
+    "name": "launch.thm",
+    "description": "A NOMAD theme extension which replaces the default user interface with a mobile-app style icon interface",
+    "category": "thm",
     "size": 12900
   },
   {
@@ -267,14 +267,20 @@
     "size": 8700
   },
   {
-    "name": "sdebar.ext",
-    "description": "A NOMAD extension to replace the layout with a sidebar [USE ONLY ONE UI REPLACEMENT OF THIS TYPE]",
-    "category": "ext",
+    "name": "sdebar.thm",
+    "description": "A NOMAD theme extension to replace the layout with a sidebar",
+    "category": "thm",
     "size": 12500
   },
   {
     "name": "shop.com",
     "description": "An example of a shop that uses data storage on NOMAD via a .com file with simple styles",
+    "category": "info",
+    "size": 17100
+  },
+  {
+    "name": "slider.thm",
+    "description": "A NOMAD theme extension to create a simple sliding layout",
     "category": "info",
     "size": 17100
   },
