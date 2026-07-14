@@ -69,6 +69,12 @@
     "size": 11000
   },
   {
+    "name": "cyber.com",
+    "description": "A nice looking interactive Cyberdeck like interface",
+    "category": "com",
+    "size": 19400
+  },
+  {
     "name": "dsktop.thm",
     "description": "A NOMAD theme extension to change the main screen into a hybrid icon/drawer layout",
     "category": "layout",
@@ -81,6 +87,12 @@
     "size": 10500
   },
   {
+    "name": "dnd.com",
+    "description": "A simple example Dungeons and Dragons 5e character generator",
+    "category": "app",
+    "size": 9400
+  },
+  {
     "name": "doom.com",
     "description": "A version of Doom, WiFi is required to download the game data",
     "category": "game",
@@ -91,12 +103,6 @@
     "description": "A NOMAD extension for an emoji picker for the LoRa messenger",
     "category": "ext",
     "size": 8200
-  },
-  {
-    "name": "dnd.com",
-    "description": "A simple example Dungeons and Dragons 5e character generator",
-    "category": "app",
-    "size": 9400
   },
   {
     "name": "flappy.com",
