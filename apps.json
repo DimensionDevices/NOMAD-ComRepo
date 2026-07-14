@@ -71,7 +71,7 @@
   {
     "name": "dsktop.thm",
     "description": "A NOMAD theme extension to change the main screen into a hybrid icon/drawer layout",
-    "category": "thm",
+    "category": "layout",
     "size": 10300
   },
   {
@@ -155,7 +155,7 @@
   {
     "name": "launch.thm",
     "description": "A NOMAD theme extension which replaces the default user interface with a mobile-app style icon interface",
-    "category": "thm",
+    "category": "layout",
     "size": 12900
   },
   {
@@ -269,7 +269,7 @@
   {
     "name": "sdebar.thm",
     "description": "A NOMAD theme extension to replace the layout with a sidebar",
-    "category": "thm",
+    "category": "layout",
     "size": 12500
   },
   {
