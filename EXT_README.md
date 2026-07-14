@@ -1,7 +1,7 @@
 # NOMAD Extensions
 
 ## Table of Contents
-- [What Are `.ext` Files?](#what-are-ext-files)
+- [What Are `.ext` and `.thm` Files?](#what-are-ext-files)
 - [Extension File Format](#extension-file-format)
 - [Required Fields](#required-fields)
 - [Optional Fields](#optional-fields)
@@ -18,7 +18,7 @@
 
 ### What Are `.ext` Files?
 
-`.ext` files are **UI extensions** for your NOMAD device. They allow you to add custom sections, widgets, and functionality to the web interface without modifying the device's firmware.
+`.ext` and `.thm` files are **UI extensions** for your NOMAD device. They allow you to add custom sections, widgets, and functionality to the web interface without modifying the device's firmware.
 
 Think of them as "plugins" that can:
 - Add new sections to the dashboard
@@ -28,10 +28,13 @@ Think of them as "plugins" that can:
 - Integrate with the NOMAD API
 
 **Key Properties:**
-- Each `.ext` file is a JSON object
+- Each file is a JSON object
 - They're uploaded like any other file (`.txt`, `.md`, `.com`)
 - Multiple `.ext` files can be active simultaneously
+- A single `.thm` file can be active at any given time
 - They're loaded when you refresh the web page
+
+The key difference between `.ext` and `.thm` files are that you may have multiple `.ext` files on your NOMAD device at any point, but you may only have ONE `.thm` file at a time. `.thm` files are for theme layouts. This ensures that the user cannot load more than one layout changing extension at once. 
 
 ---
 

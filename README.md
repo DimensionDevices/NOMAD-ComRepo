@@ -23,7 +23,7 @@ This file converts .html and .md files to multi-volume NOMAD safe files that may
 e.g.
 A 110kb .md file may be split into five volumes between 15-20kb volumes and some that may be 50-10kb. The compression level is denoted by the content itself. If the content is very repetitive, it will compress better. 
 
-## NOMAD .ext and .com Developer Documentation
+## NOMAD .ext, .thm and .com Developer Documentation
 
 Click below to read details on how to create your own .com files outside of NOMAD (or to just brush up on the techniques used):
 
@@ -31,6 +31,6 @@ Click below to read details on how to create your own .com files outside of NOMA
 
 Click below to read details on how Extension files (.ext) are generated and used within NOMAD. Details within are geared towards development and maintainance:
 
-- **[.ext File Documentation](/EXT_README.md)**
+- **[.ext & .thm File Documentation](/EXT_README.md)**
 
 © 2026 "NOMAD: Network for Open Messaging and Data" is Copyright of DimensionDevices
