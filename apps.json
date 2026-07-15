@@ -3,10 +3,10 @@
     "date": "04/07/26"
   },
   {
-    "name": "manual.com",
-    "description": "The NOMAD user manual and guide",
+    "name": "manual.md",
+    "description": "The NOMAD user manual and guide in markdown format",
     "category": "info",
-    "size": 20100
+    "size": 19500
   },
   {
     "name": "2048.com",
