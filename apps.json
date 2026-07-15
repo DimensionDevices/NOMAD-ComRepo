@@ -160,7 +160,7 @@
   },
   {
     "name": "kidmod.thm",
-    "description": "A NOMAD extension that replaces the entire front end with a child-friendly file list with no options, all file management must be done through the /config panel",
+    "description": "A NOMAD theme extension that replaces the entire front end with a child-friendly file list with no options, all file management must be done through the /config panel",
     "category": "thm",
     "size": 3500
   },
