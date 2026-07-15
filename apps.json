@@ -285,12 +285,6 @@
     "size": 17100
   },
   {
-    "name": "slider.thm",
-    "description": "A NOMAD theme extension to create a simple sliding layout",
-    "category": "info",
-    "size": 17100
-  },
-  {
     "name": "sounds.ext",
     "description": "A NOMAD extension to add sounds to the web ui for events and actions",
     "category": "ext",
