@@ -165,6 +165,12 @@
     "size": 3500
   },
   {
+    "name": "kiosk.thm",
+    "description": "A NOMAD theme extension that shows information as a kiosk style interface",
+    "category": "thm",
+    "size": 7900
+  },
+  {
     "name": "launch.thm",
     "description": "A NOMAD theme extension which replaces the default user interface with a mobile-app style icon interface",
     "category": "layout",

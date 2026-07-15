@@ -32,7 +32,7 @@
 The main dashboard displays your NOMAD's status in real time. All stats auto-refresh every 10 seconds.
 
 - **Device ID** - your unique 10-character node identifier
-- **Router IP** - your NOMAD IP address when connected to WiFi
+- **AccessDetails** - your NOMAD IP address and assigned .local address when connected to WiFi
 - **Nearby Nodes** - count of discovered LoRa nodes within range
 - **Local Files** - number of files stored on your device
 - **Duty Cycle** - LoRa transmission usage percentage
