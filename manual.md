@@ -1,6 +1,4 @@
-# NOMAD: Network for Open Messaging And Data - User Manual
-
-*A complete guide to your NOMAD device's web dashboard.*
+# NOMAD User Manual
 
 ## Table of Contents
 
