@@ -164,7 +164,7 @@ The .com Studio lets you build simple, self-contained "pseudo-websites" that liv
 - **Live Preview** - use the "Preview" button in the file creation modal to see how your file will render before saving
 
 **For the full `.com` syntax reference and directive list**, see the official repository:
-📎 [https://github.com/DimensionDevices/NOMAD-ComRepo/blob/main/COM_README.md](https://github.com/DimensionDevices/NOMAD-ComRepo/blob/main/COM_README.md)
+[https://github.com/DimensionDevices/NOMAD-ComRepo/blob/main/COM_README.md](https://github.com/DimensionDevices/NOMAD-ComRepo/blob/main/COM_README.md)
 
 ## 10. .com File Viewer
 
