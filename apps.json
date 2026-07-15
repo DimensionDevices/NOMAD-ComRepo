@@ -87,12 +87,6 @@
     "size": 10500
   },
   {
-    "name": "dnd.com",
-    "description": "A simple example Dungeons and Dragons 5e character generator",
-    "category": "app",
-    "size": 9400
-  },
-  {
     "name": "doom.com",
     "description": "A version of Doom, WiFi is required to download the game data",
     "category": "game",
@@ -199,12 +193,6 @@
     "description": "A NOMAD extension for managing localStorage on your device",
     "category": "ext",
     "size": 5800
-  },
-  {
-    "name": "marble.com",
-    "description": "A version of Marble Madness",
-    "category": "game",
-    "size": 15700
   },
   {
     "name": "mandal.com",
