@@ -28,7 +28,6 @@
 22. [File Beaconing](#22-file-beaconing)
 23. [LoRa Radio Settings](#23-lora-radio-settings)
 24. [Creating Files](#creating-files)
----
 
 ## 1. System Dashboard
 
@@ -187,13 +186,13 @@ The `.com` viewer renders your created websites in a secure sandboxed iframe wit
 
 NOMAD supports a comprehensive set of Markdown features:
 
-- **Headers** - `#`, `##`, `###`, `####`, `#####`, `######`
-- **Text Formatting** - `**bold**`, `*italic*`, `` `code` ``
-- **Code Blocks** - triple-backtick fences or indented 4 spaces
-- **Links & Images** - `[text](url)` and `![alt](src)` (images are blurred if Child-Safe is on)
-- **Blockquotes** - lines starting with `>`
-- **Lists** - unordered (`-` or `*`) and ordered (`1.`)
-- **Horizontal Rules** - `---`
+- **Headers**
+- **Text Formatting**
+- **Code Blocks**
+- **Links & Images** 
+- **Blockquotes**
+- **Lists**
+- **Horizontal Rules** 
 
 ### Image (.img) Files
 
@@ -262,7 +261,7 @@ When enabled, this filter automatically:
 
 - Censors profanity in chat messages and file content
 - Blurs images inside of .com, .md, .img and .avif file types
-- Masks URLs in text (shows only the domain, e.g. `********.com`)
+- Masks URLs in text
 - Affects all rendered content and LoRa messenger chat messages
 
 ### Public File Management
@@ -355,8 +354,6 @@ The percentage of each hour your device can transmit. Lower values conserve batt
 - **Region Recommendation** - the config page automatically adjusts the duty cycle based on the selected region
 
 **Legal Notice:** It is your *sole* responsibility to verify that your use of this device complies with all applicable local laws and regulations governing LoRa radio transmissions. Please research and confirm your local requirements before operating the NOMAD.
-
----
 
 ## Creating Files
 

@@ -1,12 +1,12 @@
 [
   {
-    "date": "04/07/26"
+    "date": "15/07/26"
   },
   {
     "name": "manual.md",
     "description": "The NOMAD user manual and guide in markdown format",
     "category": "info",
-    "size": 19500
+    "size": 19200
   },
   {
     "name": "2048.com",
