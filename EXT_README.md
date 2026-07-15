@@ -277,4 +277,106 @@ Extensions are loaded in alphabetical order by filename. If you need dependencie
 
 ---
 
+## Data Storage
+
+Every `.com` page can save and load its own small JSON "database" on the device-no external server needed. This is handy for things like counters, saved settings, high scores, or simple guestbooks that persist between visits.
+
+Storage lives separately from your page file, so it isn't counted against your page's 20 KB limit-but it has its own cap:
+
+> 💡 **10 KB hard limit** per site's stored JSON document.
+
+### How it works
+
+Your page's own JavaScript (inside a `SCRIPT-START`/`SCRIPT-END` or `CUSTOMHTML-START`/`CUSTOMHTML-END` block) talks to a small set of endpoints using `fetch()`. Each site gets its own isolated document, automatically matched to the page you're viewing-**you don't need to tell it your own filename** if you're viewing the page through its own address. If you're testing through the Studio or an IP address directly, pass `filename` explicitly instead (see [Testing Locally](#testing-locally) below).
+
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/api/db/get` | GET | Read the whole document, or a single key |
+| `/api/db/set` | POST | Save/update one or more keys |
+| `/api/db/remove` | POST | Delete one or more keys |
+| `/api/db/clear` | POST | Wipe the entire document |
+
+All four respond with the same JSON envelope:
+
+```
+{ "success": true, "filename": "yoursite.com", "data": <whatever you asked for> }
+```
+
+or, on failure:
+
+```
+{ "success": false, "error": "..." }
+```
+
+### Reading data
+
+```
+SCRIPT-START
+async function loadScore() {
+  const resp = await fetch('/api/db/get?key=score');
+  const json = await resp.json();
+  const score = (json.success && json.data !== null) ? json.data : 0;
+  document.getElementById('score').textContent = score;
+}
+loadScore();
+SCRIPT-END
+```
+
+Leave off `?key=` to get the whole document back instead of a single value.
+
+### Saving data
+
+```
+SCRIPT-START
+async function saveScore(value) {
+  await fetch('/api/db/set', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ data: { score: value } })
+  });
+}
+SCRIPT-END
+```
+
+`set` merges whatever keys you send into the existing document-it won't touch other keys you've already saved.
+
+### Removing data
+
+```
+SCRIPT-START
+async function resetScore() {
+  await fetch('/api/db/remove', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ key: 'score' })
+  });
+}
+SCRIPT-END
+```
+
+Pass `"keys": ["a", "b"]` instead of `"key"` to remove several fields at once.
+
+### Testing locally
+
+If you're previewing a file directly (rather than visiting your site's own address), the device can't tell which site is asking, so add `filename` to every call:
+
+```
+fetch('/api/db/get?filename=yoursite.com&key=score')
+
+fetch('/api/db/set', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ filename: 'yoursite.com', data: { score: 10 } })
+});
+```
+
+Match `filename` to whatever you actually named your `.com` file, or you'll end up reading/writing a different site's data.
+
+### Limits & notes
+
+- **10 KB per site**, enforced on save-if a `set` would push the document over the limit, it's rejected and your existing data is left untouched.
+- Storage is a flat set of keys and values-there's no nesting rules enforced, but keep it simple (numbers, strings, small objects/arrays) for reliability.
+- Data persists across page reloads and device reboots, but isn't backed up anywhere else-treat it as convenient, not durable.
+- Each site's storage is isolated; you can't read or write another site's data unless you explicitly pass its `filename`.
+
 **Happy building with NOMAD!**

@@ -159,6 +159,12 @@
     "size": 17100
   },
   {
+    "name": "kidmod.thm",
+    "description": "A NOMAD extension that replaces the entire front end with a child-friendly file list with no options, all file management must be done through the /config panel",
+    "category": "thm",
+    "size": 3500
+  },
+  {
     "name": "launch.thm",
     "description": "A NOMAD theme extension which replaces the default user interface with a mobile-app style icon interface",
     "category": "layout",
@@ -169,6 +175,12 @@
     "description": "A NOMAD extension that completely locks down the user iterface, only the /config panel is accessible. To remove this extension you must delete it from the /config panel directly",
     "category": "ext",
     "size": 5600
+  },
+  {
+    "name": "code.ext",
+    "description": "A NOMAD extension adds a code-lock to the app page. Default password is 1337, change in the code to what you want",
+    "category": "ext",
+    "size": 3200
   },
   {
     "name": "log.ext",
@@ -391,6 +403,12 @@
     "description": "A NOMAD extension for a quick upload button on the main screen",
     "category": "ext",
     "size": 3400
+  },
+  {
+    "name": "warns.ext",
+    "description": "A NOMAD extension to add warnings on the main screen for low storage space and duty cycle limit",
+    "category": "ext",
+    "size": 2400
   },
   {
     "name": "wifi.ext",
