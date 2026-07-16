@@ -135,6 +135,12 @@
     "size": 11200
   },
   {
+    "name": "hacker.thm",
+    "description": "A NOMAD theme to make the interface look like a retro hacker terminal",
+    "category": "thm",
+    "size": 17800
+  },
+  {
     "name": "horo.com",
     "description": "A simple horoscope generator",
     "category": "app",
