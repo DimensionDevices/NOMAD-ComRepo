@@ -8,15 +8,19 @@ Details for how the .ext and .com files are created and managed are in the links
 
 ## NOMAD Tools
 
-- **tools/theme-generator.html**
+- Login Screen Creation: **tools/create-auth.html**
+
+This tool is used to generate an auth.ext file, which allows you to create users/passwords for acces to the NOMAD user interface. Note that this is NOT a fully secure protection, but is a good deterrant for snooping people.
+
+- Theme Generator: **tools/theme-generator.html**
 
 This tool is used to generate .ext files that overwrite the default theme of your NOMAD device. Edit your theme and download the .ext file, upload to your NOMAD and restart the device to apply. To remove, simply delete the .ext file and restart the device.
 
-- **tools/minify-com-file.html**
+- .com File Minifier: **tools/minify-com-file.html**
 
 This file is used to minify created .com files, this essentially removed extra whitespace and minifies everything as much as possible without external libraries or compression. This tool does *not* compress the content (as .com files are compressed when uploaded to NOMAD automatically), it only reduces whitespace and layout. This is worthwhile due to the packet limitation of LoRa, all filesize savings are important.
 
-- **tools/volume-splitter.html**
+- .md/.html Convertor & Splitter: **tools/volume-splitter.html**
 
 This file converts .html and .md files to multi-volume NOMAD safe files that may be uploaded directly to your device. These split volumes are pre-calculated for compression to accurately measure the volumes' content that may fit into 20kb compressed per volume (the NOMAD limit). The result will be a variety of volumes with a variety of sizes, when uploaded to NOMAD and compressed, they will be under the 20kb file limit.
 
