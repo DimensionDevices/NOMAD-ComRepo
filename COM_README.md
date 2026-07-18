@@ -413,3 +413,5 @@ Match `filename` to whatever you actually named your `.com` file, or you'll end 
 - Storage is a flat set of keys and values-there's no nesting rules enforced, but keep it simple (numbers, strings, small objects/arrays) for reliability.
 - Data persists across page reloads and device reboots, but isn't backed up anywhere else-treat it as convenient, not durable.
 - Each site's storage is isolated; you can't read or write another site's data unless you explicitly pass its `filename`.
+
+© 2026 "NOMAD: Network for Open Messaging and Data" is Copyright of DimensionDevices

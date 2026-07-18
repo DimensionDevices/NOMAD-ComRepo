@@ -380,3 +380,5 @@ Match `filename` to whatever you actually named your `.com` file, or you'll end 
 - Each site's storage is isolated; you can't read or write another site's data unless you explicitly pass its `filename`.
 
 **Happy building with NOMAD!**
+
+© 2026 "NOMAD: Network for Open Messaging and Data" is Copyright of DimensionDevices
