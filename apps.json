@@ -28,9 +28,9 @@
   },
   {
     "name": "articl.ext",
-    "description": "A NOMAD extension to help convert news articles to .md files. WiFi connection to NOMAS is required",
+    "description": "A NOMAD extension to help convert web articles to .md files. WiFi connection to NOMAD is required",
     "category": "ext",
-    "size": 17300
+    "size": 15800
   },
   {
     "name": "ascii.ext",
