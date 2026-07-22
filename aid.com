@@ -5,8 +5,7 @@ DATE: 2026-06-03Prolonged field care only.
 CUSTOMHTML-START
 <style>.toc-button{display:block;width:100%;text-align:left;background:#1e1e2e;color:#cdd6f4;border:1px solid #313244;padding:8px 12px;margin:4px 0;border-radius:6px;cursor:pointer;font-size:14px;}.toc-button:hover{background:#313244;}.section-anchor{scroll-margin-top:20px;}</style>
 CUSTOMHTML-END
-BIGHEADER: Off Grid Medical Guide
-SUBTITLE: No phone. No ambulance. Prolonged field care only.
+BIGHEADER: Medical Guide
 ALERT: error | WARNING: This guide is for austere environments without medical access. It does not replace formal training. Infection is your main cause of death. Assume every wound can become fatal.
 HEADER: Contents
 CUSTOMHTML-START
@@ -100,4 +99,4 @@ CUSTOMHTML-END
 TEXT: Delivering a baby off-grid is high risk. Most births go normally. Do not interfere. Let the mother squat or lie on her side. Do not pull the baby. The baby will come out on its own. If the cord is wrapped around the neck, slip it over the head gently. After birth, put the baby on the mother's chest. Do not cut the cord immediately. Wait 5 minutes for the cord to stop pulsing. Tie the cord with clean thread or shoelace in two places. One tie 2 inches from the baby. One tie 2 inches further. Cut between the ties with a clean blade.
 TEXT: Do not pull the placenta. The placenta will deliver on its own within 30 minutes. Do not try to remove it manually. That causes fatal bleeding. Watch for heavy bleeding from the mother. Bleeding more than 2 cups in 10 minutes is postpartum hemorrhage. Massage the uterus firmly through the belly. It should feel like a hard grapefruit. Keep massaging until bleeding slows. If bleeding continues, the mother will die without medical help. There is no off-grid treatment for severe postpartum hemorrhage.
 DIVIDER
-QUOTE: End of guide. These procedures are for survival situations only. Prevention and hygiene are your best medicines. Boil all water. Clean all wounds. Stock medical supplies before you go off grid.
+QUOTE: These procedures are for survival situations only. Prevention and hygiene are your best medicines. Boil all water. Clean all wounds. Stock medical supplies before you go off grid.

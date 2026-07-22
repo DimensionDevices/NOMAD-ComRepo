@@ -27,6 +27,12 @@
     "size": 18600
   },
   {
+    "name": "articl.ext",
+    "description": "A NOMAD extension to help convert news articles to .md files. WiFi connection to NOMAS is required",
+    "category": "ext",
+    "size": 17300
+  },
+  {
     "name": "ascii.ext",
     "description": "A NOMAD extension to add ASCII title to the main screen, purely aesthetic",
     "category": "ext",
