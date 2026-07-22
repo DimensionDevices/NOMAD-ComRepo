@@ -13,6 +13,8 @@
 - [Common Use Cases & Examples](#common-use-cases--examples)
 - [Technical Reference](#technical-reference)
 - [Quick Reference Card](#quick-reference-card)
+- [Data Storage](#data-storage)
+- [Existing Global Functions](#existing-global-functions)
 
 ---
 
@@ -382,3 +384,98 @@ Match `filename` to whatever you actually named your `.com` file, or you'll end 
 **Happy building with NOMAD!**
 
 © 2026 "NOMAD: Network for Open Messaging and Data" is Copyright of DimensionDevices
+
+---
+
+## Existing Global Functions
+
+These functions are callable from your .ext or .thm file directly via Javascript, note that some of these can be destructive and should be used with *caution*!
+
+`parseMd("Your Markdown")`
+Converts raw markdown to renderable HTML applying childsafe filters if enabled.
+
+`escapeHtml("your html here")`
+Escapes a string for safe insertion into HTML via `innerHTML`.
+
+`parseSiteFile("your .com code")`
+Parses your `.com` code into renderable HTML markup.
+
+`showCustomModal("your message")`
+Shows a modal message with OK/Cancel.
+
+`showStatusOverlay("title", "your message")`
+Shows a popup status message at the bottom of the screen.
+
+`hideStatusOverlay()`
+Hide the above popup status message.
+
+`refreshFiles()`
+This refreshes the files on the screen (on-device caching may still be in effect).
+
+`viewFile("filename.com")`
+Open a file on the device, this auto selects the renderer, e.g. for a `.com` file it will render as a pseudo-website.
+
+`downloadFile("filename.com")`
+Download a file from the device.
+
+`getFileCategory("filename.com")`
+Obtains the string for the particular file (e.g. "game" or "document" etc).
+
+`assignFileCategory("filename.com", "category")`
+Assigns a category to a file.
+
+`refreshNodes()`
+Refreshs the nodes on the main screen.
+
+`requestFileList("node id")`
+Requests a file list from a particular node over LoRa.
+
+`requestFile("node id", "filename.com")`
+Requests a file from a particular node over LoRa.
+
+`getFavorites()`
+Returns an array of bookmarked files.
+
+`addCategoryDef(label)`
+Creates a new file category.
+
+`removeCategoryDef(id)`
+Deletes a file categoryand clears it from any files using it.
+
+`iconForFile("filename.xxx")`
+Returns the icon for the specific filetype in HTML format.
+
+`getSections()`
+Get the available `<details>` elements on the main screen as a usable array.
+
+`enableDyslexicFont()` or `disableDyslexicFont`
+Enables/disables the Dyslexic font.
+
+`toggleUniversalDarkMode()`
+Toggles darkmode on/off.
+
+`saveDetailsState()` and `loadDetailsState()`
+This saves/loads the `<details>` sections that are open/closed on the main screen.
+
+`showLinkOptions("https://whatever.com/blah/blah/blah`
+This opens the "open" or "copy" dialog for links, though any text can be passed into the function.
+
+`clearAllCache()`
+Completely wipes the file contents cache.
+
+`censorText("your bad words")`
+Censor text and urls from a string.
+
+`applyImageFilters()`
+Applies image filters across all files.
+
+`slugify("Your! Text! here!")`
+Returns a slug-safe string (e.g. `your-text-here`).
+
+
+
+
+
+
+
+
