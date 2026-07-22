@@ -334,9 +334,9 @@
   },
   {
     "name": "synth.com",
-    "description": "A midi sounding audio synth",
+    "description": "A midi sounding audio synth with multiple channels",
     "category": "app",
-    "size": 17000
+    "size": 17100
   },
   {
     "name": "tamago.ext",
