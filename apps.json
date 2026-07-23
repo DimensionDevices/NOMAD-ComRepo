@@ -213,6 +213,12 @@
     "size": 7900
   },
   {
+    "name": "matrix.com",
+    "description": "A nice Matrix-style rain effect with interesting topics",
+    "category": "app",
+    "size": 11000
+  },
+  {
     "name": "maze.com",
     "description": "A 3D simple interactive maze game (best played in landscape screen orientation)",
     "category": "game",
