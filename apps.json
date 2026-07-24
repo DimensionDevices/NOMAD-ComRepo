@@ -1,6 +1,6 @@
 [
   {
-    "date": "15/07/26"
+    "date": "24/07/26"
   },
   {
     "name": "manual.md",
@@ -48,7 +48,7 @@
     "name": "bkmark.ext",
     "description": "A NOMAD extension that vastly improves the default file bookmark functionality with search, renaming and reordering",
     "category": "ext",
-    "size": 7100
+    "size": 10600
   },
   {
     "name": "calndr.ext",
@@ -79,6 +79,12 @@
     "description": "A NOMAD extension for a customisable clock on the main screen",
     "category": "ext",
     "size": 11000
+  },
+  {
+    "name": "descs.ext",
+    "description": "A NOMAD extension to add custom file descriptions to hosted files",
+    "category": "ext",
+    "size": 5900
   },
   {
     "name": "dsktop.thm",
@@ -399,6 +405,12 @@
     "size": 3600
   },
   {
+    "name": "trader.com",
+    "description": "A multi-player (on same NOMAD device) stock trading game where prices fluctuate as players buy/sell stock",
+    "category": "game",
+    "size": 19400
+  },
+  {
     "name": "tron.com",
     "description": "A Tron-style surrounding game",
     "category": "game",
@@ -427,5 +439,11 @@
     "description": "A NOMAD extension for WiFi debugging",
     "category": "ext",
     "size": 2500
+  },
+  {
+    "name": "xmas.ext",
+    "description": "A NOMAD extension for Christmas time",
+    "category": "ext",
+    "size": 9000
   }
 ]
